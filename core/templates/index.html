@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+    <section class="wrapper-geral">
+        <div class="servico">
+            <p>Serviço</p>
+            <div class="cards-servico">
+                <div>
+                    <div class="card-personalizado">
+                    </div>
+                    <div class="card-title">
+                        <h5>Corte</h5>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="card-personalizado">
+                    </div>
+                    <div class="card-title">
+                        <h5>Corte Navalhado</h5>
+                    </div>
+                </div>
+                <div>
+                    <div class="card-personalizado">
+                    </div>
+                    <div class="card-title">
+                        <h5>Alisamento</h5>
+                    </div>
+                </div>
+                <div>
+                    <div class="card-personalizado">
+                    </div>
+                    <div class="card-title">
+                        <h5>Lavagem</h5>
+                    </div>
+                </div>
+                <div>
+                    <div class="card-personalizado">
+                    </div>
+                    <div class="card-title">
+                        <h5>Barba</h5>
+                    </div>
+                </div>
+                <div>
+                    <div class="card-personalizado">
+                    </div>
+                    <div class="card-title">
+                        <h5>Luzes</h5>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="dia" style="display: none;">
+            <p>Data</p>
+            <div class="selecione-o-dia">
+                <div class="card-personalizado">23/07</div>
+                <div class="card-personalizado">24/07</div>
+                <div class="card-personalizado">25/07</div>
+                <div class="card-personalizado">26/07</div>
+                <div class="card-personalizado">27/07</div>
+                <div class="card-personalizado">28/07</div>
+                <div class="card-personalizado">29/07</div>
+                <div class="card-personalizado">30/07</div>
+                <div class="card-personalizado">01/07</div>
+                <div class="card-personalizado">02/07</div>
+                <div class="card-personalizado">03/07</div>
+                <div class="card-personalizado">04/07</div>
+                <div class="card-personalizado">05/07</div>
+                <div class="card-personalizado">06/07</div>
+            </div>
+        </div>
+
+        <div class="profissional" style="display: none;">
+            <p class="profissional-p">Profissional: </p>
+            <div class="selecione-o-profissional">
+                <div class="card-personalizado">
+                    <img src="/assets/img/usuario.png" alt="">
+                    <p>Alisson</p>
+                </div>
+                <div class="card-personalizado">
+                    <img src="/assets/img/usuario.png" alt="">
+                    <p>Gustavo</p>
+                </div>
+                <div class="card-personalizado">
+                    <img src="/assets/img/usuario.png" alt="">
+                    <p>Alencar</p>
+                </div>
+                <div class="card-personalizado">
+                    <img src="/assets/img/usuario.png" alt="">
+                    <p>Santos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="hora" style="display: none;">
+            <p>Horário</p>
+            <div class="selecione-o-horario">
+                <div class="card-personalizado">12h30</div>
+                <div class="card-personalizado">13h00</div>
+                <div class="card-personalizado">13h30</div>
+                <div class="card-personalizado">14h00</div>
+                <div class="card-personalizado">14h30</div>
+                <div class="card-personalizado">15h00</div>
+                <div class="card-personalizado">15h30</div>
+                <div class="card-personalizado">16h00</div>
+                <div class="card-personalizado">16h30</div>
+                <div class="card-personalizado">17h00</div>
+                <div class="card-personalizado">17h30</div>
+                <div class="card-personalizado">18h00</div>
+            </div>
+        </div>
+
+        <div class="agendamento" style="display: none;">
+            <div class="resumo-agendamento">
+                <form action="#" class="form-agendamento">
+                    <p style="text-align: center;"><strong>Confirmação de Agendamento</strong></p>
+                    <hr>
+                    <h5>Serviço: <span id="selected-servico"></span></h5>
+                    <h5>Data: <span id="selected-data"></span></h5>
+                    <h5>Hora: <span id="selected-hora"></span></h5>
+                    <h5>Profissional: <span id="selected-profissional"></span></h5>
+                    <label for="nome">Nome*</label>
+                    <input class="form-nome" type="text" name="nome" id="nome" required placeholder="Digite seu nome">
+                    <label for="telefone">Telefone*</label>
+                    <input class="form-tel" type="tel" id="telefone" required placeholder="Digite seu telefone">
+                    <hr>
+                    <div class="btn-container">
+                    <button type="submit" class="btn">Agendar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
