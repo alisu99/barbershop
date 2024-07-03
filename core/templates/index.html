@@ -1,54 +1,20 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block conteudo %}
     <section class="wrapper-geral">
         <div class="servico">
             <p>Serviço</p>
             <div class="cards-servico">
+                {% for servico in servicos %}
                 <div>
                     <div class="card-personalizado">
                     </div>
                     <div class="card-title">
-                        <h5>Corte</h5>
+                        <h5>{{servico.servico}}</h5>
                     </div>
                 </div>
-
-                <div>
-                    <div class="card-personalizado">
-                    </div>
-                    <div class="card-title">
-                        <h5>Corte Navalhado</h5>
-                    </div>
-                </div>
-                <div>
-                    <div class="card-personalizado">
-                    </div>
-                    <div class="card-title">
-                        <h5>Alisamento</h5>
-                    </div>
-                </div>
-                <div>
-                    <div class="card-personalizado">
-                    </div>
-                    <div class="card-title">
-                        <h5>Lavagem</h5>
-                    </div>
-                </div>
-                <div>
-                    <div class="card-personalizado">
-                    </div>
-                    <div class="card-title">
-                        <h5>Barba</h5>
-                    </div>
-                </div>
-                <div>
-                    <div class="card-personalizado">
-                    </div>
-                    <div class="card-title">
-                        <h5>Luzes</h5>
-                    </div>
-                </div>
-
+                {% endfor %}
             </div>
         </div>
 
@@ -75,22 +41,12 @@
         <div class="profissional" style="display: none;">
             <p class="profissional-p">Profissional: </p>
             <div class="selecione-o-profissional">
-                <div class="card-personalizado">
-                    <img src="/assets/img/usuario.png" alt="">
-                    <p>Alisson</p>
-                </div>
-                <div class="card-personalizado">
-                    <img src="/assets/img/usuario.png" alt="">
-                    <p>Gustavo</p>
-                </div>
-                <div class="card-personalizado">
-                    <img src="/assets/img/usuario.png" alt="">
-                    <p>Alencar</p>
-                </div>
-                <div class="card-personalizado">
-                    <img src="/assets/img/usuario.png" alt="">
-                    <p>Santos</p>
-                </div>
+                {% for profissional in profissionais %}
+                    <div class="card-personalizado">
+                        <img src="{% static 'assets/img/usuario.png' %}" alt="">
+                        <p>{{profissional.nome}}</p>
+                    </div>
+                {% endfor %}
             </div>
         </div>
 

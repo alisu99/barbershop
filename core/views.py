@@ -6,8 +6,8 @@ def index(request):
     profissional = Profissional.objects.all()
     
     context = {
-        'servico': servico,
-        'profissional': profissional,
+        'servicos': servico,
+        'profissionais': profissional,
     }
     
-    return render(request, 'index.html')
+    return render(request, 'index.html', context)

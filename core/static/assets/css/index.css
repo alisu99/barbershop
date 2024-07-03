@@ -28,7 +28,7 @@ body {
 /* mobile */
 @media screen and (max-width: 768px) {
     body {
-        background-image: url('/assets/img/background.png');
+        background-image: url("{% static 'assets/img/background.png' %}");
         background-size: 100%;
         font-size: 1.06rem;
     }
@@ -66,11 +66,11 @@ body {
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
-        width: 5rem;
-        height: 5rem;
+        width: 7rem;
+        height: 7rem;
         border-radius: 50%;
         border: 2px solid gainsboro;
-        background-image: url('/assets/img/corte.png');
+        background-image: url('{% static "assets/img/corte.png" %}');
         background-size: cover;
     }
     
