@@ -21,20 +21,9 @@
         <div class="dia" style="display: none;">
             <p>Data</p>
             <div class="selecione-o-dia">
-                <div class="card-personalizado">23/07</div>
-                <div class="card-personalizado">24/07</div>
-                <div class="card-personalizado">25/07</div>
-                <div class="card-personalizado">26/07</div>
-                <div class="card-personalizado">27/07</div>
-                <div class="card-personalizado">28/07</div>
-                <div class="card-personalizado">29/07</div>
-                <div class="card-personalizado">30/07</div>
-                <div class="card-personalizado">01/07</div>
-                <div class="card-personalizado">02/07</div>
-                <div class="card-personalizado">03/07</div>
-                <div class="card-personalizado">04/07</div>
-                <div class="card-personalizado">05/07</div>
-                <div class="card-personalizado">06/07</div>
+                {% for dia in proximos_dias %}
+                <div class="card-personalizado">{{ dia }}</div>
+                {% endfor %}
             </div>
         </div>
 
@@ -73,10 +62,10 @@
                 <form action="#" class="form-agendamento">
                     <p style="text-align: center;"><strong>Confirmação de Agendamento</strong></p>
                     <hr>
-                    <h5>Serviço: <span id="selected-servico"></span></h5>
-                    <h5>Data: <span id="selected-data"></span></h5>
-                    <h5>Hora: <span id="selected-hora"></span></h5>
-                    <h5>Profissional: <span id="selected-profissional"></span></h5>
+                    <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='cut' color='#ffffff' ></box-icon> Serviço: <span id="selected-servico"></span></h5>
+                    <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='calendar' color='#ffffff' ></box-icon> Data: <span id="selected-data"></span></h5>
+                    <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='time' color='#ffffff'></box-icon> Hora: <span id="selected-hora"></span></h5>
+                    <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='user' color='#ffffff'></box-icon> Profissional: <span id="selected-profissional"></span></h5>
                     <label for="nome">Nome*</label>
                     <input class="form-nome" type="text" name="nome" id="nome" required placeholder="Digite seu nome">
                     <label for="telefone">Telefone*</label>

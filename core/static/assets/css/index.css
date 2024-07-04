@@ -28,7 +28,7 @@ body {
 /* mobile */
 @media screen and (max-width: 768px) {
     body {
-        background-image: url("{% static 'assets/img/background.png' %}");
+        background-image: url("../img/background.png");
         background-size: 100%;
         font-size: 1.06rem;
     }
@@ -36,8 +36,8 @@ body {
     .wrapper-geral {
         min-height: max-content;
     }
-    
-    
+
+
     .wrapper-geral .servico {
         padding: 1.5rem 1rem;
     }
@@ -70,10 +70,10 @@ body {
         height: 7rem;
         border-radius: 50%;
         border: 2px solid gainsboro;
-        background-image: url('{% static "assets/img/corte.png" %}');
+        background-image: url('../img/corte.png');
         background-size: cover;
     }
-    
+
 
     .wrapper-geral .servico .cards-servico .card-title {
         text-align: center;
@@ -161,7 +161,7 @@ body {
         font-weight: 600;
         color: currentColor;
         text-align: center;
-        
+
     }
 
     .wrapper-geral .profissional p {
