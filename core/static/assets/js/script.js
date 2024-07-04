@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
     const cardsServico = document.querySelectorAll('.servico .card-personalizado');
     const cardsDia = document.querySelectorAll('.dia .card-personalizado');
-    const cardsProfissional = document.querySelectorAll('.profissional .card-personalizado');
-    const cardsHorario = document.querySelectorAll('.hora .card-personalizado');
     const formAgendamento = document.querySelector('.form-agendamento');
 
     let estadoSelecionado = {
@@ -29,31 +27,11 @@ document.addEventListener('DOMContentLoaded', function () {
         card.addEventListener('click', function () {
             selecionarItem(card, '.selecione-o-dia .card-personalizado');
             atualizarEstadoSelecionado('data', card.textContent.trim());
+            carregarProfissionais();
             rolarParaProximo('.profissional');
             exibirBloco('.profissional');
             ocultarBloco('.hora');
             ocultarBloco('.agendamento');
-            atualizarResumo();
-        });
-    });
-
-    cardsProfissional.forEach(card => {
-        card.addEventListener('click', function () {
-            selecionarItem(card, '.selecione-o-profissional .card-personalizado');
-            atualizarEstadoSelecionado('profissional', card.querySelector('p').textContent.trim());
-            rolarParaProximo('.hora');
-            exibirBloco('.hora');
-            ocultarBloco('.agendamento');
-            atualizarResumo();
-        });
-    });
-
-    cardsHorario.forEach(card => {
-        card.addEventListener('click', function () {
-            selecionarItem(card, '.selecione-o-horario .card-personalizado');
-            atualizarEstadoSelecionado('horario', card.textContent.trim());
-            rolarParaProximo('.agendamento');
-            exibirBloco('.agendamento');
             atualizarResumo();
         });
     });
@@ -63,13 +41,28 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const nome = document.querySelector('.form-nome').value;
         const telefone = document.querySelector('.form-tel').value;
+        const email = document.querySelector('.form-email').value;
 
-        console.log('Serviço:', estadoSelecionado.servico);
-        console.log('Data:', estadoSelecionado.data);
-        console.log('Profissional:', estadoSelecionado.profissional);
-        console.log('Horário:', estadoSelecionado.horario);
-        console.log('Nome:', nome);
-        console.log('Telefone:', telefone);
+        fetch('/agendar/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            body: JSON.stringify({
+                servico: estadoSelecionado.servico,
+                data: estadoSelecionado.data,
+                profissional: estadoSelecionado.profissional,
+                horario: estadoSelecionado.horario,
+                nome_cliente: nome,
+                telefone_cliente: telefone,
+                email_cliente: email
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert(data.mensagem);
+        });
     });
 
     function selecionarItem(elemento, selector) {
@@ -110,5 +103,58 @@ document.addEventListener('DOMContentLoaded', function () {
         if (proximoBloco) {
             proximoBloco.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
+    }
+
+    function carregarProfissionais() {
+        const data = estadoSelecionado.data;
+
+        fetch(`/verificar_profissionais/?data=${data}`)
+            .then(response => response.json())
+            .then(profissionais => {
+                const profissionaisContainer = document.querySelector('.selecione-o-profissional');
+                profissionaisContainer.innerHTML = '';
+
+                profissionais.forEach(profissional => {
+                    const card = document.createElement('div');
+                    card.className = 'card-personalizado';
+                    card.innerHTML = `<img src="static/assets/img/usuario.png" alt=""><p>${profissional.nome}</p>`;
+                    card.addEventListener('click', function () {
+                        selecionarItem(card, '.selecione-o-profissional .card-personalizado');
+                        atualizarEstadoSelecionado('profissional', profissional.id);
+                        carregarHorarios();
+                        rolarParaProximo('.hora');
+                        exibirBloco('.hora');
+                        ocultarBloco('.agendamento');
+                        atualizarResumo();
+                    });
+                    profissionaisContainer.appendChild(card);
+                });
+            });
+    }
+
+    function carregarHorarios() {
+        const profissional = estadoSelecionado.profissional;
+        const data = estadoSelecionado.data;
+
+        fetch(`/verificar_horarios/?profissional=${profissional}&data=${data}`)
+            .then(response => response.json())
+            .then(horarios => {
+                const horariosContainer = document.querySelector('.selecione-o-horario');
+                horariosContainer.innerHTML = '';
+
+                horarios.forEach(horario => {
+                    const card = document.createElement('div');
+                    card.className = 'card-personalizado';
+                    card.textContent = horario.horario;
+                    card.addEventListener('click', function () {
+                        selecionarItem(card, '.selecione-o-horario .card-personalizado');
+                        atualizarEstadoSelecionado('horario', horario.id);
+                        rolarParaProximo('.agendamento');
+                        exibirBloco('.agendamento');
+                        atualizarResumo();
+                    });
+                    horariosContainer.appendChild(card);
+                });
+            });
     }
 });

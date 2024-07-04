@@ -2,82 +2,67 @@
 {% load static %}
 
 {% block conteudo %}
-    <section class="wrapper-geral">
-        <div class="servico">
-            <p>Serviço</p>
-            <div class="cards-servico">
-                {% for servico in servicos %}
-                <div>
-                    <div class="card-personalizado">
-                    </div>
-                    <div class="card-title">
-                        <h5>{{servico.servico}}</h5>
-                    </div>
+<section class="wrapper-geral">
+    <div class="servico">
+        <p>Serviço</p>
+        <div class="cards-servico">
+            {% for servico in servicos %}
+            <div>
+                <div class="card-personalizado">
                 </div>
-                {% endfor %}
+                <div class="card-title">
+                    <h5>{{ servico.servico }}</h5>
+                </div>
             </div>
+            {% endfor %}
         </div>
+    </div>
 
-        <div class="dia" style="display: none;">
-            <p>Data</p>
-            <div class="selecione-o-dia">
-                {% for dia in proximos_dias %}
-                <div class="card-personalizado">{{ dia }}</div>
-                {% endfor %}
-            </div>
+    <div class="dia" style="display: none;">
+        <p>Data</p>
+        <div class="selecione-o-dia">
+            {% for dia in proximos_dias %}
+            <div class="card-personalizado">{{ dia }}</div>
+            {% endfor %}
         </div>
+    </div>
 
-        <div class="profissional" style="display: none;">
-            <p class="profissional-p">Profissional: </p>
-            <div class="selecione-o-profissional">
-                {% for profissional in profissionais %}
-                    <div class="card-personalizado">
-                        <img src="{% static 'assets/img/usuario.png' %}" alt="">
-                        <p>{{profissional.nome}}</p>
-                    </div>
-                {% endfor %}
-            </div>
+    <div class="profissional" style="display: none;">
+        <p class="profissional-p">Profissional: </p>
+        <div class="selecione-o-profissional">
+            <!-- Profissionais serão carregados dinamicamente -->
         </div>
+    </div>
 
-        <div class="hora" style="display: none;">
-            <p>Horário</p>
-            <div class="selecione-o-horario">
-                <div class="card-personalizado">12h30</div>
-                <div class="card-personalizado">13h00</div>
-                <div class="card-personalizado">13h30</div>
-                <div class="card-personalizado">14h00</div>
-                <div class="card-personalizado">14h30</div>
-                <div class="card-personalizado">15h00</div>
-                <div class="card-personalizado">15h30</div>
-                <div class="card-personalizado">16h00</div>
-                <div class="card-personalizado">16h30</div>
-                <div class="card-personalizado">17h00</div>
-                <div class="card-personalizado">17h30</div>
-                <div class="card-personalizado">18h00</div>
-            </div>
+    <div class="hora" style="display: none;">
+        <p>Horário</p>
+        <div class="selecione-o-horario">
+            <!-- Horários serão carregados dinamicamente -->
         </div>
+    </div>
 
-        <div class="agendamento" style="display: none;">
-            <div class="resumo-agendamento">
-                <form action="#" class="form-agendamento">
-                    <p style="text-align: center;"><strong>Confirmação de Agendamento</strong></p>
-                    <hr>
-                    <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='cut' color='#ffffff' ></box-icon> Serviço: <span id="selected-servico"></span></h5>
-                    <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='calendar' color='#ffffff' ></box-icon> Data: <span id="selected-data"></span></h5>
-                    <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='time' color='#ffffff'></box-icon> Hora: <span id="selected-hora"></span></h5>
-                    <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='user' color='#ffffff'></box-icon> Profissional: <span id="selected-profissional"></span></h5>
-                    <label for="nome">Nome*</label>
-                    <input class="form-nome" type="text" name="nome" id="nome" required placeholder="Digite seu nome">
-                    <label for="telefone">Telefone*</label>
-                    <input class="form-tel" type="tel" id="telefone" required placeholder="Digite seu telefone">
-                    <hr>
-                    <div class="btn-container">
+    <div class="agendamento" style="display: none;">
+        <div class="resumo-agendamento">
+            <form action="#" class="form-agendamento">
+                {% csrf_token %}
+                <p style="text-align: center;"><strong>Confirmação de Agendamento</strong></p>
+                <hr>
+                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='cut' color='#ffffff'></box-icon> Serviço: <span id="selected-servico"></span></h5>
+                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='calendar' color='#ffffff'></box-icon> Data: <span id="selected-data"></span></h5>
+                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='time' color='#ffffff'></box-icon> Hora: <span id="selected-hora"></span></h5>
+                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='user' color='#ffffff'></box-icon> Profissional: <span id="selected-profissional"></span></h5>
+                <label for="nome">Nome*</label>
+                <input class="form-nome" type="text" name="nome" id="nome" required placeholder="Digite seu nome">
+                <label for="telefone">Telefone*</label>
+                <input class="form-tel" type="tel" id="telefone" required placeholder="Digite seu telefone">
+                <label for="email">Email*</label>
+                <input class="form-email" type="email" id="email" required placeholder="Digite seu email">
+                <hr>
+                <div class="btn-container">
                     <button type="submit" class="btn">Agendar</button>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}
-
-
