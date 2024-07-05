@@ -8,7 +8,7 @@
         <div class="cards-servico">
             {% for servico in servicos %}
             <div>
-                <div class="card-personalizado">
+                <div class="card-personalizado" data-servico="{{ servico.servico }}">
                 </div>
                 <div class="card-title">
                     <h5>{{ servico.servico }}</h5>
@@ -22,7 +22,9 @@
         <p>Data</p>
         <div class="selecione-o-dia">
             {% for dia in proximos_dias %}
-            <div class="card-personalizado">{{ dia }}</div>
+            <div class="card-personalizado" data-dia="{{ dia }}">
+                {{ dia }}
+            </div>
             {% endfor %}
         </div>
     </div>
@@ -30,14 +32,23 @@
     <div class="profissional" style="display: none;">
         <p class="profissional-p">Profissional: </p>
         <div class="selecione-o-profissional">
-            <!-- Profissionais serão carregados dinamicamente -->
+            {% for profissional in profissionais %}
+            <div class="card-personalizado" data-profissional="{{ profissional.nome }}">
+                <img src="{% static 'assets/img/usuario.png' %}" alt="">
+                <p>{{ profissional.nome }}</p>
+            </div>
+            {% endfor %}
         </div>
     </div>
 
     <div class="hora" style="display: none;">
         <p>Horário</p>
         <div class="selecione-o-horario">
-            <!-- Horários serão carregados dinamicamente -->
+            {% for hora in horas %}
+            <div class="card-personalizado" data-hora="{{ hora.horario }}">
+                {{ hora.horario }}
+            </div>
+            {% endfor %}
         </div>
     </div>
 
@@ -55,8 +66,6 @@
                 <input class="form-nome" type="text" name="nome" id="nome" required placeholder="Digite seu nome">
                 <label for="telefone">Telefone*</label>
                 <input class="form-tel" type="tel" id="telefone" required placeholder="Digite seu telefone">
-                <label for="email">Email*</label>
-                <input class="form-email" type="email" id="email" required placeholder="Digite seu email">
                 <hr>
                 <div class="btn-container">
                     <button type="submit" class="btn">Agendar</button>
