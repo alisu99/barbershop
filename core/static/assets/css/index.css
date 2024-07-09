@@ -132,15 +132,22 @@ body {
 
     .wrapper-geral .profissional .selecione-o-profissional {
         display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        padding: 1rem;
-        justify-content: center;
-        border: 0.1px solid gainsboro;
+        width: 100%;
+        gap: 10px;
+        scroll-snap-align: start;
+        overflow-x: auto;
+        border: 1px solid gainsboro;
         border-radius: 20px;
+        padding: 1rem 1rem;
+    }
+
+    .wrapper-geral .profissional .selecione-o-profissional::-webkit-scrollbar {
+        height: 0px;
+    }
+
+    .wrapper-geral .profissional .selecione-o-profissional::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
     }
 
     .wrapper-geral .profissional .selecione-o-profissional .card-personalizado {

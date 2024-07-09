@@ -3,24 +3,31 @@ from django.http import JsonResponse
 from .models import *
 import datetime
 from django.views.decorators.http import require_GET
+import locale
+import calendar
+
+locale.setlocale(locale.LC_ALL, 'pt_BR.utf8')
 
 
 def index(request):
     servicos = Servico.objects.all()
     profissionais = Profissional.objects.all()
     horas = Horario.objects.all()
-    proximos_dias = []
     data_atual = datetime.date.today()
+    dia_da_semana = calendar.day_name[data_atual.weekday()]
+    dia_da_semana_sem_feira = dia_da_semana.replace('-feira', '').capitalize()
+    proximos_dias = []
 
     for i in range(12):
         dia_futuro = data_atual + datetime.timedelta(days=i)
-        proximos_dias.append(dia_futuro.strftime("%d/%m/%Y"))
+        proximos_dias.append(dia_futuro.strftime("%d/%m/%y"))
 
     context = {
         "horas": horas,
         "profissionais": profissionais,
         "servicos": servicos,
         "proximos_dias": proximos_dias,
+        "dia_da_semana_sem_feira": dia_da_semana_sem_feira
     }
 
     return render(request, "index.html", context)
@@ -32,7 +39,7 @@ def verificar_disponibilidade(request):
     data = request.GET.get("data")
     horario_id = request.GET.get("horario_id")
 
-    data_formatada = datetime.datetime.strptime(data, "%d/%m/%Y").date()
+    data_formatada = datetime.datetime.strptime(data, "%d/%m/%y").date()
     disponivel = Agendamento.is_horario_disponivel(
         profissional_id, data_formatada, horario_id
     )
@@ -43,7 +50,7 @@ def verificar_disponibilidade(request):
 def horarios_disponiveis(request):
     profissional_id = request.GET.get('profissional_id')
     data = request.GET.get('data')
-    data_formatada = datetime.datetime.strptime(data, '%d/%m/%Y').date()
+    data_formatada = datetime.datetime.strptime(data, '%d/%m/%y').date()
 
     # Obter os horários indisponíveis
     agendamentos = Agendamento.objects.filter(profissional_selecionado_id=profissional_id, data=data_formatada)
@@ -66,7 +73,7 @@ def agendar(request):
         nome_cliente = request.POST.get("nome_cliente")
         telefone_cliente = request.POST.get("telefone_cliente")
 
-        data_formatada = datetime.datetime.strptime(data, "%d/%m/%Y").date()
+        data_formatada = datetime.datetime.strptime(data, "%d/%m/%y").date()
 
         if Agendamento.is_horario_disponivel(
             profissional_id, data_formatada, horario_id

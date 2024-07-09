@@ -8,7 +8,7 @@
         <div class="cards-servico">
             {% for servico in servicos %}
             <div>
-                <div class="card-personalizado" data-servico="{{ servico.id }}">
+                <div class="card-personalizado" data-servico-id="{{ servico.id }}" data-servico-nome="{{ servico.servico }}">
                 </div>
                 <div class="card-title">
                     <h5>{{ servico.servico }}</h5>
@@ -22,7 +22,7 @@
         <p class="profissional-p">Profissional: </p>
         <div class="selecione-o-profissional">
             {% for profissional in profissionais %}
-            <div class="card-personalizado" data-profissional="{{ profissional.id }}">
+            <div class="card-personalizado" data-profissional-id="{{ profissional.id }}" data-profissional-nome="{{ profissional.nome }}">
                 <img src="{% static 'assets/img/usuario.png' %}" alt="">
                 <p>{{ profissional.nome }}</p>
             </div>
@@ -36,6 +36,8 @@
             {% for dia in proximos_dias %}
             <div class="card-personalizado" data-dia="{{ dia }}">
                 {{ dia }}
+                <br>
+                {{ dia_da_semana_sem_feira }}
             </div>
             {% endfor %}
         </div>
@@ -73,6 +75,5 @@
             </form>
         </div>
     </div>
-    
 </section>
 {% endblock %}

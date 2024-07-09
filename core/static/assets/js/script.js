@@ -5,10 +5,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const cardsHora = document.querySelectorAll('.hora .card-personalizado');
 
     let estadoSelecionado = {
-        servico: '',
+        servico: { id: '', nome: '' },
         dia: '',
-        profissional: '',
-        hora: ''
+        profissional: { id: '', nome: '' },
+        hora: { id: '', horario: '' }
     };
 
     function selecionarItem(cards, proximoBloco, categoria) {
@@ -16,20 +16,33 @@ document.addEventListener('DOMContentLoaded', function () {
             card.addEventListener('click', function () {
                 cards.forEach(card => card.classList.remove('selecionado'));
                 card.classList.add('selecionado');
-                estadoSelecionado[categoria] = card.getAttribute(`data-${categoria}`);
+                
+                if (categoria === 'servico') {
+                    estadoSelecionado.servico.id = card.getAttribute('data-servico-id');
+                    estadoSelecionado.servico.nome = card.getAttribute('data-servico-nome');
+                } else if (categoria === 'profissional') {
+                    estadoSelecionado.profissional.id = card.getAttribute('data-profissional-id');
+                    estadoSelecionado.profissional.nome = card.getAttribute('data-profissional-nome');
+                } else if (categoria === 'dia') {
+                    estadoSelecionado.dia = card.getAttribute('data-dia');
+                } else if (categoria === 'hora') {
+                    estadoSelecionado.hora.id = card.getAttribute('data-hora-id');
+                    estadoSelecionado.hora.horario = card.getAttribute('data-hora-horario');
+                }
+
                 document.querySelector(proximoBloco).style.display = 'block';
                 document.querySelector(proximoBloco).scrollIntoView({ behavior: 'smooth', block: 'start' });
                 atualizarResumo();
 
                 if (categoria === 'dia') {
-                    carregarHorariosDisponiveis(estadoSelecionado.profissional, estadoSelecionado.dia);
+                    carregarHorariosDisponiveis(estadoSelecionado.profissional.id, estadoSelecionado.dia);
                 }
             });
         });
     }
 
-    function carregarHorariosDisponiveis(profissional, dia) {
-        fetch(`/horarios_disponiveis/?profissional_id=${profissional}&data=${dia}`)
+    function carregarHorariosDisponiveis(profissionalId, dia) {
+        fetch(`/horarios_disponiveis/?profissional_id=${profissionalId}&data=${dia}`)
             .then(response => response.json())
             .then(data => {
                 const horariosContainer = document.querySelector('.hora .selecione-o-horario');
@@ -37,7 +50,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 data.horarios.forEach(horario => {
                     const div = document.createElement('div');
                     div.classList.add('card-personalizado');
-                    div.setAttribute('data-hora', horario.id);
+                    div.setAttribute('data-hora-id', horario.id);
+                    div.setAttribute('data-hora-horario', horario.horario);
                     div.textContent = horario.horario;
                     horariosContainer.appendChild(div);
                 });
@@ -46,15 +60,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function atualizarResumo() {
-        document.getElementById('selected-servico').textContent = estadoSelecionado.servico;
+        document.getElementById('selected-servico').textContent = estadoSelecionado.servico.nome;
         document.getElementById('selected-data').textContent = estadoSelecionado.dia;
-        document.getElementById('selected-profissional').textContent = estadoSelecionado.profissional;
-        document.getElementById('selected-hora').textContent = estadoSelecionado.hora;
+        document.getElementById('selected-profissional').textContent = estadoSelecionado.profissional.nome;
+        document.getElementById('selected-hora').textContent = estadoSelecionado.hora.horario;
 
         // Atualizar os campos ocultos do formulário
-        document.getElementById('servico_id').value = estadoSelecionado.servico;
-        document.getElementById('profissional_id').value = estadoSelecionado.profissional;
-        document.getElementById('horario_id').value = estadoSelecionado.hora;
+        document.getElementById('servico_id').value = estadoSelecionado.servico.id;
+        document.getElementById('profissional_id').value = estadoSelecionado.profissional.id;
+        document.getElementById('horario_id').value = estadoSelecionado.hora.id;
         document.getElementById('data').value = estadoSelecionado.dia;
     }
 
