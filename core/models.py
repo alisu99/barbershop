@@ -47,7 +47,13 @@ class Agendamento(models.Model):
     data = models.DateField("Data", null=False)
     nome_cliente = models.CharField("Cliente", max_length=255, null=False)
     telefone_cliente = models.CharField("telefone", max_length=255, null=False)
-    email_cliente = models.EmailField("Email", max_length=100)
 
     def __str__(self):
         return self.nome_cliente
+
+    def is_horario_disponivel(profissional_id, data, horario_id):
+        return not Agendamento.objects.filter(
+            profissional_selecionado_id=profissional_id,
+            data=data,
+            horario_selecionado_id=horario_id
+        ).exists()
