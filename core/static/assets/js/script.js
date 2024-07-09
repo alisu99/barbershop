@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const cardsServico = document.querySelectorAll('.servico .card-personalizado');
-    const cardsDia = document.querySelectorAll('.dia .card-personalizado');
     const cardsProfissional = document.querySelectorAll('.profissional .card-personalizado');
+    const cardsDia = document.querySelectorAll('.dia .card-personalizado');
     const cardsHora = document.querySelectorAll('.hora .card-personalizado');
 
     let estadoSelecionado = {
@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('selected-hora').textContent = estadoSelecionado.hora;
     }
 
-    selecionarItem(cardsServico, '.dia', 'servico');
-    selecionarItem(cardsDia, '.profissional', 'dia');
-    selecionarItem(cardsProfissional, '.hora', 'profissional');
+    selecionarItem(cardsServico, '.profissional', 'servico');
+    selecionarItem(cardsProfissional, '.dia', 'profissional');
+    selecionarItem(cardsDia, '.hora', 'dia');
     selecionarItem(cardsHora, '.agendamento', 'hora');
 });

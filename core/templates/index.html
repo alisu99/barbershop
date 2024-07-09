@@ -18,17 +18,6 @@
         </div>
     </div>
 
-    <div class="dia" style="display: none;">
-        <p>Data</p>
-        <div class="selecione-o-dia">
-            {% for dia in proximos_dias %}
-            <div class="card-personalizado" data-dia="{{ dia }}">
-                {{ dia }}
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-
     <div class="profissional" style="display: none;">
         <p class="profissional-p">Profissional: </p>
         <div class="selecione-o-profissional">
@@ -36,6 +25,17 @@
             <div class="card-personalizado" data-profissional="{{ profissional.nome }}">
                 <img src="{% static 'assets/img/usuario.png' %}" alt="">
                 <p>{{ profissional.nome }}</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="dia" style="display: none;">
+        <p>Data</p>
+        <div class="selecione-o-dia">
+            {% for dia in proximos_dias %}
+            <div class="card-personalizado" data-dia="{{ dia }}">
+                {{ dia }}
             </div>
             {% endfor %}
         </div>
@@ -59,9 +59,9 @@
                 <p style="text-align: center;"><strong>Confirmação de Agendamento</strong></p>
                 <hr>
                 <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='cut' color='#ffffff'></box-icon> Serviço: <span id="selected-servico"></span></h5>
+                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='user' color='#ffffff'></box-icon> Profissional: <span id="selected-profissional"></span></h5>
                 <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='calendar' color='#ffffff'></box-icon> Data: <span id="selected-data"></span></h5>
                 <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='time' color='#ffffff'></box-icon> Hora: <span id="selected-hora"></span></h5>
-                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='user' color='#ffffff'></box-icon> Profissional: <span id="selected-profissional"></span></h5>
                 <label for="nome">Nome*</label>
                 <input class="form-nome" type="text" name="nome" id="nome" required placeholder="Digite seu nome">
                 <label for="telefone">Telefone*</label>
