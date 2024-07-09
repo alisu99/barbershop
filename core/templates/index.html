@@ -33,11 +33,9 @@
     <div class="dia" style="display: none;">
         <p>Data</p>
         <div class="selecione-o-dia">
-            {% for dia in proximos_dias %}
+            {% for dia, nome_dia in proximos_dias %}
             <div class="card-personalizado" data-dia="{{ dia }}">
-                {{ dia }}
-                <br>
-                {{ dia_da_semana_sem_feira }}
+                {{ dia }}<br>{{ nome_dia }}
             </div>
             {% endfor %}
         </div>

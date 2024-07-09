@@ -14,20 +14,20 @@ def index(request):
     profissionais = Profissional.objects.all()
     horas = Horario.objects.all()
     data_atual = datetime.date.today()
-    dia_da_semana = calendar.day_name[data_atual.weekday()]
-    dia_da_semana_sem_feira = dia_da_semana.replace('-feira', '').capitalize()
+    
     proximos_dias = []
 
     for i in range(12):
         dia_futuro = data_atual + datetime.timedelta(days=i)
-        proximos_dias.append(dia_futuro.strftime("%d/%m/%y"))
+        dia_da_semana = calendar.day_name[dia_futuro.weekday()]
+        dia_da_semana_sem_feira = dia_da_semana.replace('-feira', '').capitalize()
+        proximos_dias.append((dia_futuro.strftime("%d/%m/%y"), dia_da_semana_sem_feira))
 
     context = {
         "horas": horas,
         "profissionais": profissionais,
         "servicos": servicos,
-        "proximos_dias": proximos_dias,
-        "dia_da_semana_sem_feira": dia_da_semana_sem_feira
+        "proximos_dias": proximos_dias
     }
 
     return render(request, "index.html", context)
