@@ -14,7 +14,22 @@ def index(request):
     profissionais = Profissional.objects.all()
     horas = Horario.objects.all()
     data_atual = datetime.date.today()
-    
+    hora_atual = datetime.datetime.now().time()
+
+    if data_atual == datetime.date.today():
+        horas_disponiveis = []
+        for hora in horas:
+            horario_formatado = hora.horario.replace("h", ":")
+            try:
+                horario_time = datetime.datetime.strptime(horario_formatado, "%H:%M").time()
+                if horario_time >= hora_atual:
+                    horas_disponiveis.append(hora)
+                else:
+                    print(f"Desconsiderando horário {hora.horario}")
+            except ValueError as e:
+                print(f"Erro ao converter horário {hora.horario}: {e}")
+        horas = horas_disponiveis
+
     proximos_dias = []
 
     for i in range(12):
@@ -50,18 +65,15 @@ def verificar_disponibilidade(request):
 def horarios_disponiveis(request):
     profissional_id = request.GET.get('profissional_id')
     data = request.GET.get('data')
-    data_formatada = datetime.datetime.strptime(data, '%d/%m/%y').date()
+    data = datetime.datetime.strptime(data, "%d/%m/%y").date()
 
-    # Obter os horários indisponíveis
-    agendamentos = Agendamento.objects.filter(profissional_selecionado_id=profissional_id, data=data_formatada)
-    horarios_indisponiveis = agendamentos.values_list('horario_selecionado_id', flat=True)
+    horarios = Horario.objects.all()
+    hora_atual = datetime.datetime.now().time()
 
-    # Obter os horários disponíveis
-    horarios_disponiveis = Horario.objects.exclude(id__in=horarios_indisponiveis)
+    if data == datetime.date.today():
+        horarios = [hora for hora in horarios if datetime.datetime.strptime(hora.horario.replace("h", ":"), "%H:%M").time() > hora_atual]
 
-    # Preparar a resposta
-    horarios = [{'id': horario.id, 'horario': horario.horario} for horario in horarios_disponiveis]
-    return JsonResponse({'horarios': horarios})
+    return JsonResponse({"horarios": [{"id": hora.id, "horario": hora.horario} for hora in horarios]})
 
 
 def agendar(request):
@@ -87,7 +99,6 @@ def agendar(request):
                 telefone_cliente=telefone_cliente,
             )
             agendamento.save()
-            # return JsonResponse({"success": True})
             return redirect('index')
         else:
             return JsonResponse({"success": False, "message": "Horário indisponível"})

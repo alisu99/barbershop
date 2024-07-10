@@ -33,10 +33,6 @@ class Usuario(models.Model):
         "Nome de Usuário", max_length=255, null=False, unique=True
     )
     email = models.EmailField("Email", max_length=100, null=False)
-    endereco = models.CharField("Endereço", max_length=1000, null=False)
-    bairro = models.CharField("Bairro", max_length=255, null=False)
-    cidade = models.CharField("Cidade", max_length=255, null=False)
-    uf = models.CharField("UF", max_length=255, null=False)
 
 
 class Agendamento(models.Model):
@@ -48,7 +44,7 @@ class Agendamento(models.Model):
     nome_cliente = models.CharField("Cliente", max_length=255, null=False)
     telefone_cliente = models.CharField("telefone", max_length=255, null=False)
 
-    info = models.DateTimeField(auto_now_add=True)
+    info = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return self.nome_cliente
