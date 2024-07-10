@@ -63,18 +63,29 @@ def verificar_disponibilidade(request):
 
 
 def horarios_disponiveis(request):
-    profissional_id = request.GET.get('profissional_id')
-    data = request.GET.get('data')
-    data = datetime.datetime.strptime(data, "%d/%m/%y").date()
+    if request.method == 'GET':
+        profissional_id = request.GET.get('profissional_id')
+        data_str = request.GET.get('data')
+        data = datetime.datetime.strptime(data_str, "%d/%m/%y").date()
 
-    horarios = Horario.objects.all()
-    hora_atual = datetime.datetime.now().time()
+        horarios = Horario.objects.all()
 
-    if data == datetime.date.today():
-        horarios = [hora for hora in horarios if datetime.datetime.strptime(hora.horario.replace("h", ":"), "%H:%M").time() > hora_atual]
+        if data == datetime.date.today():
+            hora_atual = datetime.datetime.now().time()
+            horarios = horarios.filter(
+                horario__gte=hora_atual
+            )
 
-    return JsonResponse({"horarios": [{"id": hora.id, "horario": hora.horario} for hora in horarios]})
+        horarios_agendados = Agendamento.objects.filter(
+            profissional_selecionado_id=profissional_id,
+            data=data
+        ).values_list('horario_selecionado_id', flat=True)
 
+        horarios = horarios.exclude(id__in=horarios_agendados)
+
+        horarios_disponiveis = list(horarios.values('id', 'horario'))
+
+        return JsonResponse({'horarios': horarios_disponiveis})
 
 def agendar(request):
     if request.method == "POST":
