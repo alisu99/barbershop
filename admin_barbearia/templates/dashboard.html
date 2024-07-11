@@ -1,5 +1,157 @@
-{% extends 'base.html' %}
+{% load static %}
 
-{% block conteudo %}
-<h1>Dashboard</h1>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="pt-br" class="bg-color-one scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="" type="image/png">
+    <title>Admin - Faculdade Malta</title>
+
+
+    {% block styles %}
+    {% endblock %}
+
+    <link rel="stylesheet" href="{% static 'libs/bootstrap-icons/bootstrap-icons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/global.css' %}">
+</head>
+
+<body>
+    <header
+        class="shadow fixed top-0 left-0 w-full bg-color-two flex justify-between items-center h-[50px] py-0 z-[100]">
+        <div class="text-md text-white flex items-center justify-center h-full w-[200px] px-4 bg-black">
+            <img class="h-[60%]" src="{{faculdade.imagem.url}}" alt="barbershop">
+        </div>
+
+        <div class="flex items-center justify-center gap-4 px-4">
+            <button type="button" title="Notificações" class="text-white">
+                <i class="bi bi-bell-fill text-xl"></i>
+            </button>
+
+            <div class="flex items-center gap-2">
+                <img src="{% static 'assets/images/path-to-user-image.jpg' %}" alt="{{ request.user }}"
+                    class="w-[35px] h-[35px] rounded-full object-cover">
+                <span class="text-white">{{ request.user }}</span>
+            </div>
+        </div>
+    </header>
+
+    <nav
+        class="position-calc fixed top-[50px] left-0 w-[200px] text-white bg-color-two flex-1 flex flex-col flex-col shadow">
+        <ul class="flex flex-1 flex-col py-4 pl-4">
+            <li data-submenu data-menu="">
+                <a class="p-4 rounded-l-md border-t border-b border-l border-color-two block hover:bg-white hover:text-color-two duration-300 ease-in-out"
+                    href="#">
+                    <i class="bi bi-speedometer"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <li data-submenu="false" data-menu="home">
+                <a class="p-4 rounded-l-md border-t border-b border-l border-color-two block hover:bg-white hover:text-color-two duration-300 ease-in-out"
+                    href="javascript:void(0)">
+                    <i class="bi bi-house-fill"></i>
+                    Home
+                </a>
+
+                <ul class="ml-6 px-4 submenu">
+
+                    <li>
+                        <a class="p-4 rounded-md border border-color-two block hover:bg-white hover:text-color-two duration-300 ease-in-out"
+                            href="#">Carrossel</a>
+                    </li>
+
+                    <li>
+                        <a class="p-4 rounded-md border border-color-two block hover:bg-white hover:text-color-two duration-300 ease-in-out"
+                            href="#">Eventos</a>
+                    </li>
+
+                    <li>
+                        <a class="p-4 rounded-md border border-color-two block hover:bg-white hover:text-color-two duration-300 ease-in-out"
+                            href="#">Lista Dinâmica</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li data-submenu="false" data-menu="controle">
+                <a class="p-4 rounded-l-md border-t border-b border-l border-color-two block hover:bg-white hover:text-color-two duration-300 ease-in-out"
+                    href="javascript:void(0)">
+                    <i class="bi bi-diagram-2-fill"></i>
+                    Controle
+                </a>
+
+                <ul class="ml-6 px-4 submenu">
+                    <li>
+                        <a class="p-4 rounded-md border border-color-two block hover:bg-white hover:text-color-two duration-300 ease-in-out"
+                            href="#">Controle de Matrículas</a>
+                    </li>
+                </ul>
+            </li>
+            <!-- 
+                <li>
+                    <a class="p-4 rounded-l-md border-t border-b border-l border-color-two block hover:bg-white hover:text-color-two duration-300 ease-in-out" href="javascript:void(0)">
+                        <i class="bi bi-coin"></i>
+                        Financeiro
+                    </a>
+                </li>
+
+                <li>
+                    <a class="p-4 rounded-l-md border-t border-b border-l border-color-two block hover:bg-white hover:text-color-two duration-300 ease-in-out" href="javascript:void(0)">
+                        <i class="bi bi-receipt-cutoff"></i>
+                        Vendas
+                    </a>
+
+                </li>
+
+                <li>
+                    <a class="p-4 rounded-l-md border-t border-b border-l border-color-two block hover:bg-white hover:text-color-two duration-300 ease-in-out" href="javascript:void(0)">
+                        <i class="bi bi-sliders"></i>
+                        Geral
+                    </a>
+                </li> -->
+
+            <div class="w-full mt-auto pr-4">
+                <ul>
+                    <li>
+                        <a class="w-full text-left px-4 py-2 rounded-md border border-color-two hover:bg-white hover:text-color-two block duration-300 ease-in-out"
+                            href="#">
+                            <i class="bi bi-sliders"></i>
+                            Configurações
+                        </a>
+                    </li>
+
+                    <li>
+                        <form id="logout-form" action="#" method="post">
+                            {% csrf_token %}
+                            <button type="submit"
+                                class="w-full text-left px-4 py-2 rounded-md border border-color-two hover:bg-danger duration-300 ease-in-out"
+                                title="Logout">
+                                <i class="bi bi-box-arrow-left"></i>
+                                Logout
+                            </button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </ul>
+    </nav>
+
+    <main class="p-4 ml-[200px] mt-[50px] position-calc">
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <script src="{% static  'libs/jquery/jquery-3.6.0.min.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/scripts/classes/Helpers.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/scripts/classes/Crud.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/scripts/classes/Message.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/scripts/classes/Modal.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/scripts/classes/PageBack.js' %}" type="text/javascript"></script>
+    <script src="{% static 'assets/scripts/main.js' %}" type="text/javascript"></script>
+
+    {% block scripts %}
+    {% endblock %}
