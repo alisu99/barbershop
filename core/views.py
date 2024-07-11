@@ -25,13 +25,12 @@ def index(request):
                 if horario_time >= hora_atual:
                     horas_disponiveis.append(hora)
                 else:
-                    print(f"Desconsiderando horário {hora.horario}")
+                    print(f"Desconsiderando horário {hora.horario}.")
             except ValueError as e:
                 print(f"Erro ao converter horário {hora.horario}: {e}")
         horas = horas_disponiveis
 
     proximos_dias = []
-
     for i in range(12):
         dia_futuro = data_atual + datetime.timedelta(days=i)
         dia_da_semana = calendar.day_name[dia_futuro.weekday()]
@@ -72,20 +71,20 @@ def horarios_disponiveis(request):
 
         if data == datetime.date.today():
             hora_atual = datetime.datetime.now().time()
-            horarios = horarios.filter(
-                horario__gte=hora_atual
-            )
+            horarios = [hora for hora in horarios if datetime.datetime.strptime(hora.horario.replace("h", ":"), "%H:%M").time() >= hora_atual]
 
         horarios_agendados = Agendamento.objects.filter(
             profissional_selecionado_id=profissional_id,
             data=data
         ).values_list('horario_selecionado_id', flat=True)
 
-        horarios = horarios.exclude(id__in=horarios_agendados)
+        horarios_disponiveis = [hora for hora in horarios if hora.id not in horarios_agendados]
 
-        horarios_disponiveis = list(horarios.values('id', 'horario'))
+        # Transformando a lista de objetos em uma lista de dicionários
+        horarios_disponiveis_dict = [{'id': hora.id, 'horario': hora.horario} for hora in horarios_disponiveis]
 
-        return JsonResponse({'horarios': horarios_disponiveis})
+        return JsonResponse({'horarios': horarios_disponiveis_dict})
+
 
 def agendar(request):
     if request.method == "POST":
