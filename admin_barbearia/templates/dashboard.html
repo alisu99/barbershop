@@ -11,6 +11,12 @@
 
 
     {% block styles %}
+    <style>
+        #agendamento:hover {
+            border: solid 1px white;
+            border-radius: 5px;
+        }
+    </style>
     {% endblock %}
 
     <link rel="stylesheet" href="{% static 'libs/bootstrap-icons/bootstrap-icons.min.css' %}">
@@ -84,7 +90,7 @@
 
                 <ul class="ml-6 px-4 submenu">
                     <li>
-                        <a class="p-4 rounded-md border border-color-two block hover:bg-white hover:text-color-two duration-300 ease-in-out"
+                        <a id="agendamento" class="p-4 rounded-md block"
                             href="#">Agendamentos</a>
                     </li>
                     <li>
