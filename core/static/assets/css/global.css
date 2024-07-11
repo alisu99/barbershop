@@ -984,6 +984,7 @@ video {
   /* background-color: rgb(84 89 95 / var(--tw-bg-opacity)); */
   background-image: url('../img/background.png');
   background-size: cover;
+
 }
 
 .bg-danger {
