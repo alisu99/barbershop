@@ -28,7 +28,7 @@ body {
 /* mobile */
 @media screen and (max-width: 768px) {
     body {
-        background-image: url("../img/background.png");
+        background-image: url("../img/background2.png");
         background-size: 100%;
         font-size: 1.06rem;
     }
@@ -47,9 +47,11 @@ body {
         gap: 10px;
         scroll-snap-align: start;
         overflow-x: auto;
-        border: 1px solid gainsboro;
+        border: 2px solid;
         border-radius: 20px;
         padding: 1rem 1rem;
+        background-color: #000000;
+
     }
 
     .wrapper-geral .servico p {
@@ -64,7 +66,6 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-shrink: 0;
         width: 7rem;
         height: 7rem;
         border-radius: 50%;
@@ -104,8 +105,11 @@ body {
         gap: 0.3rem;
         padding: 1rem;
         justify-content: center;
-        border: 0.1px solid gainsboro;
+        border: 2px solid;
         border-radius: 20px;
+        background-color: #000000;
+
+
     }
 
     .wrapper-geral .dia .selecione-o-dia .card-personalizado {
@@ -135,9 +139,12 @@ body {
         gap: 10px;
         scroll-snap-align: start;
         overflow-x: auto;
-        border: 1px solid gainsboro;
+        border: 2px solid;
         border-radius: 20px;
         padding: 1rem 1rem;
+        background-color: #000000;
+
+
     }
 
     .wrapper-geral .profissional .selecione-o-profissional::-webkit-scrollbar {
@@ -173,6 +180,7 @@ body {
 
     .wrapper-geral .profissional p {
         color: gainsboro;
+        font-weight: 600;
     }
 
     .wrapper-geral .profissional .profissional-p {
@@ -199,8 +207,11 @@ body {
         gap: 0.3rem;
         padding: 1rem 0.5rem;
         justify-content: center;
-        border: 0.1px solid gainsboro;
+        border: 2px solid;
         border-radius: 20px;
+        background-color: #000000;
+
+
     }
 
     .wrapper-geral .hora .selecione-o-horario .card-personalizado {
@@ -219,9 +230,10 @@ body {
 
     .wrapper-geral .agendamento .resumo-agendamento .form-agendamento {
         width: 100%;
-        border: 1px solid gainsboro;
+        border: 2px solid;
         padding: 1rem;
         border-radius: 20px;
+        background: #000000;
     }
 
     .wrapper-geral .agendamento .resumo-agendamento .form-agendamento {
@@ -245,8 +257,10 @@ body {
     }
 
     .wrapper-geral .agendamento .resumo-agendamento .form-agendamento .btn-container button {
-        border: 1px solid gainsboro;
-        color: white;
+        /* border: 1px solid gainsboro; */
+        color: black;
+        width: 100%;
+        background-color: #E5B817;
     }
 
     .wrapper-geral .agendamento .resumo-agendamento .form-agendamento .btn-container button:active {
@@ -274,76 +288,86 @@ body {
 
 /* aside */
 @media screen and (max-width: 768px) {
-    .navbar {
-        display: flex;
-        justify-content: flex-end;
-        z-index: 3;
-    }
+/* Estilos da Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    color: white;
+}
 
-    .navbar-burger-mobile {
-        display: none;
-    }
+/* Estilos do botão de menu */
+.navbar-aside-mobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 3;
+}
 
-    .navbar-aside-mobile {
-        display: flex;
-    }
+.navbar-aside-mobile div {
+    width: 30px;
+    height: 3px;
+    background-color: white;
+    transition: 0.4s;
+}
 
-    .aside-mobile {
-        position: fixed;
-        z-index: 2;
-        top: 0;
-        right: 0;
-        display: flex;
-        flex-direction: column;
-        width: 95%;
-        height: 100%;
-        padding: 5rem 15px 40px;
-        transition: 0.3s;
-        overflow: auto;
-        translate: 100% 0;
-        background: rgba(220, 220, 220, 0.34);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(5.3px);
-    }
+.open .bar1 {
+    transform: rotate(-45deg) translate(-7px, 7px);
+}
 
-    .aside-mobile nav {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        font-size: 20px;
-    }
+.open .bar2 {
+    opacity: 0;
+}
 
-    .aside-mobile nav a {
-        color: white;
-        text-decoration: none;
-        max-width: max-content;
-    }
+.open .bar3 {
+    transform: rotate(45deg) translate(-7px, -7px);
+}
 
-    .navbar-aside-mobile {
-        z-index: 1;
-        display: grid;
-        place-items: center;
-        width: 88px;
-        height: 88px;
-        background-image: url("../img/tesoura-vertical.png");
-        background-color: transparent;
-        background-repeat: no-repeat;
-        background-position: center;
-        border-style: none;
-        transition: 0.40s;
-    }
+/* Estilos da aside */
+.aside-mobile {
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    height: 100%;
+    padding: 5rem 15px 40px;
+    transition: 0.3s;
+    overflow: auto;
+    translate: 100% 0;
+    background: rgba(220, 220, 220, 0.34);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.3px);
+}
 
-    body.open .navbar-aside-mobile {
-        background-image: url("../img/tesoura-horizontal.png");
-    }
+.aside-mobile nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    font-size: 20px;
+}
+
+.aside-mobile nav a {
+    color: white;
+    text-decoration: none;
+    max-width: max-content;
+}
+
+body.open .aside-mobile {
+    translate: 0;
+}
 
 
-    body.open .aside-mobile {
-        translate: 0;
-    }
-
-    body.open .navbar {
+    /* body.open .navbar {
         position: fixed;
         width: 100%;
-    }
+    } */
 }

@@ -10,6 +10,7 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.utf8')
 
 
 def index(request):
+    print(dir(request.user))
     servicos = Servico.objects.all()
     profissionais = Profissional.objects.all()
     horas = Horario.objects.all()

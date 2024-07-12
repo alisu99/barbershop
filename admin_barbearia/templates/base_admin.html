@@ -13,6 +13,17 @@
 </head>
 
 <body>
+    <nav class="navbar" style="justify-content: flex-end;">
+        <!-- {% if request.user.is_authenticated %}
+            <h2 style="color: gainsboro; margin-left: 30px;">Olá, {{request.user|capfirst}}!</h2>
+        {% endif %} -->
+        <button class="navbar-aside-mobile" onclick="toggleMenu()"></button>
+    </nav>
+    <aside class="aside-mobile">
+        <nav>
+            <a href="#">Home</a>
+        </nav>
+    </aside>
     {% block conteudo %}
     {% endblock %}
 
@@ -21,6 +32,11 @@
         $(document).ready(function () {
             $('#telefone').mask('(00) 00000-0000');
         });
+    </script>
+    <script type="text/javascript">
+        const toggleMenu = () => {
+            document.body.classList.toggle("open");
+        };
     </script>
     <script src="{% static 'assets/js/script.js' %}"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>

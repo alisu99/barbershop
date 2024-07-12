@@ -13,9 +13,16 @@
 
 <body>
     <nav class="navbar">
-        <button class="navbar-aside-mobile" onclick="toggleMenu()"></button>
+        {% if request.user.is_authenticated %}
+            <h2 style="color: gainsboro; margin-left: 20px;">Olá, {{ request.user|capfirst }}!</h2>
+        {% endif %}
+        <button class="navbar-aside-mobile" onclick="toggleMenu()">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </button>
     </nav>
-    <aside class="aside-mobile">
+    <aside class="aside-mobile" id="asideMenu">
         <nav>
             <a href="#">Home</a>
         </nav>
