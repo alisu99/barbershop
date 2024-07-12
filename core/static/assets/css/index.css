@@ -113,7 +113,7 @@ body {
         padding: 0.2rem;
         text-align: center;
         font-weight: 600;
-        border-radius: 8px;
+        border-radius: 6.5px;
         border: 1px solid gainsboro;
         color: white;
     }
@@ -154,10 +154,10 @@ body {
         width: 6.1rem;
         height: max-content;
         border: 1px solid gainsboro;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
         flex-direction: column;
         align-items: center;
         text-wrap: wrap;
@@ -197,18 +197,18 @@ body {
         display: flex;
         flex-wrap: wrap;
         gap: 0.3rem;
-        padding: 1rem;
+        padding: 1rem 0.5rem;
         justify-content: center;
         border: 0.1px solid gainsboro;
         border-radius: 20px;
     }
 
     .wrapper-geral .hora .selecione-o-horario .card-personalizado {
-        width: 3.5rem;
+        width: 4rem;
         padding: 0.2rem;
         text-align: center;
         font-weight: 600;
-        border-radius: 8px;
+        border-radius: 5px;
         border: 1px solid gainsboro;
         color: white;
     }
@@ -256,12 +256,19 @@ body {
 
     .agendamentos .dashboard .card-personalizado {
         width: 100%;
-        padding: 0.2rem;
-        text-align: center;
         font-weight: 600;
         border-radius: 8px;
         border: 1px solid gainsboro;
         color: white;
+        padding: 0rem 1rem;
+    }
+
+    .agendamentos .dashboard .card-personalizado .profissional-servico {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        overflow: hidden;
+        line-height: 20px;
     }
 }
 
