@@ -5,11 +5,17 @@
 <section class="agendamentos">
     <div class="dashboard">
         {% for agendamento in agendamentos %}
+        {% if agendamento.finalizado == True %}
+            <style>
+                .agendamentos .dashboard .card-personalizado::after {
+                    background-color: green;
+                }
+            </style>
+        {% endif %}
         <div class="card-personalizado">
             <div>
                 <p><span style="font-size: 16px;">{{ agendamento.data|date:"d/m/y" }} - {{agendamento.horario_selecionado}}</span><br>{{agendamento.nome_cliente}}</p>
             </div>
-            <div></div>
             <div class="profissional-servico">
                 <p><span style="font-size: 16px;">Profissional</span><br>{{agendamento.profissional_selecionado}}</p>
                 <p><span style="font-size: 16px;">Serviço</span><br>{{agendamento.servico_selecionado}}</p>

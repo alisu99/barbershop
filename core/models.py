@@ -43,8 +43,7 @@ class Agendamento(models.Model):
     data = models.DateField("Data", null=False)
     nome_cliente = models.CharField("Cliente", max_length=255, null=False)
     telefone_cliente = models.CharField("telefone", max_length=255, null=False)
-    
-    info = models.DateTimeField(auto_now=True)
+    finalizado = models.BooleanField(default=False)
 
     def __str__(self):
         return self.nome_cliente
