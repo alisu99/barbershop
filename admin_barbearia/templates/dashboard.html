@@ -2,26 +2,93 @@
 
 {% block conteudo %}
 <title>Dashboard</title>
-<section class="agendamentos">
-    <div class="dashboard">
-        {% for agendamento in agendamentos %}
-        {% if agendamento.finalizado == True %}
+
+<div class="dinamicos">
+    <div class="utilitarios">
+        <div id="utilitarios-agendamentos" class="agendamentos">
+            <p>Agendamentos</p>
+        </div>
+
+        <div id="utilitarios-historico" class="historico">
+            <p>Histórico</p>
+        </div>
+
+        <div id="utilitarios-horarios-disponiveis" class="horarios-disponiveis">
+            <p>Horários disponíveis</p>
+        </div>
+
+        <div id="utilitarios-relatorio" class="relatorio">
+            <p>Relatórios</p>
+        </div>
+    </div>
+    <!-- ---------------------------- -->
+    <section id="section-agendamentos" class="agendamentos">
+        <div class="dashboard">
+            {% for agendamento in agendamentos %}
+            {% if agendamento.finalizado == False %}
             <style>
                 .agendamentos .dashboard .card-personalizado::after {
                     background-color: green;
                 }
             </style>
-        {% endif %}
-        <div class="card-personalizado">
-            <div>
-                <p><span style="font-size: 16px;">{{ agendamento.data|date:"d/m/y" }} - {{agendamento.horario_selecionado}}</span><br>{{agendamento.nome_cliente}}</p>
+            {% endif %}
+            <div class="card-personalizado">
+                <div>
+                    <p><span style="font-size: 16px;">{{ agendamento.data|date:"d/m/y" }} -
+                            {{agendamento.horario_selecionado}}</span><br>{{agendamento.nome_cliente|title}}</p>
+                </div>
+                <div class="profissional-servico">
+                    <p><span
+                            style="font-size: 16px;">Profissional</span><br>{{agendamento.profissional_selecionado|title}}
+                    </p>
+                    <p><span style="font-size: 16px;">Serviço</span><br>{{agendamento.servico_selecionado}}</p>
+                </div>
             </div>
-            <div class="profissional-servico">
-                <p><span style="font-size: 16px;">Profissional</span><br>{{agendamento.profissional_selecionado}}</p>
-                <p><span style="font-size: 16px;">Serviço</span><br>{{agendamento.servico_selecionado}}</p>
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
-    </div>
-</section>
+    </section>
+
+    <section id="section-historico" class="historico" style="display: none;">
+        <h1>Histórico</h1>
+    </section>
+
+    <section id="section-horarios-disponiveis" class="horarios-disponiveis" style="display: none;">
+        <h1>Horários disponíveis</h1>
+    </section>
+
+    <section id="section-relatorio" class="relatorio" style="display: none;">
+        <h1>Relatórios</h1>
+    </section>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const sections = {
+            "utilitarios-agendamentos": "section-agendamentos",
+            "utilitarios-historico": "section-historico",
+            "utilitarios-horarios-disponiveis": "section-horarios-disponiveis",
+            "utilitarios-relatorio": "section-relatorio"
+        };
+
+        // Inicialmente, destaque a primeira opção
+        document.getElementById("utilitarios-agendamentos").classList.add("opcaoSelecionada");
+
+        for (const [utilitarioId, sectionId] of Object.entries(sections)) {
+            document.getElementById(utilitarioId).addEventListener('click', function () {
+                // Remover a classe 'selected' de todas as opções
+                for (const utilitario of Object.keys(sections)) {
+                    document.getElementById(utilitario).classList.remove("opcaoSelecionada");
+                }
+                // Adicionar a classe 'selected' à opção clicada
+                document.getElementById(utilitarioId).classList.add("opcaoSelecionada");
+
+                // Ocultar todas as seções e exibir a seção correspondente
+                for (const section of Object.values(sections)) {
+                    document.getElementById(section).style.display = 'none';
+                }
+                document.getElementById(sectionId).style.display = 'block';
+            });
+        }
+    });
+</script>
 {% endblock %}

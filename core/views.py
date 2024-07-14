@@ -31,7 +31,7 @@ def index(request):
         horas = horas_disponiveis
 
     proximos_dias = []
-    for i in range(12):
+    for i in range(9):
         dia_futuro = data_atual + datetime.timedelta(days=i)
         dia_da_semana = calendar.day_name[dia_futuro.weekday()]
         dia_da_semana_sem_feira = dia_da_semana.replace('-feira', '').capitalize()
