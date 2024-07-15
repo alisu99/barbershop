@@ -21,9 +21,9 @@ body {
 
 @font-face {
     font-family: font-main;
-  
+
     src: url(../../assets/fonts/poppins/Poppins-Regular.ttf);
-  }
+}
 
 .selecionado {
     background-color: rgba(220, 220, 220, 0.493);
@@ -70,7 +70,7 @@ body {
     .wrapper-geral .servico p {
         color: gainsboro;
         margin-bottom: 0;
-        
+
         margin-left: 20px;
     }
 
@@ -129,7 +129,7 @@ body {
         width: 5rem;
         padding: 0.2rem;
         text-align: center;
-        
+
         border-radius: 6.5px;
         border: 1px solid gainsboro;
         color: white;
@@ -138,7 +138,7 @@ body {
     .wrapper-geral .dia p {
         color: gainsboro;
         margin-bottom: 0;
-        
+
         margin-left: 20px;
     }
 
@@ -185,7 +185,7 @@ body {
     }
 
     .wrapper-geral .profissional .selecione-o-profissional .card p {
-        
+
         color: currentColor;
         text-align: center;
 
@@ -193,13 +193,13 @@ body {
 
     .wrapper-geral .profissional p {
         color: gainsboro;
-        
+
     }
 
     .wrapper-geral .profissional .profissional-p {
         color: gainsboro;
         margin-bottom: 0;
-        
+
         margin-left: 20px;
     }
 
@@ -210,7 +210,7 @@ body {
     .wrapper-geral .hora p {
         color: gainsboro;
         margin-bottom: 0;
-        
+
         margin-left: 20px;
     }
 
@@ -231,7 +231,7 @@ body {
         width: 4rem;
         padding: 0.2rem;
         text-align: center;
-        
+
         border-radius: 5px;
         border: 1px solid gainsboro;
         color: white;
@@ -283,15 +283,15 @@ body {
 
     .agendamentos .dashboard {
         padding: 0.4rem 1rem 0;
-        gap: 0.5rem;
+        gap: 1rem;
         display: flex;
         flex-direction: column;
         height: 18rem;
         margin-top: 0.4rem;
         overflow: auto;
-    
+
     }
-    
+
     .agendamentos .dashboard .card-personalizado {
         width: 100%;
         border-radius: 8px;
@@ -300,7 +300,7 @@ body {
         background-color: #1f1e1e;
         position: relative;
     }
-    
+
     .agendamentos .dashboard .card-personalizado::after {
         content: '';
         position: absolute;
@@ -312,59 +312,126 @@ body {
         border-top-right-radius: 8px;
         border-bottom-right-radius: 8px;
     }
-    
+
     .agendamentos .dashboard .card-personalizado p {
         color: gainsboro;
         margin-top: 0.4rem;
         margin-bottom: 0.2rem;
     }
-    
+
     .agendamentos .dashboard .card-personalizado .profissional-servico {
         display: flex;
         gap: 1rem;
         overflow: hidden;
         line-height: 20px;
+        justify-content: space-between;
     }
-    
+
+    .agendamentos .dashboard .card-personalizado .profissional-servico a {
+        text-decoration: none;
+        color: gainsboro;
+        background-color: green;
+        padding: 0.4rem 0.2rem;
+        display: flex;
+        border-radius: 8px;
+    }
+
+
+    .historico .dashboard {
+        padding: 0.4rem 1rem 0;
+        gap: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        height: 18rem;
+        margin-top: 0.4rem;
+        overflow: auto;
+
+    }
+
+    .historico .dashboard .card-personalizado {
+        width: 100%;
+        border-radius: 8px;
+        border: 2px solid;
+        padding: 0rem 1rem;
+        background-color: #1f1e1e;
+        position: relative;
+    }
+
+    .historico .dashboard .card-personalizado::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 5px;
+        height: 100%;
+        /* background-color: green; */
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+
+    .historico .dashboard .card-personalizado p {
+        color: gainsboro;
+        margin-top: 0.4rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .historico .dashboard .card-personalizado .profissional-servico {
+        display: flex;
+        gap: 1rem;
+        overflow: hidden;
+        line-height: 20px;
+    }
+
     .spaced-span {
         margin-left: 0.3rem;
         color: #E5B817;
     }
 }
 
+.busca-por-nome {
+    padding: 0.4rem 1rem;
+    display: flex;
+    gap: 0.5rem;    
+}
+
+.busca-por-nome input {
+    font-size: x-small;
+}
+
 /* aside */
 @media screen and (max-width: 768px) {
-/* Estilos da Navbar */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    color: white;
-    /* height: 6rem; */
-    align-content: flex-start;
-    background: #1f1e1e
-}
 
-.dinamicos .utilitarios {
-    display: flex;
-    overflow: auto;
-    text-wrap: nowrap;
-    padding: 0.3rem 0.2rem;
-    font-size: small;
-    background-color: #1f1e1e;
-    position: relative;
-}
+    /* Estilos da Navbar */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+        color: white;
+        /* height: 6rem; */
+        align-content: flex-start;
+        background: #1f1e1e
+    }
 
-.dinamicos .utilitarios::-webkit-scrollbar {
-    height: 0px;
-}
+    .dinamicos .utilitarios {
+        display: flex;
+        overflow: auto;
+        text-wrap: nowrap;
+        padding: 0.3rem 0.2rem;
+        font-size: small;
+        background-color: #1f1e1e;
+        position: relative;
+    }
 
-.dinamicos .utilitarios div {
-    position: relative;
-    padding: 0 1rem;
-}
+    .dinamicos .utilitarios::-webkit-scrollbar {
+        height: 0px;
+    }
 
-/* .dinamicos .utilitarios div::after {
+    .dinamicos .utilitarios div {
+        position: relative;
+        padding: 0 1rem;
+    }
+
+    /* .dinamicos .utilitarios div::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -374,96 +441,96 @@ body {
     background-color: gainsboro;
 } */
 
-.dinamicos .utilitarios div::before {
-    left: 0;
-}
+    .dinamicos .utilitarios div::before {
+        left: 0;
+    }
 
-.dinamicos .utilitarios div::after {
-    right: 0;
-}
+    .dinamicos .utilitarios div::after {
+        right: 0;
+    }
 
-.dinamicos .utilitarios div:first-child::before {
-    display: none;
-}
+    .dinamicos .utilitarios div:first-child::before {
+        display: none;
+    }
 
-.dinamicos .utilitarios div:last-child::after {
-    display: none;
-}
+    .dinamicos .utilitarios div:last-child::after {
+        display: none;
+    }
 
-.dinamicos .utilitarios p {
-    color: gainsboro;
-    margin: 0;
-}
+    .dinamicos .utilitarios p {
+        color: gainsboro;
+        margin: 0;
+    }
 
 
-/* Estilos do botão de menu */
-.navbar-aside-mobile {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 30px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    z-index: 3;
-}
+    /* Estilos do botão de menu */
+    .navbar-aside-mobile {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 30px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 3;
+    }
 
-.navbar-aside-mobile div {
-    width: 30px;
-    height: 2px;
-    background-color: white;
-    transition: 0.4s;
-}
+    .navbar-aside-mobile div {
+        width: 30px;
+        height: 2px;
+        background-color: white;
+        transition: 0.4s;
+    }
 
-.open .bar1 {
-    transform: rotate(-45deg) translate(-7px, 7px);
-}
+    .open .bar1 {
+        transform: rotate(-45deg) translate(-7px, 7px);
+    }
 
-.open .bar2 {
-    opacity: 0;
-}
+    .open .bar2 {
+        opacity: 0;
+    }
 
-.open .bar3 {
-    transform: rotate(45deg) translate(-7px, -7px);
-}
+    .open .bar3 {
+        transform: rotate(45deg) translate(-7px, -7px);
+    }
 
-/* Estilos da aside */
-.aside-mobile {
-    position: fixed;
-    z-index: 2;
-    top: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    width: 95%;
-    height: 100%;
-    padding: 5rem 15px 40px;
-    transition: 0.3s;
-    overflow: auto;
-    translate: 100% 0;
-    background: rgba(220, 220, 220, 0.34);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(5.3px);
-}
+    /* Estilos da aside */
+    .aside-mobile {
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        width: 95%;
+        height: 100%;
+        padding: 5rem 15px 40px;
+        transition: 0.3s;
+        overflow: auto;
+        translate: 100% 0;
+        background: rgba(220, 220, 220, 0.34);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5.3px);
+    }
 
-.aside-mobile nav {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    font-size: 20px;
-}
+    .aside-mobile nav {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        font-size: 20px;
+    }
 
-.aside-mobile nav a {
-    color: white;
-    text-decoration: none;
-    max-width: max-content;
-}
+    .aside-mobile nav a {
+        color: white;
+        text-decoration: none;
+        max-width: max-content;
+    }
 
-body.open .aside-mobile {
-    translate: 0;
-}
+    body.open .aside-mobile {
+        translate: 0;
+    }
 
 
     /* body.open .navbar {

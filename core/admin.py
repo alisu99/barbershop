@@ -9,7 +9,7 @@ class ProfissionalAdmin(admin.ModelAdmin):
 
 @admin.register(Agendamento)
 class AgendamentoAdmin(admin.ModelAdmin):
-    list_display = ["nome_cliente", "servico_selecionado", "data", "profissional_selecionado", "horario_selecionado"]
+    list_display = ["nome_cliente", "servico_selecionado", "data", "profissional_selecionado", "horario_selecionado", "finalizado"]
 
 
 @admin.register(Servico)
