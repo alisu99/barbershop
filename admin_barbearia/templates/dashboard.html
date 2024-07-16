@@ -2,28 +2,10 @@
 
 {% block conteudo %}
 <title>Dashboard</title>
-
-<div class="dinamicos">
-    <div class="utilitarios">
-        <div id="utilitarios-agendamentos" class="agendamentos">
-            <p>Agendamentos</p>
-        </div>
-
-        <div id="utilitarios-historico" class="historico">
-            <p>Histórico</p>
-        </div>
-
-        <div id="utilitarios-horarios-disponiveis" class="horarios-disponiveis">
-            <p>Horários disponíveis</p>
-        </div>
-
-        <div id="utilitarios-dashboard" class="dashboard">
-            <p>Dashboard</p>
-        </div>
-    </div>
     <!-- ---------------------------- -->
 
     <!-- ---------------------------- -->
+     <main>
     <section id="section-agendamentos" class="agendamentos">
         <div class="busca-por-nome">
             <input type="text" name="pesquisar" id="pesquisar" placeholder="Nome do cliente" class="form-control">
@@ -61,11 +43,11 @@
         <div class="busca-por-nome">
             <input type="text" name="pesquisar" id="pesquisar" placeholder="Nome do cliente" class="form-control">
         </div>
-        <div class="dashboard">
+        <div class="itens">
             {% for historico in historicos %}
             {% if historico.finalizado == True %}
             <style>
-                .historico .dashboard .card-personalizado::after {
+                .historico .itens .card-personalizado::after {
                     background-color: green;
                 }
             </style>
@@ -92,9 +74,21 @@
     </section>
 
     <section id="section-dashboard" class="dashboard" style="display: none;">
-        <h1>Dashboard</h1>
+        <div class="dash">
+            <div class="card-personalizado">
+                <h4 style="color: gainsboro;">Hoje</h4>
+                <h4 style="color: gainsboro;">{{total_agendamentos_hoje}}</h4>
+            </div>
+            <div class="card-personalizado">
+                <h4 style="color: gainsboro;">Abertos</h4>
+                <h4 class="card-title" style="color: gainsboro;">{{agendamentos_abertos_hoje}}</h4>
+            </div>
+            <div class="card-personalizado">
+                <h4 style="color: gainsboro;">finalizados</h4>
+                <h4 class="card-title" style="color: gainsboro;">{{agendamentos_fechados_hoje}}</h4>
+            </div>
+        </div>
     </section>
-</div>
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
