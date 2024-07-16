@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'admin_barbearia',
+    'financeiro',
 ]
 
 MIDDLEWARE = [
