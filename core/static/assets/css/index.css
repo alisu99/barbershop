@@ -39,10 +39,9 @@ body {
 .opcaoSelecionada {
     background-color: rgba(220, 220, 220, 0.081);
     border-radius: 10px;
-    transform: translateY(-2px);
-    transition: 0.40s;
     border: 1px solid #E5B817;
     color: #E5B817;
+    transition: 0.40s;
 }
 
 .dinamicos .utilitarios:not(.opcaoSelecionada) {
@@ -60,7 +59,7 @@ body {
     body {
         background-image: url("../img/background2.png");
         background-size: 100%;
-        font-size: .850rem;
+        font-size: .950rem;
         font-family: font-main;
     }
 

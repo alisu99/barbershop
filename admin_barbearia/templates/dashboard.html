@@ -19,14 +19,14 @@
             <div class="card-personalizado">
                 <div>
                     <p><span style="font-size: 16px;">{{ agendamento.data|date:"d/m/y" }} -
-                            {{agendamento.horario_selecionado}}</span><br><span
+                            {{agendamento.horario}}</span><br><span
                             style="font-size: 1.4rem;">{{agendamento.nome_cliente|title}}</span></p>
                 </div>
                 <div class="profissional-servico">
                     <p><span
-                            style="font-size: 16px;">Profissional</span><br>{{agendamento.profissional_selecionado|title}}
+                            style="font-size: 16px;">Profissional</span><br>{{agendamento.nome_profissional|title}}
                     </p>
-                    <p><span style="font-size: 16px;">Serviço</span><br>{{agendamento.servico_selecionado}}</p>
+                    <p><span style="font-size: 16px;">Serviço</span><br>{{agendamento.nome_servico}}</p>
                     <div>
                         <a href="{% url 'finalizar' agendamento.id %}"
                             onclick="return confirm('Finalizar serviço?')">Finalizar</a>
@@ -53,14 +53,14 @@
             <div class="card-personalizado">
                 <div>
                     <p><span style="font-size: 16px;">{{ historico.data|date:"d/m/y" }} -
-                            {{historico.horario_selecionado}}</span><br><span
+                            {{historico.horario}}</span><br><span
                             style="font-size: 1.4rem;">{{historico.nome_cliente|title}}</span></p>
                 </div>
                 <div class="profissional-servico">
                     <p><span
-                            style="font-size: 16px;">Profissional</span><br>{{historico.profissional_selecionado|title}}
+                            style="font-size: 16px;">Profissional</span><br>{{historico.nome_profissional|title}}
                     </p>
-                    <p><span style="font-size: 16px;">Serviço</span><br>{{historico.servico_selecionado}}</p>
+                    <p><span style="font-size: 16px;">Serviço</span><br>{{historico.nome_servico}}</p>
                 </div>
             </div>
             {% endfor %}
