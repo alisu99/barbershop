@@ -1,7 +1,7 @@
 {% extends 'base_admin.html' %}
 
 {% block conteudo %}
-<title>Dashboard</title>    
+<title>Dashboard</title>
 <main>
     <section id="section-agendamentos" class="agendamentos">
         <div class="busca-por-nome">
@@ -74,16 +74,18 @@
     <section id="section-dashboard" class="dashboard" style="display: none;">
         <div class="dash">
             <div class="card-personalizado">
-                <h4 style="color: gainsboro;">Hoje</h4>
-                <h4 style="color: gainsboro;">{{total_agendamentos_hoje}}</h4>
-            </div>
-            <div class="card-personalizado">
-                <h4 style="color: gainsboro;">Abertos</h4>
-                <h4 class="card-title" style="color: gainsboro;">{{agendamentos_abertos_hoje}}</h4>
-            </div>
-            <div class="card-personalizado">
-                <h4 style="color: gainsboro;">finalizados</h4>
-                <h4 class="card-title" style="color: gainsboro;">{{agendamentos_fechados_hoje}}</h4>
+                <div>
+                    <h4 style="color: gainsboro;">Hoje</h4>
+                    <h4 style="color: gainsboro;">{{total_agendamentos_hoje}}</h4>
+                </div>
+                <div>
+                    <h4 style="color: gainsboro;">Abertos</h4>
+                    <h4 class="card-title" style="color: gainsboro;">{{agendamentos_abertos_hoje}}</h4>
+                </div>
+                <div>
+                    <h4 style="color: gainsboro;">finalizados</h4>
+                    <h4 class="card-title" style="color: gainsboro;">{{agendamentos_fechados_hoje}}</h4>
+                </div>
             </div>
         </div>
     </section>

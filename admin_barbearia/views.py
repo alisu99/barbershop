@@ -3,7 +3,7 @@ from core.models import *
 import datetime
 
 def dashboard(request):
-    agendamentos = Agendamento.objects.filter(finalizado=False).order_by('data')
+    agendamentos = Agendamento.objects.filter(finalizado=False).order_by('-data')
     historicos = Agendamento.objects.filter(finalizado=True).order_by('-data')
     total_agendamentos_hoje = len(Agendamento.objects.filter(data=datetime.date.today()))
     agendamentos_abertos_hoje = len(Agendamento.objects.filter(finalizado=False, data=datetime.date.today()))

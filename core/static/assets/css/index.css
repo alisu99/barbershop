@@ -26,15 +26,33 @@ body {
 }
 
 .selecionado {
-    background-color: rgba(220, 220, 220, 0.493);
+    background-color: rgba(220, 220, 220, 0.081);
     transition: .30s;
+    color: #E5B817;
+    border: 2px solid #E5B817;
+}
+
+.selecionado h5 {
+    color: #E5B817;
 }
 
 .opcaoSelecionada {
-    background-color: rgba(220, 220, 220, 0.493);
+    background-color: rgba(220, 220, 220, 0.081);
     border-radius: 10px;
-    transform: translateY(-5px);
-    transition: 0.40s
+    transform: translateY(-2px);
+    transition: 0.40s;
+    border: 1px solid #E5B817;
+    color: #E5B817;
+}
+
+.dinamicos .utilitarios:not(.opcaoSelecionada) {
+    color: gainsboro;
+}
+
+
+.wrapper-geral .card-personalizado:not(.selecionado) {
+    border: 2px solid gainsboro;
+    color: gainsboro;
 }
 
 /* mobile */
@@ -79,12 +97,9 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 7rem;
-        height: 7rem;
+        width: 8rem;
+        height: 8rem;
         border-radius: 50%;
-        border: 2px solid gainsboro;
-        background-image: url('../img/corte.png');
-        background-size: cover;
     }
 
 
@@ -96,7 +111,9 @@ body {
     .wrapper-geral .servico .cards-servico h5 {
         font-size: 0.975rem;
         margin: 0;
-        color: white;
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     .wrapper-geral .servico .cards-servico::-webkit-scrollbar {
@@ -129,10 +146,9 @@ body {
         width: 5rem;
         padding: 0.2rem;
         text-align: center;
-
         border-radius: 6.5px;
-        border: 1px solid gainsboro;
-        color: white;
+        /* border: 1px solid gainsboro;
+        color: white; */
     }
 
     .wrapper-geral .dia p {
@@ -173,7 +189,6 @@ body {
         display: flex;
         width: 6.1rem;
         height: max-content;
-        border: 1px solid gainsboro;
         border-top-left-radius: 7px;
         border-top-right-radius: 7px;
         border-bottom-left-radius: 7px;
@@ -191,10 +206,10 @@ body {
 
     }
 
-    .wrapper-geral .profissional p {
+    /* .wrapper-geral .profissional p {
         color: gainsboro;
 
-    }
+    } */
 
     .wrapper-geral .profissional .profissional-p {
         color: gainsboro;
@@ -233,8 +248,8 @@ body {
         text-align: center;
 
         border-radius: 5px;
-        border: 1px solid gainsboro;
-        color: white;
+        /* border: 1px solid gainsboro;
+        color: white; */
     }
 
     .wrapper-geral .agendamento {
@@ -337,7 +352,7 @@ body {
 
 
     .historico .itens {
-        padding: 0.4rem 1rem 0;
+        padding: 0.4rem 1rem;
         gap: 0.5rem;
         display: flex;
         flex-direction: column;
@@ -411,7 +426,7 @@ body {
         padding: 0.3rem 0.2rem;
         background-color: #1f1e1e;
         position: relative;
-        border-bottom: 4px solid;
+        border-bottom: 4px solid #2c434361;
     }
 
     .dinamicos .utilitarios::-webkit-scrollbar {
@@ -450,7 +465,6 @@ body {
     }
 
     .dinamicos .utilitarios h5 {
-        color: gainsboro;
         margin: 0;
     }
 
@@ -553,15 +567,13 @@ body {
 
     .dashboard .dash .card-personalizado {
         display: flex;
-        max-width: 8rem;
-        height: 8rem;
-        align-items: center;
+        flex-wrap: wrap;
         gap: 1rem;
         background-color: #1f1e1e;
+        justify-content: space-around;
         border-radius: 13px;
         border: 2px solid;
         flex-grow: 1;
-        flex-direction: column;
         padding: 1rem;
     }
 }

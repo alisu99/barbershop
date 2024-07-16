@@ -33,6 +33,7 @@ class Usuario(models.Model):
         "Nome de Usuário", max_length=255, null=False, unique=True
     )
     email = models.EmailField("Email", max_length=100, null=False)
+    telefone = models.CharField("Telefone", max_length=15, null=False)
 
 
 class Agendamento(models.Model):
