@@ -4,7 +4,7 @@ from .views import *
 
 urlpatterns = [
     path('', index, name='index'),
-    path('verificar_profissionais/', verificar_profissionais, name='verificar_profissionais'),
-    path('verificar_horarios/', verificar_horarios, name='verificar_horarios'),
+    path('verificar_disponibilidade/', verificar_disponibilidade, name='verificar_disponibilidade'),
     path('agendar/', agendar, name='agendar'),
+    path('horarios_disponiveis/', horarios_disponiveis, name='horarios_disponiveis'),
 ]

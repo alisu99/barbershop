@@ -19,27 +19,39 @@ body {
     /* Cor da trilha */
 }
 
+@font-face {
+    font-family: font-main;
+
+    src: url(../../assets/fonts/poppins/Poppins-Regular.ttf);
+}
+
 .selecionado {
     background-color: rgba(220, 220, 220, 0.493);
     transition: .30s;
-    color: black;
+}
+
+.opcaoSelecionada {
+    background-color: rgba(220, 220, 220, 0.493);
+    border-radius: 10px;
+    transform: translateY(-5px);
+    transition: 0.40s
 }
 
 /* mobile */
 @media screen and (max-width: 768px) {
     body {
-        background-image: url("../img/background.png");
+        background-image: url("../img/background2.png");
         background-size: 100%;
-        font-size: 1.06rem;
+        font-size: .850rem;
+        font-family: font-main;
     }
 
     .wrapper-geral {
         min-height: max-content;
     }
 
-
     .wrapper-geral .servico {
-        padding: 1.5rem 1rem;
+        padding: 1rem;
     }
 
     .wrapper-geral .servico .cards-servico {
@@ -48,15 +60,17 @@ body {
         gap: 10px;
         scroll-snap-align: start;
         overflow-x: auto;
-        border: 1px solid gainsboro;
+        border: 2px solid;
         border-radius: 20px;
         padding: 1rem 1rem;
+        background-color: #1f1e1e;
+
     }
 
     .wrapper-geral .servico p {
         color: gainsboro;
         margin-bottom: 0;
-        font-weight: 600;
+
         margin-left: 20px;
     }
 
@@ -65,7 +79,6 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-shrink: 0;
         width: 7rem;
         height: 7rem;
         border-radius: 50%;
@@ -105,16 +118,19 @@ body {
         gap: 0.3rem;
         padding: 1rem;
         justify-content: center;
-        border: 0.1px solid gainsboro;
+        border: 2px solid;
         border-radius: 20px;
+        background-color: #1f1e1e;
+
+
     }
 
     .wrapper-geral .dia .selecione-o-dia .card-personalizado {
-        width: max-content;
+        width: 5rem;
         padding: 0.2rem;
         text-align: center;
-        font-weight: 600;
-        border-radius: 8px;
+
+        border-radius: 6.5px;
         border: 1px solid gainsboro;
         color: white;
     }
@@ -122,7 +138,7 @@ body {
     .wrapper-geral .dia p {
         color: gainsboro;
         margin-bottom: 0;
-        font-weight: 600;
+
         margin-left: 20px;
     }
 
@@ -132,15 +148,25 @@ body {
 
     .wrapper-geral .profissional .selecione-o-profissional {
         display: flex;
-        gap: 0.5rem;
-        flex-wrap: wrap;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        padding: 1rem;
-        justify-content: center;
-        border: 0.1px solid gainsboro;
+        width: 100%;
+        gap: 10px;
+        scroll-snap-align: start;
+        overflow-x: auto;
+        border: 2px solid;
         border-radius: 20px;
+        padding: 1rem 1rem;
+        background-color: #1f1e1e;
+
+
+    }
+
+    .wrapper-geral .profissional .selecione-o-profissional::-webkit-scrollbar {
+        height: 0px;
+    }
+
+    .wrapper-geral .profissional .selecione-o-profissional::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 10px;
     }
 
     .wrapper-geral .profissional .selecione-o-profissional .card-personalizado {
@@ -148,17 +174,18 @@ body {
         width: 6.1rem;
         height: max-content;
         border: 1px solid gainsboro;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
-        border-bottom-left-radius: 20px;
-        border-bottom-right-radius: 20px;
+        border-top-left-radius: 7px;
+        border-top-right-radius: 7px;
+        border-bottom-left-radius: 7px;
+        border-bottom-right-radius: 7px;
         flex-direction: column;
         align-items: center;
         text-wrap: wrap;
+        text-align: center;
     }
 
     .wrapper-geral .profissional .selecione-o-profissional .card p {
-        font-weight: 600;
+
         color: currentColor;
         text-align: center;
 
@@ -166,12 +193,13 @@ body {
 
     .wrapper-geral .profissional p {
         color: gainsboro;
+
     }
 
     .wrapper-geral .profissional .profissional-p {
         color: gainsboro;
         margin-bottom: 0;
-        font-weight: 600;
+
         margin-left: 20px;
     }
 
@@ -182,7 +210,7 @@ body {
     .wrapper-geral .hora p {
         color: gainsboro;
         margin-bottom: 0;
-        font-weight: 600;
+
         margin-left: 20px;
     }
 
@@ -190,18 +218,21 @@ body {
         display: flex;
         flex-wrap: wrap;
         gap: 0.3rem;
-        padding: 1rem;
+        padding: 1rem 0.5rem;
         justify-content: center;
-        border: 0.1px solid gainsboro;
+        border: 2px solid;
         border-radius: 20px;
+        background-color: #1f1e1e;
+
+
     }
 
     .wrapper-geral .hora .selecione-o-horario .card-personalizado {
-        width: max-content;
+        width: 4rem;
         padding: 0.2rem;
         text-align: center;
-        font-weight: 600;
-        border-radius: 8px;
+
+        border-radius: 5px;
         border: 1px solid gainsboro;
         color: white;
     }
@@ -212,9 +243,10 @@ body {
 
     .wrapper-geral .agendamento .resumo-agendamento .form-agendamento {
         width: 100%;
-        border: 1px solid gainsboro;
+        border: 2px solid;
         padding: 1rem;
         border-radius: 20px;
+        background: #1f1e1e;
     }
 
     .wrapper-geral .agendamento .resumo-agendamento .form-agendamento {
@@ -238,12 +270,298 @@ body {
     }
 
     .wrapper-geral .agendamento .resumo-agendamento .form-agendamento .btn-container button {
-        border: 1px solid gainsboro;
-        color: white;
+        /* border: 1px solid gainsboro; */
+        color: black;
+        width: 100%;
+        background-color: #E5B817;
     }
 
     .wrapper-geral .agendamento .resumo-agendamento .form-agendamento .btn-container button:active {
         background-color: rgba(220, 220, 220, 0.493);
         color: white;
+    }
+
+    .agendamentos .dashboard {
+        padding: 0.4rem 1rem;
+        gap: 1rem;
+        display: flex;
+        flex-direction: column;
+        /* height: 18rem; */
+        overflow: auto;
+
+    }
+
+    .agendamentos .dashboard .card-personalizado {
+        width: 100%;
+        border-radius: 8px;
+        border: 2px solid;
+        padding: 0rem 1rem;
+        background-color: #1f1e1e;
+        position: relative;
+    }
+
+    .agendamentos .dashboard .card-personalizado::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 5px;
+        height: 100%;
+        /* background-color: green; */
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+
+    .agendamentos .dashboard .card-personalizado p {
+        color: gainsboro;
+        margin-top: 0.4rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .agendamentos .dashboard .card-personalizado .profissional-servico {
+        display: flex;
+        gap: 1rem;
+        overflow: hidden;
+        line-height: 20px;
+        justify-content: space-between;
+    }
+
+    .agendamentos .dashboard .card-personalizado .profissional-servico a {
+        text-decoration: none;
+        color: gainsboro;
+        background-color: green;
+        padding: 0.4rem 0.2rem;
+        display: flex;
+        border-radius: 8px;
+    }
+
+
+    .historico .itens {
+        padding: 0.4rem 1rem 0;
+        gap: 0.5rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .historico .itens .card-personalizado {
+        width: 100%;
+        border-radius: 8px;
+        border: 2px solid;
+        padding: 0rem 1rem;
+        background-color: #1f1e1e;
+        position: relative;
+    }
+
+    .historico .itens .card-personalizado::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 5px;
+        height: 100%;
+        /* background-color: green; */
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+
+    .historico .itens .card-personalizado p {
+        color: gainsboro;
+        margin-top: 0.4rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .historico .itens .card-personalizado .profissional-servico {
+        display: flex;
+        gap: 1rem;
+        overflow: hidden;
+        line-height: 20px;
+    }
+
+    .spaced-span {
+        margin-left: 0.3rem;
+        color: #E5B817;
+    }
+}
+
+.busca-por-nome {
+    padding: 0.4rem 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+
+/* aside */
+@media screen and (max-width: 768px) {
+
+    /* Estilos da Navbar */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        padding: 1rem;
+        color: white;
+        height: 5rem;
+        align-content: flex-start;
+        background: #1f1e1e;
+    }
+
+    .dinamicos .utilitarios {
+        display: flex;
+        overflow: auto;
+        text-wrap: nowrap;
+        padding: 0.3rem 0.2rem;
+        background-color: #1f1e1e;
+        position: relative;
+        border-bottom: 4px solid;
+    }
+
+    .dinamicos .utilitarios::-webkit-scrollbar {
+        height: 0px;
+    }
+
+    .dinamicos .utilitarios div {
+        position: relative;
+        padding: 0 1rem;
+    }
+
+    /* .dinamicos .utilitarios div::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+    width: 1px;
+    background-color: gainsboro;
+} */
+
+    .dinamicos .utilitarios div::before {
+        left: 0;
+    }
+
+    .dinamicos .utilitarios div::after {
+        right: 0;
+    }
+
+    .dinamicos .utilitarios div:first-child::before {
+        display: none;
+    }
+
+    .dinamicos .utilitarios div:last-child::after {
+        display: none;
+    }
+
+    .dinamicos .utilitarios h5 {
+        color: gainsboro;
+        margin: 0;
+    }
+
+
+    /* Estilos do botão de menu */
+    .navbar-aside-mobile {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 30px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 3;
+    }
+
+    .navbar-aside-mobile div {
+        width: 30px;
+        height: 2px;
+        background-color: white;
+        transition: 0.4s;
+    }
+
+    .open .bar1 {
+        transform: rotate(-45deg) translate(-7px, 7px);
+    }
+
+    .open .bar2 {
+        opacity: 0;
+    }
+
+    .open .bar3 {
+        transform: rotate(45deg) translate(-7px, -7px);
+    }
+
+    /* Estilos da aside */
+    .aside-mobile {
+        position: fixed;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+        width: 95%;
+        height: 100%;
+        padding: 5rem 15px 40px;
+        transition: 0.3s;
+        overflow: auto;
+        translate: 100% 0;
+        background: rgba(220, 220, 220, 0.34);
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5.3px);
+    }
+
+    .aside-mobile nav {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        font-size: 20px;
+    }
+
+    .aside-mobile nav a {
+        color: white;
+        text-decoration: none;
+        max-width: max-content;
+    }
+
+    body.open .aside-mobile {
+        translate: 0;
+    }
+
+
+    /* body.open .navbar {
+        position: fixed;
+        width: 100%;
+    } */
+
+    .position-fixed {
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        top: 0;
+    }
+
+    main {
+        position: relative;
+        top: 7.5rem;
+    }
+
+    .dashboard .dash {
+        padding: 0.4rem 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    .dashboard .dash .card-personalizado {
+        display: flex;
+        max-width: 8rem;
+        height: 8rem;
+        align-items: center;
+        gap: 1rem;
+        background-color: #1f1e1e;
+        border-radius: 13px;
+        border: 2px solid;
+        flex-grow: 1;
+        flex-direction: column;
+        padding: 1rem;
     }
 }

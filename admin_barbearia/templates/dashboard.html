@@ -1,0 +1,165 @@
+{% extends 'base_admin.html' %}
+
+{% block conteudo %}
+<title>Dashboard</title>    
+<main>
+    <section id="section-agendamentos" class="agendamentos">
+        <div class="busca-por-nome">
+            <input type="text" name="pesquisar" id="pesquisar" placeholder="Nome do cliente" class="form-control">
+        </div>
+        <div class="dashboard">
+            {% for agendamento in agendamentos %}
+            {% if agendamento.finalizado == False %}
+            <style>
+                .agendamentos .dashboard .card-personalizado::after {
+                    background-color: #E5B817;
+                }
+            </style>
+            {% endif %}
+            <div class="card-personalizado">
+                <div>
+                    <p><span style="font-size: 16px;">{{ agendamento.data|date:"d/m/y" }} -
+                            {{agendamento.horario_selecionado}}</span><br><span
+                            style="font-size: 1.4rem;">{{agendamento.nome_cliente|title}}</span></p>
+                </div>
+                <div class="profissional-servico">
+                    <p><span
+                            style="font-size: 16px;">Profissional</span><br>{{agendamento.profissional_selecionado|title}}
+                    </p>
+                    <p><span style="font-size: 16px;">Serviço</span><br>{{agendamento.servico_selecionado}}</p>
+                    <div>
+                        <a href="{% url 'finalizar' agendamento.id %}"
+                            onclick="return confirm('Finalizar serviço?')">Finalizar</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="section-historico" class="historico" style="display: none;">
+        <div class="busca-por-nome">
+            <input type="text" name="pesquisar" id="pesquisar" placeholder="Nome do cliente" class="form-control">
+        </div>
+        <div class="itens">
+            {% for historico in historicos %}
+            {% if historico.finalizado == True %}
+            <style>
+                .historico .itens .card-personalizado::after {
+                    background-color: green;
+                }
+            </style>
+            {% endif %}
+            <div class="card-personalizado">
+                <div>
+                    <p><span style="font-size: 16px;">{{ historico.data|date:"d/m/y" }} -
+                            {{historico.horario_selecionado}}</span><br><span
+                            style="font-size: 1.4rem;">{{historico.nome_cliente|title}}</span></p>
+                </div>
+                <div class="profissional-servico">
+                    <p><span
+                            style="font-size: 16px;">Profissional</span><br>{{historico.profissional_selecionado|title}}
+                    </p>
+                    <p><span style="font-size: 16px;">Serviço</span><br>{{historico.servico_selecionado}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <section id="section-horarios-disponiveis" class="horarios-disponiveis" style="display: none;">
+        <h1>Horários disponíveis</h1>
+    </section>
+
+    <section id="section-dashboard" class="dashboard" style="display: none;">
+        <div class="dash">
+            <div class="card-personalizado">
+                <h4 style="color: gainsboro;">Hoje</h4>
+                <h4 style="color: gainsboro;">{{total_agendamentos_hoje}}</h4>
+            </div>
+            <div class="card-personalizado">
+                <h4 style="color: gainsboro;">Abertos</h4>
+                <h4 class="card-title" style="color: gainsboro;">{{agendamentos_abertos_hoje}}</h4>
+            </div>
+            <div class="card-personalizado">
+                <h4 style="color: gainsboro;">finalizados</h4>
+                <h4 class="card-title" style="color: gainsboro;">{{agendamentos_fechados_hoje}}</h4>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const sections = {
+                "utilitarios-agendamentos": "section-agendamentos",
+                "utilitarios-historico": "section-historico",
+                "utilitarios-horarios-disponiveis": "section-horarios-disponiveis",
+                "utilitarios-dashboard": "section-dashboard"
+            };
+
+            // Inicialmente, destaque a primeira opção
+            const firstOption = document.getElementById("utilitarios-agendamentos");
+            if (firstOption) {
+                firstOption.classList.add("opcaoSelecionada");
+            }
+
+            for (const [utilitarioId, sectionId] of Object.entries(sections)) {
+                const utilitarioElement = document.getElementById(utilitarioId);
+                if (utilitarioElement) {
+                    utilitarioElement.addEventListener('click', function () {
+                        // Remover a classe 'opcaoSelecionada' de todas as opções
+                        for (const utilitario of Object.keys(sections)) {
+                            const element = document.getElementById(utilitario);
+                            if (element) {
+                                element.classList.remove("opcaoSelecionada");
+                            }
+                        }
+                        // Adicionar a classe 'opcaoSelecionada' à opção clicada
+                        utilitarioElement.classList.add("opcaoSelecionada");
+
+                        // Ocultar todas as seções e exibir a seção correspondente
+                        for (const section of Object.values(sections)) {
+                            const sectionElement = document.getElementById(section);
+                            if (sectionElement) {
+                                sectionElement.style.display = 'none';
+                            }
+                        }
+                        const sectionToShow = document.getElementById(sectionId);
+                        if (sectionToShow) {
+                            sectionToShow.style.display = 'block';
+                        }
+                    });
+                }
+            }
+
+            // Função de Nome do cliente
+            function searchByName(sectionId, inputName, cardClass) {
+                const input = document.querySelector(`#${sectionId} input[name="${inputName}"]`);
+                if (input) {
+                    input.addEventListener('keyup', function () {
+                        const filter = input.value.toLowerCase();
+                        const cards = document.querySelectorAll(`#${sectionId} .${cardClass}`);
+                        cards.forEach(card => {
+                            const nameElement = card.querySelector('p');
+                            if (nameElement) {
+                                const name = nameElement.innerText.toLowerCase();
+                                if (name.includes(filter)) {
+                                    card.style.display = "";
+                                } else {
+                                    card.style.display = "none";
+                                }
+                            }
+                        });
+                    });
+                } else {
+                    console.error(`Input with name "${inputName}" not found in section "${sectionId}".`);
+                }
+            }
+
+            // Adiciona a funcionalidade de busca para cada seção
+            searchByName('section-agendamentos', 'pesquisar', 'card-personalizado');
+            searchByName('section-historico', 'pesquisar', 'card-personalizado');
+        });
+
+    </script>
+    {% endblock %}

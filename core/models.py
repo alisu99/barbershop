@@ -1,54 +1,56 @@
 from django.db import models
 
+
 class Servico(models.Model):
     id = models.AutoField(primary_key=True)
-    servico = models.CharField('Serviço', max_length=255, null=False)
-    valor = models.CharField('Valor', max_length=255, null=False)
+    servico = models.CharField("Serviço", max_length=255, null=False)
+    valor = models.CharField("Valor", max_length=255, null=False)
 
     def __str__(self):
         return self.servico
 
+
 class Profissional(models.Model):
     id = models.AutoField(primary_key=True)
-    nome = models.CharField('Nome', max_length=255, null=False)
+    nome = models.CharField("Nome", max_length=255, null=False)
 
     def __str__(self):
         return self.nome
-    
+
+
 class Horario(models.Model):
     id = models.AutoField(primary_key=True)
-    horario = models.CharField(max_length=10, null=False)
-    
+    horario = models.CharField(max_length=10, null=False, unique=True)
+
     def __str__(self):
         return self.horario
 
+
 class Usuario(models.Model):
     id = models.AutoField(primary_key=True)
-    nome = models.CharField('Nome', max_length=255, null=False)
-    username = models.CharField('Nome de Usuário', max_length=255, null=False, unique=True)
-    email = models.EmailField('Email', max_length=100, null=False)
-    endereco = models.CharField('Endereço', max_length=1000, null=False)
-    bairro = models.CharField('Bairro', max_length=255, null=False)
-    cidade = models.CharField('Cidade', max_length=255, null=False)
-    uf = models.CharField('UF', max_length=255, null=False)
+    nome = models.CharField("Nome", max_length=255, null=False)
+    username = models.CharField(
+        "Nome de Usuário", max_length=255, null=False, unique=True
+    )
+    email = models.EmailField("Email", max_length=100, null=False)
 
-class Disponibilidade(models.Model):
-    profissional = models.ForeignKey(Profissional, on_delete=models.CASCADE)
-    horario = models.ForeignKey(Horario, on_delete=models.CASCADE)
-    data = models.DateField()
-
-    class Meta:
-        unique_together = ('profissional', 'horario', 'data')
 
 class Agendamento(models.Model):
     id = models.AutoField(primary_key=True)
     servico_selecionado = models.ForeignKey(Servico, on_delete=models.CASCADE)
     profissional_selecionado = models.ForeignKey(Profissional, on_delete=models.CASCADE)
     horario_selecionado = models.ForeignKey(Horario, on_delete=models.CASCADE)
-    data = models.DateField('Data', null=False)
-    nome_cliente = models.CharField('Cliente', max_length=255, null=False)
-    telefone_cliente = models.CharField('telefone', max_length=255, null=False)
-    email_cliente = models.EmailField('Email', max_length=100)
+    data = models.DateField("Data", null=False)
+    nome_cliente = models.CharField("Cliente", max_length=255, null=False)
+    telefone_cliente = models.CharField("telefone", max_length=255, null=False)
+    finalizado = models.BooleanField(default=False)
 
     def __str__(self):
         return self.nome_cliente
+
+    def is_horario_disponivel(profissional_id, data, horario_id):
+        return not Agendamento.objects.filter(
+            profissional_selecionado_id=profissional_id,
+            data=data,
+            horario_selecionado_id=horario_id
+        ).exists()

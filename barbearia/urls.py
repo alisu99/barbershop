@@ -6,6 +6,7 @@ from core.urls import *
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('core.urls'))
+    path('superadmin/', admin.site.urls),
+    path('', include('core.urls')),
+    path('', include('admin_barbearia.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

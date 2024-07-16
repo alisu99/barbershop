@@ -2,13 +2,14 @@
 {% load static %}
 
 {% block conteudo %}
+<title>Agendamento</title>
 <section class="wrapper-geral">
     <div class="servico">
         <p>Serviço</p>
         <div class="cards-servico">
             {% for servico in servicos %}
             <div>
-                <div class="card-personalizado">
+                <div class="card-personalizado" data-servico-id="{{ servico.id }}" data-servico-nome="{{ servico.servico }}">
                 </div>
                 <div class="card-title">
                     <h5>{{ servico.servico }}</h5>
@@ -18,49 +19,58 @@
         </div>
     </div>
 
-    <div class="dia" style="display: none;">
-        <p>Data</p>
-        <div class="selecione-o-dia">
-            {% for dia in proximos_dias %}
-            <div class="card-personalizado">{{ dia }}</div>
+    <div class="profissional" style="display: none;">
+        <p class="profissional-p">Profissional: </p>
+        <div class="selecione-o-profissional">
+            {% for profissional in profissionais %}
+            <div class="card-personalizado" data-profissional-id="{{ profissional.id }}" data-profissional-nome="{{ profissional.nome }}">
+                <img src="{% static 'assets/img/usuario.png' %}" alt="">
+                <p>{{ profissional.nome }}</p>
+            </div>
             {% endfor %}
         </div>
     </div>
 
-    <div class="profissional" style="display: none;">
-        <p class="profissional-p">Profissional: </p>
-        <div class="selecione-o-profissional">
-            <!-- Profissionais serão carregados dinamicamente -->
+    <div class="dia" style="display: none;">
+        <p>Data</p>
+        <div class="selecione-o-dia">
+            {% for dia, nome_dia in proximos_dias %}
+            <div class="card-personalizado" data-dia="{{ dia }}">
+                {{ dia }}<br>{{ nome_dia }}
+            </div>
+            {% endfor %}
         </div>
     </div>
 
     <div class="hora" style="display: none;">
         <p>Horário</p>
         <div class="selecione-o-horario">
-            <!-- Horários serão carregados dinamicamente -->
+            <!-- Horários serão carregados aqui -->
         </div>
     </div>
-
     <div class="agendamento" style="display: none;">
         <div class="resumo-agendamento">
-            <form action="#" class="form-agendamento">
+            <form action="{% url 'agendar' %}" method="post" class="form-agendamento">
                 {% csrf_token %}
                 <p style="text-align: center;"><strong>Confirmação de Agendamento</strong></p>
                 <hr>
-                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='cut' color='#ffffff'></box-icon> Serviço: <span id="selected-servico"></span></h5>
-                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='calendar' color='#ffffff'></box-icon> Data: <span id="selected-data"></span></h5>
-                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='time' color='#ffffff'></box-icon> Hora: <span id="selected-hora"></span></h5>
-                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='user' color='#ffffff'></box-icon> Profissional: <span id="selected-profissional"></span></h5>
+                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='cut' color='#ffffff'></box-icon> Serviço:<span class="spaced-span" id="selected-servico"></span></h5>
+                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='user' color='#ffffff'></box-icon> Barbeiro: <span class="spaced-span" id="selected-profissional"></span></h5>
+                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='calendar' color='#ffffff'></box-icon> Data: <span class="spaced-span" id="selected-data"></span></h5>
+                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='time' color='#ffffff'></box-icon> Hora: <span class="spaced-span" id="selected-hora"></span></h5>
                 <label for="nome">Nome*</label>
-                <input class="form-nome" type="text" name="nome" id="nome" required placeholder="Digite seu nome">
-                <label for="telefone">Telefone*</label>
-                <input class="form-tel" type="tel" id="telefone" required placeholder="Digite seu telefone">
-                <label for="email">Email*</label>
-                <input class="form-email" type="email" id="email" required placeholder="Digite seu email">
+                <input class="form-control" type="text" name="nome_cliente" id="nome" required placeholder="Digite seu nome">
+                <br>
+                <label style="display: flex; align-items: center; gap: .2rem;" for="telefone"><box-icon type='logo' color='#ffffff' name='whatsapp'></box-icon> Telefone*</label>
+                <input class="form-control" type="tel" name="telefone_cliente" id="telefone" required placeholder="Digite seu telefone">
                 <hr>
                 <div class="btn-container">
-                    <button type="submit" class="btn">Agendar</button>
+                    <button type="submit" class="btn"><h4>Confirmar agendamento</h4></button>
                 </div>
+                <input type="hidden" name="servico_id" id="servico_id">
+                <input type="hidden" name="profissional_id" id="profissional_id">
+                <input type="hidden" name="horario_id" id="horario_id">
+                <input type="hidden" name="data" id="data">
             </form>
         </div>
     </div>

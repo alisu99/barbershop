@@ -1,71 +1,116 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from .models import Profissional, Servico, Agendamento, Horario, Disponibilidade
+from .models import *
 import datetime
+from django.views.decorators.http import require_GET
+import locale
+import calendar
+
+locale.setlocale(locale.LC_ALL, 'pt_BR.utf8')
+
 
 def index(request):
     servicos = Servico.objects.all()
-    proximos_dias = []
+    profissionais = Profissional.objects.all()
+    horas = Horario.objects.all()
     data_atual = datetime.date.today()
+    hora_atual = datetime.datetime.now().time()
 
-    for i in range(12):
+    if data_atual == datetime.date.today():
+        horas_disponiveis = []
+        for hora in horas:
+            horario_formatado = hora.horario.replace("h", ":")
+            try:
+                horario_time = datetime.datetime.strptime(horario_formatado, "%H:%M").time()
+                if horario_time >= hora_atual:
+                    horas_disponiveis.append(hora)
+                else:
+                    print(f"Desconsiderando horário {hora.horario}.")
+            except ValueError as e:
+                print(f"Erro ao converter horário {hora.horario}: {e}")
+        horas = horas_disponiveis
+
+    proximos_dias = []
+    for i in range(9):
         dia_futuro = data_atual + datetime.timedelta(days=i)
-        proximos_dias.append(dia_futuro.strftime("%Y-%m-%d"))
+        dia_da_semana = calendar.day_name[dia_futuro.weekday()]
+        dia_da_semana_sem_feira = dia_da_semana.replace('-feira', '').capitalize()
+        proximos_dias.append((dia_futuro.strftime("%d/%m/%y"), dia_da_semana_sem_feira))
 
     context = {
+        "horas": horas,
+        "profissionais": profissionais,
         "servicos": servicos,
-        "proximos_dias": proximos_dias,
+        "proximos_dias": proximos_dias
     }
 
     return render(request, "index.html", context)
 
-def verificar_profissionais(request):
-    data = request.GET.get('data')
-    data_formatada = datetime.datetime.strptime(data, "%Y-%m-%d").date()
-    profissionais_disponiveis = Profissional.objects.filter(disponibilidade__data=data_formatada).distinct()
 
-    profissionais = list(profissionais_disponiveis.values('id', 'nome'))
-    return JsonResponse(profissionais, safe=False)
+@require_GET
+def verificar_disponibilidade(request):
+    profissional_id = request.GET.get("profissional_id")
+    data = request.GET.get("data")
+    horario_id = request.GET.get("horario_id")
 
-def verificar_horarios(request):
-    profissional_id = request.GET.get('profissional')
-    data = request.GET.get('data')
-    data_formatada = datetime.datetime.strptime(data, "%Y-%m-%d").date()
-
-    horarios_disponiveis = Horario.objects.filter(
-        disponibilidade__profissional_id=profissional_id,
-        disponibilidade__data=data_formatada
-    ).exclude(
-        agendamento__profissional_selecionado_id=profissional_id,
-        agendamento__data=data_formatada
+    data_formatada = datetime.datetime.strptime(data, "%d/%m/%y").date()
+    disponivel = Agendamento.is_horario_disponivel(
+        profissional_id, data_formatada, horario_id
     )
 
-    horarios = list(horarios_disponiveis.values('id', 'horario'))
-    return JsonResponse(horarios, safe=False)
+    return JsonResponse({"disponivel": disponivel})
+
+
+def horarios_disponiveis(request):
+    if request.method == 'GET':
+        profissional_id = request.GET.get('profissional_id')
+        data_str = request.GET.get('data')
+        data = datetime.datetime.strptime(data_str, "%d/%m/%y").date()
+
+        horarios = Horario.objects.all()
+
+        if data == datetime.date.today():
+            hora_atual = datetime.datetime.now().time()
+            horarios = [hora for hora in horarios if datetime.datetime.strptime(hora.horario.replace("h", ":"), "%H:%M").time() >= hora_atual]
+
+        horarios_agendados = Agendamento.objects.filter(
+            profissional_selecionado_id=profissional_id,
+            data=data
+        ).values_list('horario_selecionado_id', flat=True)
+
+        horarios_disponiveis = [hora for hora in horarios if hora.id not in horarios_agendados]
+
+        # Transformando a lista de objetos em uma lista de dicionários
+        horarios_disponiveis_dict = [{'id': hora.id, 'horario': hora.horario} for hora in horarios_disponiveis]
+
+        return JsonResponse({'horarios': horarios_disponiveis_dict})
+
 
 def agendar(request):
-    if request.method == 'POST':
-        servico_id = request.POST['servico']
-        profissional_id = request.POST['profissional']
-        horario_id = request.POST['horario']
-        data = request.POST['data']
-        nome_cliente = request.POST['nome_cliente']
-        telefone_cliente = request.POST['telefone_cliente']
-        email_cliente = request.POST['email_cliente']
+    if request.method == "POST":
+        servico_id = request.POST.get("servico_id")
+        profissional_id = request.POST.get("profissional_id")
+        horario_id = request.POST.get("horario_id")
+        data = request.POST.get("data")
+        nome_cliente = request.POST.get("nome_cliente")
+        telefone_cliente = request.POST.get("telefone_cliente")
 
-        data_formatada = datetime.datetime.strptime(data, "%Y-%m-%d").date()
+        data_formatada = datetime.datetime.strptime(data, "%d/%m/%y").date()
 
-        agendamento = Agendamento(
-            servico_selecionado_id=servico_id,
-            profissional_selecionado_id=profissional_id,
-            horario_selecionado_id=horario_id,
-            data=data_formatada,
-            nome_cliente=nome_cliente,
-            telefone_cliente=telefone_cliente,
-            email_cliente=email_cliente
-        )
-        agendamento.save()
+        if Agendamento.is_horario_disponivel(
+            profissional_id, data_formatada, horario_id
+        ):
+            agendamento = Agendamento(
+                servico_selecionado_id=servico_id,
+                profissional_selecionado_id=profissional_id,
+                horario_selecionado_id=horario_id,
+                data=data_formatada,
+                nome_cliente=nome_cliente,
+                telefone_cliente=telefone_cliente,
+            )
+            agendamento.save()
+            return redirect('index')
+        else:
+            return JsonResponse({"success": False, "message": "Horário indisponível"})
 
-        return JsonResponse({"mensagem": "Agendamento realizado com sucesso."}, status=201)
-
-    return JsonResponse({"mensagem": "Método não permitido."}, status=405)
+    return JsonResponse({"success": False, "message": "Requisição inválida"})

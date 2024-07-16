@@ -9,7 +9,7 @@ class ProfissionalAdmin(admin.ModelAdmin):
 
 @admin.register(Agendamento)
 class AgendamentoAdmin(admin.ModelAdmin):
-    list_display = ["nome_cliente", "servico_selecionado", "profissional_selecionado", "horario_selecionado"]
+    list_display = ["nome_cliente", "servico_selecionado", "data", "profissional_selecionado", "horario_selecionado", "finalizado"]
 
 
 @admin.register(Servico)
@@ -24,7 +24,3 @@ class UsuarioAdmin(admin.ModelAdmin):
 @admin.register(Horario)
 class HorarioAdmin(admin.ModelAdmin):
     list_display = ["horario"]
-
-@admin.register(Disponibilidade)
-class DisponibilidadeAdmin(admin.ModelAdmin):
-    list_display = ["profissional", "horario", "data"]
