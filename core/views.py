@@ -8,7 +8,6 @@ import calendar
 
 locale.setlocale(locale.LC_ALL, 'pt_BR.utf8')
 
-
 def index(request):
     servicos = Servico.objects.all()
     profissionais = Profissional.objects.all()
@@ -49,13 +48,13 @@ def index(request):
 
 @require_GET
 def verificar_disponibilidade(request):
-    profissional_id = request.GET.get("profissional_id")
+    profissional_nome = request.GET.get("profissional_nome")
     data = request.GET.get("data")
-    horario_id = request.GET.get("horario_id")
+    horario = request.GET.get("horario")
 
     data_formatada = datetime.datetime.strptime(data, "%d/%m/%y").date()
     disponivel = Agendamento.is_horario_disponivel(
-        profissional_id, data_formatada, horario_id
+        profissional_nome, data_formatada, horario
     )
 
     return JsonResponse({"disponivel": disponivel})
@@ -63,7 +62,7 @@ def verificar_disponibilidade(request):
 
 def horarios_disponiveis(request):
     if request.method == 'GET':
-        profissional_id = request.GET.get('profissional_id')
+        profissional_nome = request.GET.get('profissional_nome')
         data_str = request.GET.get('data')
         data = datetime.datetime.strptime(data_str, "%d/%m/%y").date()
 
@@ -74,11 +73,11 @@ def horarios_disponiveis(request):
             horarios = [hora for hora in horarios if datetime.datetime.strptime(hora.horario.replace("h", ":"), "%H:%M").time() >= hora_atual]
 
         horarios_agendados = Agendamento.objects.filter(
-            profissional_selecionado_id=profissional_id,
+            profissional_selecionado=profissional_nome,
             data=data
-        ).values_list('horario_selecionado_id', flat=True)
+        ).values_list('horario_selecionado', flat=True)
 
-        horarios_disponiveis = [hora for hora in horarios if hora.id not in horarios_agendados]
+        horarios_disponiveis = [hora for hora in horarios if hora.horario not in horarios_agendados]
 
         # Transformando a lista de objetos em uma lista de dicionários
         horarios_disponiveis_dict = [{'id': hora.id, 'horario': hora.horario} for hora in horarios_disponiveis]
@@ -97,13 +96,11 @@ def agendar(request):
 
         data_formatada = datetime.datetime.strptime(data, "%d/%m/%y").date()
 
-        if Agendamento.is_horario_disponivel(
-            profissional_id, data_formatada, horario_id
-        ):
+        if Agendamento.is_horario_disponivel(profissional_id, data_formatada, horario_id):
             agendamento = Agendamento(
-                servico_selecionado_id=servico_id,
-                profissional_selecionado_id=profissional_id,
-                horario_selecionado_id=horario_id,
+                servico_selecionado=servico_id,  # Removido _id
+                profissional_selecionado=profissional_id,  # Removido _id
+                horario_selecionado=horario_id,  # Removido _id
                 data=data_formatada,
                 nome_cliente=nome_cliente,
                 telefone_cliente=telefone_cliente,
@@ -114,3 +111,4 @@ def agendar(request):
             return JsonResponse({"success": False, "message": "Horário indisponível"})
 
     return JsonResponse({"success": False, "message": "Requisição inválida"})
+

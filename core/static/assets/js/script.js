@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
             card.addEventListener('click', function () {
                 cards.forEach(card => card.classList.remove('selecionado'));
                 card.classList.add('selecionado');
-                
+
                 if (categoria === 'servico') {
                     estadoSelecionado.servico.id = card.getAttribute('data-servico-id');
                     estadoSelecionado.servico.nome = card.getAttribute('data-servico-nome');
@@ -60,16 +60,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function atualizarResumo() {
-        document.getElementById('selected-servico').textContent = estadoSelecionado.servico.nome;
-        document.getElementById('selected-data').textContent = estadoSelecionado.dia;
-        document.getElementById('selected-profissional').textContent = estadoSelecionado.profissional.nome;
-        document.getElementById('selected-hora').textContent = estadoSelecionado.hora.horario;
+        const servicoIdElement = document.getElementById('servico_id');
+        const profissionalIdElement = document.getElementById('profissional_id');
+        const horarioIdElement = document.getElementById('horario_id');
+        const dataElement = document.getElementById('data');
 
-        // Atualizar os campos ocultos do formulário
-        document.getElementById('servico_id').value = estadoSelecionado.servico.id;
-        document.getElementById('profissional_id').value = estadoSelecionado.profissional.id;
-        document.getElementById('horario_id').value = estadoSelecionado.hora.id;
-        document.getElementById('data').value = estadoSelecionado.dia;
+        if (servicoIdElement && profissionalIdElement && horarioIdElement && dataElement) {
+            servicoIdElement.value = estadoSelecionado.servico.id;
+            profissionalIdElement.value = estadoSelecionado.profissional.id;
+            horarioIdElement.value = estadoSelecionado.hora.id;
+            dataElement.value = estadoSelecionado.dia;
+
+            document.getElementById('selected-servico').textContent = estadoSelecionado.servico.nome;
+            document.getElementById('selected-data').textContent = estadoSelecionado.dia;
+            document.getElementById('selected-profissional').textContent = estadoSelecionado.profissional.nome;
+            document.getElementById('selected-hora').textContent = estadoSelecionado.hora.horario;
+        } else {
+            console.error("Elementos não encontrados");
+        }
     }
 
     selecionarItem(cardsServico, '.profissional', 'servico');

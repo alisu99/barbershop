@@ -52,14 +52,28 @@
                 {% csrf_token %}
                 <p style="text-align: center;"><strong>Confirmação de Agendamento</strong></p>
                 <hr>
-                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='cut' color='#ffffff'></box-icon> Serviço:<span class="spaced-span" id="selected-servico"></span></h5>
-                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='user' color='#ffffff'></box-icon> Barbeiro: <span class="spaced-span" id="selected-profissional"></span></h5>
-                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='calendar' color='#ffffff'></box-icon> Data: <span class="spaced-span" id="selected-data"></span></h5>
-                <h5 style="display: flex; align-items: center; gap: .2rem;"><box-icon name='time' color='#ffffff'></box-icon> Hora: <span class="spaced-span" id="selected-hora"></span></h5>
+                <h5 style="display: flex; align-items: center; gap: .2rem;">
+                    <box-icon name='cut' color='#ffffff'></box-icon> Serviço:
+                    <span class="spaced-span" id="selected-servico"></span>
+                </h5>
+                <h5 style="display: flex; align-items: center; gap: .2rem;">
+                    <box-icon name='user' color='#ffffff'></box-icon> Barbeiro:
+                    <span class="spaced-span" id="selected-profissional"></span>
+                </h5>
+                <h5 style="display: flex; align-items: center; gap: .2rem;">
+                    <box-icon name='calendar' color='#ffffff'></box-icon> Data:
+                    <span class="spaced-span" id="selected-data"></span>
+                </h5>
+                <h5 style="display: flex; align-items: center; gap: .2rem;">
+                    <box-icon name='time' color='#ffffff'></box-icon> Hora:
+                    <span class="spaced-span" id="selected-hora"></span>
+                </h5>
                 <label for="nome">Nome*</label>
                 <input class="form-control" type="text" name="nome_cliente" id="nome" required placeholder="Digite seu nome">
                 <br>
-                <label style="display: flex; align-items: center; gap: .2rem;" for="telefone"><box-icon type='logo' color='#ffffff' name='whatsapp'></box-icon> Telefone*</label>
+                <label style="display: flex; align-items: center; gap: .2rem;" for="telefone">
+                    <box-icon type='logo' color='#ffffff' name='whatsapp'></box-icon> Telefone*
+                </label>
                 <input class="form-control" type="tel" name="telefone_cliente" id="telefone" required placeholder="Digite seu telefone">
                 <hr>
                 <div class="btn-container">
@@ -70,6 +84,7 @@
                 <input type="hidden" name="horario_id" id="horario_id">
                 <input type="hidden" name="data" id="data">
             </form>
+            
         </div>
     </div>
 </section>
