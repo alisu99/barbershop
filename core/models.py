@@ -28,9 +28,7 @@ class Horario(models.Model):
 class Usuario(models.Model):
     id = models.AutoField(primary_key=True)
     nome = models.CharField("Nome", max_length=255, null=False)
-    username = models.CharField(
-        "Nome de Usuário", max_length=255, null=False, unique=True
-    )
+    username = models.CharField("Nome de Usuário", max_length=255, null=False, unique=True)
     email = models.EmailField("Email", max_length=100, null=False)
     telefone = models.CharField("Telefone", max_length=15, null=False)
 
@@ -58,3 +56,8 @@ class Agendamento(models.Model):
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        # Sobrescrevendo o método de exclusão para evitar a exclusão em cascata
+        super().delete(*args, **kwargs)
+        # Aqui você pode adicionar qualquer lógica adicional após a exclusão do agendamento

@@ -15,7 +15,6 @@ def dashboard(request):
         'agendamentos_abertos_hoje': agendamentos_abertos_hoje,
         'agendamentos_fechados_hoje': agendamentos_fechados_hoje,
     }
-    print(total_agendamentos_hoje)
     return render(request, 'dashboard.html', context)
 
 def finalizar(request, id):

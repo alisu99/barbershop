@@ -45,7 +45,6 @@ def index(request):
 
     return render(request, "index.html", context)
 
-
 @require_GET
 def verificar_disponibilidade(request):
     profissional_nome = request.GET.get("profissional_nome")
@@ -58,7 +57,6 @@ def verificar_disponibilidade(request):
     )
 
     return JsonResponse({"disponivel": disponivel})
-
 
 def horarios_disponiveis(request):
     if request.method == 'GET':
@@ -79,11 +77,9 @@ def horarios_disponiveis(request):
 
         horarios_disponiveis = [hora for hora in horarios if hora.horario not in horarios_agendados]
 
-        # Transformando a lista de objetos em uma lista de dicionários
         horarios_disponiveis_dict = [{'id': hora.id, 'horario': hora.horario} for hora in horarios_disponiveis]
 
         return JsonResponse({'horarios': horarios_disponiveis_dict})
-
 
 def agendar(request):
     if request.method == "POST":
@@ -94,13 +90,18 @@ def agendar(request):
         nome_cliente = request.POST.get("nome_cliente")
         telefone_cliente = request.POST.get("telefone_cliente")
 
+        # Obtendo os nomes reais do serviço e profissional
+        servico = Servico.objects.get(id=servico_id)
+        profissional = Profissional.objects.get(id=profissional_id)
+        horario = Horario.objects.get(id=horario_id)
+
         data_formatada = datetime.datetime.strptime(data, "%d/%m/%y").date()
 
-        if Agendamento.is_horario_disponivel(profissional_id, data_formatada, horario_id):
+        if Agendamento.is_horario_disponivel(profissional.nome, data_formatada, horario.horario):
             agendamento = Agendamento(
-                servico_selecionado=servico_id,  # Removido _id
-                profissional_selecionado=profissional_id,  # Removido _id
-                horario_selecionado=horario_id,  # Removido _id
+                servico_selecionado=servico.servico,  
+                profissional_selecionado=profissional.nome,  
+                horario_selecionado=horario.horario,  
                 data=data_formatada,
                 nome_cliente=nome_cliente,
                 telefone_cliente=telefone_cliente,
@@ -111,4 +112,3 @@ def agendar(request):
             return JsonResponse({"success": False, "message": "Horário indisponível"})
 
     return JsonResponse({"success": False, "message": "Requisição inválida"})
-
