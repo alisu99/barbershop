@@ -1,4 +1,4 @@
-{% extends 'base_admin.html' %}
+{% extends 'base_dashboard.html' %}
 
 {% block conteudo %}
 <title>Dashboard</title>
@@ -54,14 +54,14 @@
             <div class="card-personalizado">
                 <div>
                     <p><span style="font-size: 16px;">{{ historico.data|date:"d/m/y" }} -
-                            {{historico.horario}}</span><br><span
+                            {{historico.horario_selecionado}}</span><br><span
                             style="font-size: 1.4rem;">{{historico.nome_cliente|title}}</span></p>
                 </div>
                 <div class="profissional-servico">
                     <p><span
-                            style="font-size: 16px;">Profissional</span><br>{{historico.nome_profissional|title}}
+                            style="font-size: 16px;">Profissional</span><br>{{historico.profissional_selecionado|title}}
                     </p>
-                    <p><span style="font-size: 16px;">Serviço</span><br>{{historico.nome_servico}}</p>
+                    <p><span style="font-size: 16px;">Serviço</span><br>{{historico.servico_selecionado}}</p>
                 </div>
             </div>
             {% endfor %}

@@ -22,3 +22,6 @@ def finalizar(request, id):
     agendamento.finalizado = True
     agendamento.save()
     return redirect(dashboard)
+
+def adm(request):
+    return render(request, 'administracao.html')

@@ -297,7 +297,7 @@ body {
 
     .agendamentos .dashboard {
         padding: 0.4rem 1rem;
-        gap: 1rem;
+        gap: 0.5rem;
         display: flex;
         flex-direction: column;
         /* height: 18rem; */

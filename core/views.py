@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import *
+from admin_barbearia.models import *
 import datetime
 from django.views.decorators.http import require_GET
 import locale
