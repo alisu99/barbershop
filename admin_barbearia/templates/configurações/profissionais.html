@@ -1,0 +1,38 @@
+{% extends '../base_adm.html' %}
+{% load static %}
+
+{% block conteudo %}
+<title>Barbearia - Profissionais</title>
+<main>
+    <section class="profissional">
+        <div class="selecione-o-profissional">
+            {% for profissional in profissionais %}
+            <div class="card-personalizado" data-profissional-id="{{ profissional.id }}"
+                data-profissional-nome="{{ profissional.nome }}">
+                <img src="{% static 'assets/img/usuario.png' %}" alt="">
+                <p>{{ profissional.nome|title }}</p>
+
+
+                {% if profissional.disponivel == False %}
+                <div class="estado">
+                    <div style="background-color: red; width: 10px; height: 10px; border-radius: 50%;"></div>
+                    Indisponível
+                </div>
+                {% elif profissional.disponivel == True %}
+                <div class="estado">
+                    <div style="background-color: green; width: 10px; height: 10px; border-radius: 50%;"></div>
+                    Disponível
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <br>
+        <form action="#" class="novo-profissional">
+            <p>Novo Profissional</p>
+            <label for="nome">Nome</label>
+            <input class="form-control" type="text" name="nome" id="nome" placeholder="Nome do profissional">
+        </form>
+    </section>
+</main>
+{% endblock %}

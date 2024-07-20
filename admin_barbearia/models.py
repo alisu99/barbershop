@@ -13,6 +13,7 @@ class Servico(models.Model):
 class Profissional(models.Model):
     id = models.AutoField(primary_key=True)
     nome = models.CharField("Nome", max_length=255, null=False)
+    disponivel = models.BooleanField('Disponível', default=True)
 
     def __str__(self):
         return self.nome

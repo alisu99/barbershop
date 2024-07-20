@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from core.models import *
+from .models import *
 import datetime
 
 def dashboard(request):
@@ -25,3 +26,11 @@ def finalizar(request, id):
 
 def adm(request):
     return render(request, 'administracao.html')
+
+def profissionais(request):
+    profissionais = Profissional.objects.all()
+    
+    context = {
+        'profissionais': profissionais
+    }
+    return render(request, 'configurações/profissionais.html', context)
