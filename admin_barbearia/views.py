@@ -1,4 +1,7 @@
 from django.shortcuts import render, redirect
+from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
+from django.http import JsonResponse
 from core.models import *
 from .models import *
 import datetime
@@ -29,8 +32,27 @@ def adm(request):
 
 def profissionais(request):
     profissionais = Profissional.objects.all()
-    
     context = {
         'profissionais': profissionais
     }
     return render(request, 'configurações/profissionais.html', context)
+
+def adicionar_profissional(request):
+    if request.method == 'POST':
+        nome = request.POST.get('nome')
+        profissional = Profissional(nome=nome)
+        profissional.save()
+    return redirect('profissionais')
+
+@csrf_exempt
+@require_POST
+def atualizar_disponibilidade(request):
+    profissional_id = request.POST.get('id')
+    disponibilidade = request.POST.get('disponibilidade') == 'true'
+
+    profissional = Profissional.objects.filter(id=profissional_id).first()
+    if profissional:
+        profissional.disponivel = disponibilidade
+        profissional.save()
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'error', 'message': 'Profissional não encontrado'}, status=404)

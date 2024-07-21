@@ -23,7 +23,7 @@
             {% for profissional in profissionais %}
             <div class="card-personalizado" data-profissional-id="{{ profissional.id }}" data-profissional-nome="{{ profissional.nome }}">
                 <img src="{% static 'assets/img/usuario.png' %}" alt="">
-                <p>{{ profissional.nome }}</p>
+                <p>{{ profissional.nome|title }}</p>
             </div>
             {% endfor %}
         </div>

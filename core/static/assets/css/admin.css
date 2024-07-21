@@ -6,11 +6,11 @@
 
 @media screen and (max-width: 768px) {
     body {
-        /* background-image: url("../img/background2.png"); */
-        /* background-size: 100%; */
+        background-image: url("../img/background2.png");
+        background-size: cover;
         font-size: .950rem;
         font-family: font-main;
-        background-color: #2d2d2d;
+        /* background-color: #2d2d2d; */
     }
 
     .navbar {
@@ -170,10 +170,12 @@
     }
 
     .profissional .novo-profissional {
-    border: 2px solid;
-    border-radius: 20px;
-    padding: 1rem 1rem;
-    background-color: #1f1e1e;
+        border: 2px solid;
+        border-radius: 20px;
+        padding: 1rem 1rem;
+        display: flex;
+        background-color: #1f1e1e;
+        flex-direction: column;
     }
 
     .profissional .novo-profissional label,

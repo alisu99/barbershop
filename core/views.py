@@ -11,7 +11,7 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.utf8')
 
 def index(request):
     servicos = Servico.objects.all()
-    profissionais = Profissional.objects.all()
+    profissionais = Profissional.objects.filter(disponivel=True)
     horas = Horario.objects.all()
     data_atual = datetime.date.today()
     hora_atual = datetime.datetime.now().time()
