@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
@@ -56,3 +56,9 @@ def atualizar_disponibilidade(request):
         profissional.save()
         return JsonResponse({'status': 'success'})
     return JsonResponse({'status': 'error', 'message': 'Profissional não encontrado'}, status=404)
+
+
+def deletar_profissional(request, id):
+    profissional = get_object_or_404(Profissional, id=id)
+    profissional.delete()
+    return redirect('profissionais')

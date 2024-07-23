@@ -7,5 +7,6 @@ urlpatterns = [
     path('adm/', adm, name='adm'),
     path('profissionais/', profissionais, name='profissionais'),
     path('atualizar-disponibilidade/', atualizar_disponibilidade, name='atualizar_disponibilidade'),
-    path('adicionar-profissional/', adicionar_profissional, name='adicionar_profissional')
+    path('adicionar-profissional/', adicionar_profissional, name='adicionar_profissional'),
+    path('deletar_profissional/<int:id>', deletar_profissional, name='deletar_profissional')
 ]
