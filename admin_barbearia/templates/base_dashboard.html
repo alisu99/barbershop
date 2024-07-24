@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'assets/css/index.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/admin.css' %}">
 </head>
 
 <body>
@@ -26,28 +27,35 @@
             <nav>
                 <section class="wrapper-geral">
                     <div class="gerenciar">
-            
+
                         <div class="options">
-                            <a href="#">Barbearia</a>
+                            <a href="{% url 'index' %}"><box-icon name='store' type='solid'
+                                    color='#ffffff'></box-icon>Vitrine</a>
                         </div>
-            
+
                         <div class="options">
-                            <a href="{% url 'profissionais' %}">Profissionais</a>
+                            <a href="#"><box-icon name='cut' color='#ffffff'></box-icon>Barbearia</a>
                         </div>
-            
+
                         <div class="options">
-                            <a href="#">Horários</a>
+                            <a href="{% url 'profissionais' %}"><box-icon name='group'
+                                    color='#ffffff'></box-icon>Profissionais</a>
                         </div>
-            
+
                         <div class="options">
-                            <a href="#">Serviços</a>
+                            <a href="#"><box-icon name='time' color='#ffffff'></box-icon>Horários</a>
                         </div>
-            
+
                         <div class="options">
-                            <a href="#">Usuários</a>
+                            <a href="#"><box-icon type='logo' color='#ffffff' name='sketch'></box-icon>Serviços</a>
                         </div>
-            
+
+                        <div class="options">
+                            <a href="#"><box-icon color='#ffffff' name='user-check'></box-icon>Usuários</a>
+                        </div>
+
                     </div>
+
             </nav>
         </aside>
         <div class="dinamicos">
@@ -70,16 +78,16 @@
             </div>
         </div>
     </div>
-        {% block conteudo %}
-        {% endblock %}
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script type="text/javascript">
-            const toggleMenu = () => {
-                document.body.classList.toggle("open");
-            };
-        </script>
-        <script src="{% static 'assets/js/script.js' %}"></script>
-        <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    {% block conteudo %}
+    {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript">
+        const toggleMenu = () => {
+            document.body.classList.toggle("open");
+        };
+    </script>
+    <script src="{% static 'assets/js/script.js' %}"></script>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 </body>
 
 </html>
