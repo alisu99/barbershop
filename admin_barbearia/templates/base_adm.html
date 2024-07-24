@@ -24,9 +24,38 @@
         </nav>
         <aside class="aside-mobile" id="asideMenu">
             <nav>
-                <a href="#">Home</a>
-            </nav>
-        </aside>
+                <section class="wrapper-geral">
+                    <div class="gerenciar">
+            
+                        <div class="options">
+                            <a href="{% url 'index' %}"><box-icon name='store' type='solid' color='#ffffff' ></box-icon>Vitrine</a>
+                        </div>
+            
+                        <div class="options">
+                            <a href="#"><box-icon name='cut' color='#ffffff' ></box-icon>Barbearia</a>
+                        </div>
+            
+                        <div class="options">
+                            <a href="{% url 'profissionais' %}"><box-icon name='group' color='#ffffff' ></box-icon>Profissionais</a>
+                        </div>
+            
+                        <div class="options">
+                            <a href="#"><box-icon name='time' color='#ffffff' ></box-icon>Horários</a>
+                        </div>
+            
+                        <div class="options">
+                            <a href="#"><box-icon type='logo' color='#ffffff' name='sketch'></box-icon>Serviços</a>
+                        </div>
+            
+                        <div class="options">
+                            <a href="#"><box-icon color='#ffffff' name='user-check'></box-icon>Usuários</a>
+                        </div>
+            
+                    </div>
+
+                </nav>
+                <p style="text-align: center; color: gainsboro; font-size: small;">MyApp Soluções&copy; 2024</p>
+            </aside>
     </div>
         {% block conteudo %}
         {% endblock %}

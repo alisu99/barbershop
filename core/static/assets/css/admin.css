@@ -43,6 +43,18 @@
         transition: 0.4s;
     }
 
+    .open .bar1 {
+        transform: rotate(-45deg) translate(-7px, 7px);
+    }
+
+    .open .bar2 {
+        opacity: 0;
+    }
+
+    .open .bar3 {
+        transform: rotate(45deg) translate(-7px, -7px);
+    }
+
     .aside-mobile {
         position: fixed;
         z-index: 2;
@@ -56,9 +68,11 @@
         transition: 0.3s;
         overflow: auto;
         translate: 100% 0;
-        background: rgba(220, 220, 220, 0.34);
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        backdrop-filter: blur(5.3px);
+        background-image: url("../img/background2.png");
+        background-size: cover;
+        /* background: rgba(220, 220, 220, 0.34); */
+        /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
+        /* backdrop-filter: blur(5.3px); */
     }
 
     .aside-mobile nav {
@@ -113,6 +127,9 @@
     .gerenciar .options a {
         text-decoration: none;
         color: gainsboro;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
     }
 
     .profissional {
