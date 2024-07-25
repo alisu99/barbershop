@@ -59,28 +59,34 @@ def verificar_disponibilidade(request):
 
     return JsonResponse({"disponivel": disponivel})
 
+@require_GET
 def horarios_disponiveis(request):
-    if request.method == 'GET':
-        profissional_nome = request.GET.get('profissional_nome')
-        data_str = request.GET.get('data')
-        data = datetime.datetime.strptime(data_str, "%d/%m/%y").date()
+    profissional_nome = request.GET.get('profissional_nome')
+    data_str = request.GET.get('data')
+    data = datetime.datetime.strptime(data_str, "%d/%m/%y").date()
 
-        horarios = Horario.objects.all()
+    # Obter todos os horários
+    horarios = Horario.objects.all()
 
-        if data == datetime.date.today():
-            hora_atual = datetime.datetime.now().time()
-            horarios = [hora for hora in horarios if datetime.datetime.strptime(hora.horario.replace("h", ":"), "%H:%M").time() >= hora_atual]
+    # Filtrar horários que ainda não passaram, se for a data atual
+    if data == datetime.date.today():
+        hora_atual = datetime.datetime.now().time()
+        horarios = [hora for hora in horarios if datetime.datetime.strptime(hora.horario.replace("h", ":"), "%H:%M").time() >= hora_atual]
 
-        horarios_agendados = Agendamento.objects.filter(
-            profissional_selecionado=profissional_nome,
-            data=data
-        ).values_list('horario_selecionado', flat=True)
+    # Obter os horários já agendados
+    horarios_agendados = Agendamento.objects.filter(
+        profissional_selecionado=profissional_nome,
+        data=data
+    ).values_list('horario_selecionado', flat=True)
 
-        horarios_disponiveis = [hora for hora in horarios if hora.horario not in horarios_agendados]
+    # Filtrar horários disponíveis, excluindo os já agendados
+    horarios_disponiveis = [hora for hora in horarios if hora.horario not in horarios_agendados]
 
-        horarios_disponiveis_dict = [{'id': hora.id, 'horario': hora.horario} for hora in horarios_disponiveis]
+    # Preparar a resposta
+    horarios_disponiveis_dict = [{'id': hora.id, 'horario': hora.horario} for hora in horarios_disponiveis]
 
-        return JsonResponse({'horarios': horarios_disponiveis_dict})
+    return JsonResponse({'horarios': horarios_disponiveis_dict})
+
 
 def agendar(request):
     if request.method == "POST":

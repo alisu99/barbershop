@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const cardsServico = document.querySelectorAll('.servico .card-personalizado');
     const cardsProfissional = document.querySelectorAll('.profissional .card-personalizado');
     const cardsDia = document.querySelectorAll('.dia .card-personalizado');
-    const cardsHora = document.querySelectorAll('.hora .card-personalizado');
+    let cardsHora; // Inicialmente vazio, será preenchido ao carregar horários disponíveis
 
     let estadoSelecionado = {
         servico: { id: '', nome: '' },
@@ -35,14 +35,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 atualizarResumo();
 
                 if (categoria === 'dia') {
-                    carregarHorariosDisponiveis(estadoSelecionado.profissional.id, estadoSelecionado.dia);
+                    carregarHorariosDisponiveis(estadoSelecionado.profissional.nome, estadoSelecionado.dia);
                 }
             });
         });
     }
 
-    function carregarHorariosDisponiveis(profissionalId, dia) {
-        fetch(`/horarios_disponiveis/?profissional_id=${profissionalId}&data=${dia}`)
+    function carregarHorariosDisponiveis(profissionalNome, dia) {
+        fetch(`/horarios_disponiveis/?profissional_nome=${profissionalNome}&data=${dia}`)
             .then(response => response.json())
             .then(data => {
                 const horariosContainer = document.querySelector('.hora .selecione-o-horario');
@@ -55,7 +55,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     div.textContent = horario.horario;
                     horariosContainer.appendChild(div);
                 });
-                selecionarItem(document.querySelectorAll('.hora .card-personalizado'), '.agendamento', 'hora');
+                cardsHora = document.querySelectorAll('.hora .card-personalizado');
+                selecionarItem(cardsHora, '.agendamento', 'hora');
             });
     }
 

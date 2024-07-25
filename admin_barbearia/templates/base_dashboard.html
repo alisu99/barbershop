@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'assets/css/index.css' %}">
-    <link rel="stylesheet" href="{% static 'assets/css/admin.css' %}">
 </head>
 
 <body>
@@ -31,6 +30,10 @@
                         <div class="options">
                             <a href="{% url 'index' %}"><box-icon name='store' type='solid'
                                     color='#ffffff'></box-icon>Vitrine</a>
+                        </div>
+
+                        <div class="options">
+                            <a href="{% url 'dashboard' %}"><box-icon name='dashboard' type='solid' color='#ffffff' ></box-icon>Dashboard</a>
                         </div>
 
                         <div class="options">
@@ -58,25 +61,6 @@
 
             </nav>
         </aside>
-        <div class="dinamicos">
-            <div class="utilitarios">
-                <div id="utilitarios-agendamentos" class="agendamentos">
-                    <h5>Agendamentos</h5>
-                </div>
-
-                <div id="utilitarios-historico" class="historico">
-                    <h5>Histórico</h5>
-                </div>
-
-                <!-- <div id="utilitarios-horarios-disponiveis" class="horarios-disponiveis">
-                    <h5>Horários disponíveis</h5>
-                </div> -->
-
-                <div id="utilitarios-dashboard" class="dashboard">
-                    <h5>Dashboard</h5>
-                </div>
-            </div>
-        </div>
     </div>
     {% block conteudo %}
     {% endblock %}

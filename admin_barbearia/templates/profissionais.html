@@ -1,9 +1,9 @@
-{% extends '../base_adm.html' %}
+{% extends 'base_dashboard.html' %}
 {% load static %}
 
 {% block conteudo %}
 <title>Barbearia - Profissionais</title>
-<main>
+<main class="main-profissional">
     <section class="profissional">
         <div class="selecione-o-profissional">
             {% for profissional in profissionais %}
