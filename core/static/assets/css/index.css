@@ -211,6 +211,7 @@ body {
         text-wrap: wrap;
         text-align: center;
         border: 1px solid gainsboro;
+        background-color: transparent;
     }
 
     .main-profissional .profissional .selecione-o-profissional .card-personalizado p {
@@ -347,7 +348,6 @@ body {
     }
 
     .agendamentos .dashboard .card-personalizado {
-        width: 100%;
         border-radius: 8px;
         border: 2px solid;
         padding: 0rem 1rem;
@@ -374,11 +374,14 @@ body {
     }
 
     .agendamentos .dashboard .card-personalizado .profissional-servico {
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
         gap: 1rem;
         overflow: hidden;
         line-height: 20px;
-        justify-content: space-between;
+        justify-items: center;
+        align-items: center;
+        max-width: max-content;
     }
 
     .agendamentos .dashboard .card-personalizado .profissional-servico a {
@@ -558,11 +561,13 @@ body {
         transition: 0.3s;
         overflow: auto;
         translate: 100% 0;
-        background-image: url("../img/background2.png");
+        /* background-image: url(../img/background2.png); */
         background-size: cover;
-        /* background: rgba(220, 220, 220, 0.34); */
+        background: rgba(220, 220, 220, 0.34);
         /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
-        /* backdrop-filter: blur(5.3px); */
+        /* backdrop-filter: blur(35px); */
+        background: #1f1e1e;
+        border-left: 1px solid #dcdcdc2b;
     }
 
     .aside-mobile nav {
@@ -639,7 +644,7 @@ body {
         display: flex;
         flex-direction: column;
         width: 100%;
-        padding: 1rem 0;
+        /* padding: 1rem 0; */
         /* background-color: #2d2d2d; */
         border-radius: 9px;
     }
@@ -648,7 +653,7 @@ body {
     .gerenciar .options {
         /* background-color: rgba(220, 220, 220, 0.247); */
         padding: 1rem 0;
-        border-bottom: 1px solid rgba(220, 220, 220, 0.247);
+        border-bottom: 1px solid rgb(220 220 220 / 9%);
     }
 
     .gerenciar .options a {
@@ -657,6 +662,7 @@ body {
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        font-size: 0.970rem;
     }
 
     main {
