@@ -33,29 +33,62 @@
                         </div>
 
                         <div class="options">
-                            <a href="{% url 'dashboard' %}"><box-icon name='dashboard' type='solid' color='#ffffff' ></box-icon>Dashboard</a>
+                            <a href="{% url 'dashboard' %}"><box-icon name='dashboard' type='solid'
+                                    color='#ffffff'></box-icon>Dashboard</a>
                         </div>
 
-                        <div class="options">
-                            <a href="#"><box-icon name='cut' color='#ffffff'></box-icon>Barbearia</a>
+
+
+
+
+
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                        <box-icon name='cog' type='solid' color='#ffffff'
+                                            class="icon"></box-icon>Gerenciar
+                                    </button>
+
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                    data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+
+                                        <div class="options">
+                                            <a href="#"><box-icon name='cut' color='#ffffff'></box-icon>Barbearia</a>
+                                        </div>
+
+                                        <div class="options">
+                                            <a href="{% url 'profissionais' %}"><box-icon name='group'
+                                                    color='#ffffff'></box-icon>Profissionais</a>
+                                        </div>
+                
+                                        <div class="options">
+                                            <a href="#"><box-icon name='time' color='#ffffff'></box-icon>Horários</a>
+                                        </div>
+                
+                                        <div class="options">
+                                            <a href="#"><box-icon type='logo' color='#ffffff' name='sketch'></box-icon>Serviços</a>
+                                        </div>
+
+                                        <div class="options">
+                                            <a href="#"><box-icon color='#ffffff' name='user-check'></box-icon>Usuários</a>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="options">
-                            <a href="{% url 'profissionais' %}"><box-icon name='group'
-                                    color='#ffffff'></box-icon>Profissionais</a>
-                        </div>
 
-                        <div class="options">
-                            <a href="#"><box-icon name='time' color='#ffffff'></box-icon>Horários</a>
-                        </div>
 
-                        <div class="options">
-                            <a href="#"><box-icon type='logo' color='#ffffff' name='sketch'></box-icon>Serviços</a>
-                        </div>
 
-                        <div class="options">
-                            <a href="#"><box-icon color='#ffffff' name='user-check'></box-icon>Usuários</a>
-                        </div>
+
+
+
 
                     </div>
 
