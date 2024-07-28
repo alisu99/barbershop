@@ -12,8 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'assets/css/index.css' %}">
 </head>
-
 <body>
+    <div class="all-black"></div>
     <div class="position-fixed">
         <nav class="navbar" style="justify-content: flex-end;">
             <button class="navbar-aside-mobile" onclick="toggleMenu()">
@@ -26,7 +26,6 @@
             <nav>
                 <section class="wrapper-geral">
                     <div class="gerenciar">
-
                         <div class="options">
                             <a href="{% url 'index' %}"><box-icon name='store' type='solid'
                                     color='#ffffff'></box-icon>Vitrine</a>
@@ -36,12 +35,6 @@
                             <a href="{% url 'dashboard' %}"><box-icon name='dashboard' type='solid'
                                     color='#ffffff'></box-icon>Dashboard</a>
                         </div>
-
-
-
-
-
-
                         <div class="accordion accordion-flush" id="accordionFlushExample">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
@@ -51,7 +44,6 @@
                                         <box-icon name='cog' type='solid' color='#ffffff'
                                             class="icon"></box-icon>Gerenciar
                                     </button>
-
                                 </h2>
                                 <div id="flush-collapseOne" class="accordion-collapse collapse"
                                     data-bs-parent="#accordionFlushExample">
@@ -82,16 +74,7 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-
-
-
                     </div>
-
             </nav>
         </aside>
     </div>
@@ -106,5 +89,4 @@
     <script src="{% static 'assets/js/script.js' %}"></script>
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 </body>
-
 </html>

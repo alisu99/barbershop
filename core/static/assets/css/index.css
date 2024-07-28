@@ -24,19 +24,30 @@
 .selecionado {
     background-color: rgba(220, 220, 220, 0.081);
     transition: .30s;
-    color: #E5B817;
-    border: 1px solid #E5B817;
+    color: #FFCA00;
+    border: 1px solid #FFCA00;
 }
 
 .selecionado h5 {
-    color: #E5B817;
+    color: #FFCA00;
+}
+
+.adicionar {
+    border: 1px solid gainsboro;
+    color: gainsboro;
+}
+
+.adicionar:hover {
+    background-color: none;
+    border: 1px solid gainsboro;
+    color: gainsboro;
 }
 
 .opcaoSelecionada {
     background-color: rgba(220, 220, 220, 0.081);
     border-radius: 10px;
-    border: 1px solid #E5B817;
-    color: #E5B817;
+    border: 1px solid #FFCA00;
+    color: #FFCA00;
     transition: 0.40s;
 }
 
@@ -80,7 +91,7 @@
 @media screen and (max-width: 768px) {
     body {
         /* background-image: url("../img/background2.png"); */
-        background-color: currentColor;
+        background-color: #212325;
         background-size: 100%;
         font-size: .950rem;
         font-family: font-main;
@@ -229,7 +240,7 @@
         gap: 10px;
         scroll-snap-align: start;
         overflow-x: auto;
-        border:2px solid #dcdcdc1c;
+        border: 2px solid #dcdcdc1c;
         border-radius: 20px;
         padding: 1rem 1rem;
         background-color: #1f1e1e;
@@ -294,12 +305,13 @@
     }
 
     .profissional .novo-profissional {
-        border:2px solid #dcdcdc1c;
+        /* border: 2px solid #dcdcdc1c; */
         border-radius: 20px;
-        padding: 1rem 1rem;
+        padding: 0.5rem;
         display: flex;
-        background-color: #1f1e1e;
-        flex-direction: column;
+        /* background-color: #1f1e1e; */
+        align-items: center;
+        gap: 0.2rem;
     }
 
     .wrapper-geral .profissional .selecione-o-profissional .card p {
@@ -388,15 +400,14 @@
     }
 
     .wrapper-geral .agendamento .resumo-agendamento .form-agendamento .btn-container button {
-        /* border: 1px solid gainsboro; */
-        color: black;
+        border: 1px solid #FFCA00;
+        color: #FFCA00;
         width: 100%;
-        background-color: #E5B817;
+        background-color: transparent;
     }
 
     .wrapper-geral .agendamento .resumo-agendamento .form-agendamento .btn-container button:active {
         background-color: rgba(220, 220, 220, 0.493);
-        color: white;
     }
 
     .agendamentos .dashboard {
@@ -495,7 +506,7 @@
 
     .spaced-span {
         margin-left: 0.3rem;
-        color: #E5B817;
+        color: #FFCA00;
     }
 }
 
@@ -620,7 +631,7 @@
         right: 0;
         display: flex;
         flex-direction: column;
-        width: 95%;
+        width: 80%;
         height: 100%;
         padding: 5rem 15px 40px;
         transition: 0.3s;
@@ -650,6 +661,18 @@
 
     body.open .aside-mobile {
         translate: 0;
+
+    }
+
+
+
+    body.open .all-black {
+        background: #0000005b;
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        z-index: 1;
+        transition: 0.40s;
     }
 
 

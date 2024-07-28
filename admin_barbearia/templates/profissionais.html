@@ -25,14 +25,13 @@
             </div>
             {% endfor %}
         </div>
-        <br>
         <form action="{% url 'adicionar_profissional' %}" method="post" class="novo-profissional">
             {% csrf_token %}
-            <p>Novo Profissional</p>
-            <label for="nome">Nome</label>
-            <input class="form-control" type="text" name="nome" id="nome" placeholder="Nome do profissional" required
+            <!-- <p>Novo Profissional</p> -->
+            <!-- <label for="nome">Nome</label> -->
+            <input class="form-control" type="text" name="nome" id="nome" placeholder="Novo profissional" required
                 autocomplete="off">
-            <button type="submit" class="btn btn-success" style="align-self: end; margin: 1rem 0 0;">Adicionar</button>
+            <button type="submit" class="btn adicionar">Adicionar</button>
         </form>
     </section>
 </main>
