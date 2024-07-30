@@ -16,8 +16,7 @@ def index(request):
     horas = Horario.objects.all()
     data_atual = datetime.date.today()
     hora_atual = datetime.datetime.now().time()
-    historicos = Agendamento.objects.filter(cliente_email=request.user.email)
-    print(request.user.email_user)
+    historicos = Agendamento.objects.filter(cliente_email=request.user.email if request.user.is_authenticated else None)
     if data_atual == datetime.date.today():
         horas_disponiveis = []
         for hora in horas:
