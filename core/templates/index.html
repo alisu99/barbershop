@@ -87,5 +87,13 @@
             
         </div>
     </div>
+    <div class="historico">
+        <h4>Histórico</h4>
+        {% for historico in historicos %}
+        <div class="historico-pessoal">
+            <p style="color: gainsboro;">{{historico.nome_cliente}}</p>
+        </div>
+        {% endfor %}
+    </div>
 </section>
 {% endblock %}

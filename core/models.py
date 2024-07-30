@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User 
 
 
 class Agendamento(models.Model):
@@ -9,6 +10,7 @@ class Agendamento(models.Model):
     profissional_selecionado = models.CharField(
         "Nome do Profissional", max_length=255, null=False
     )
+    cliente_email = models.EmailField('Email', max_length=255)
     horario_selecionado = models.CharField("Horário", max_length=255, null=False)
     data = models.DateField("Data", null=False)
     nome_cliente = models.CharField("Cliente", max_length=255, null=False)
