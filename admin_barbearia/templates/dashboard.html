@@ -37,13 +37,13 @@
             {% endif %}
             <div class="card-personalizado">
                 <div>
-                    <p><span>{{agendamento.nome_cliente|title}}</span><br><span>{{ agendamento.data|date:"d/m/y" }} - {{agendamento.horario_selecionado}}</span>
+                    <p style="display: flex; flex-wrap: wrap; justify-content: space-between;"><span>{{agendamento.nome_cliente|title}}</span><span>{{ agendamento.data|date:"d/m/y" }} - {{agendamento.horario_selecionado}}</span>
                     </p>
                 </div>
                 <div class="profissional-servico">
-                    <p><span>Profissional</span><br>{{agendamento.profissional_selecionado|title}}</p>
-                    <p><span>Serviço</span><br>{{agendamento.servico_selecionado}}</p>
-                    <div>
+                    <p><span style="color: rgba(220, 220, 220, 0.277);">Profissional</span><br>{{agendamento.profissional_selecionado|title}}</p>
+                    <p><span style="color: rgba(220, 220, 220, 0.277);">Serviço</span><br>{{agendamento.servico_selecionado}}</p>
+                    <div style="display: flex; justify-content: flex-end;">
                         <a href="{% url 'finalizar' agendamento.id %}"
                             onclick="return confirm('Finalizar serviço?')">Finalizar</a>
                     </div>
@@ -68,11 +68,11 @@
             {% endif %}
             <div class="card-personalizado">
                 <div>
-                    <p><span>{{historico.nome_cliente|title}}</span><br><span>{{ historico.data|date:"d/m/y" }} - {{historico.horario_selecionado}}</span></p>
+                    <p style="display: flex; flex-wrap: wrap; justify-content: space-between;"><span>{{historico.nome_cliente|title}}</span><span>{{ historico.data|date:"d/m/y" }} - {{historico.horario_selecionado}}</span></p>
                 </div>
                 <div class="profissional-servico">
-                    <p><span>Profissional</span><br>{{historico.profissional_selecionado|title}}</p>
-                    <p><span>Serviço</span><br>{{historico.servico_selecionado}}</p>
+                    <p><span style="color: rgba(220, 220, 220, 0.277);">Profissional</span><br>{{historico.profissional_selecionado|title}}</p>
+                    <p><span style="color: rgba(220, 220, 220, 0.277);">Serviço</span><br>{{historico.servico_selecionado}}</p>
                 </div>
             </div>
             {% endfor %}

@@ -91,7 +91,7 @@
 @media screen and (max-width: 768px) {
     body {
         background-image: url("../img/background3.png");
-        /* background-color: #212325; */
+        background-color: #212325;
         background-size: 100%;
         font-size: .950rem;
         font-family: font-main;
@@ -448,13 +448,11 @@
     }
 
     .agendamentos .dashboard .card-personalizado .profissional-servico {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        display: flex;
         gap: 1rem;
-        overflow: hidden;
         line-height: 20px;
-        align-items: center;
         width: 100%;
+        align-items: center;
     }
 
     .agendamentos .dashboard .card-personalizado .profissional-servico a {
@@ -498,11 +496,10 @@
     }
 
     .historico .itens .card-personalizado .profissional-servico {
-        display: grid;
+        display: flex;
         gap: 1rem;
         overflow: hidden;
         line-height: 20px;
-        grid-template-columns: 1fr 1fr;
     }
 
     .spaced-span {
@@ -629,7 +626,7 @@
         position: fixed;
         z-index: 2;
         top: 0;
-        right: 0;
+        right: -1px;
         display: flex;
         flex-direction: column;
         width: 80%;
@@ -645,8 +642,8 @@
         /* backdrop-filter: blur(35px); */
         background: #1f1e1e;
         border-left: 1px solid #dcdcdc2b;
-        border-top-left-radius: 25px;
-        border-bottom-left-radius: 25px;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
     }
 
     .aside-mobile nav {
