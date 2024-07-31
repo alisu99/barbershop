@@ -448,12 +448,12 @@
     }
 
     .agendamentos .dashboard .card-personalizado .profissional-servico {
-        display: flex;
+        display: flex;  
         gap: 1rem;
         line-height: 20px;
         width: 100%;
-        align-items: center;
-    }
+        align-items: flex-start;
+    }   
 
     .agendamentos .dashboard .card-personalizado .profissional-servico a {
         text-decoration: none;
