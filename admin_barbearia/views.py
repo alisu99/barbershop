@@ -38,7 +38,14 @@ def finalizar(request, id):
 
 def profissionais(request):
     profissionais = Profissional.objects.all()
-    context = {"profissionais": profissionais}
+    servicos = Servico.objects.all()
+    horarios = Horario.objects.all()
+
+    context = {
+        "profissionais": profissionais,
+        "servicos": servicos,
+        "horarios": horarios,
+        }
     return render(request, "profissionais.html", context)
 
 
@@ -48,6 +55,13 @@ def adicionar_profissional(request):
         profissional = Profissional(nome=nome)
         profissional.save()
     return redirect("profissionais")
+
+def adicionar_servico(request):
+    if request.method == 'POST':
+        servico = request.POST.get("servico")
+        novo_servico = Servico(servico=servico)
+        novo_servico.save()
+    return redirect('profissionais')
 
 
 @csrf_exempt

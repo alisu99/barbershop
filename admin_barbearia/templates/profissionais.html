@@ -3,7 +3,7 @@
 
 {% block conteudo %}
 <title>Barbearia - Profissionais</title>
-<main class="main-profissional">
+<main class="main-preferencias">
     <section class="profissional">
         <div class="selecione-o-profissional">
             <div class="scroll-div">
@@ -34,6 +34,39 @@
                     autocomplete="off">
                 <button type="submit" class="btn adicionar">Adicionar</button>
             </form>
+        </div>
+    </section>
+
+    <section class="servicos">
+        <div class="div-servicos">
+            <div class="scroll-div">
+                {% for servico in servicos %}
+                <div>
+                    <div class="card-personalizado" data-servico-id="{{ servico.id }}"
+                        data-servico-nome="{{ servico.servico }}">
+                        <h5>{{ servico.servico }}</h5>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <form action="{% url 'adicionar_servico' %}" method="post" class="novo-servico">
+                {% csrf_token %}
+                <!-- <p>Novo Profissional</p> -->
+                <!-- <label for="nome">Nome</label> -->
+                <input class="form-control" type="text" name="servico" id="servico" placeholder="Novo serviço" required
+                    autocomplete="off">
+                <button type="submit" class="btn adicionar">Adicionar</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="horarios">
+        <div class="container-horarios">
+            {% for horario in horarios %}
+            <div class="card-personalizado">
+                {{horario.horario}}
+            </div>
+            {% endfor %}
         </div>
     </section>
 </main>

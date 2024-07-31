@@ -55,7 +55,7 @@
     color: gainsboro;
 }
 
-
+.scroll-div .card-personalizado,
 .wrapper-geral .card-personalizado:not(.selecionado) {
     border: 1px solid #dcdcdc29;
     color: gainsboro;
@@ -163,7 +163,8 @@
 
         margin-left: 20px;
     }
-
+    
+    .div-servicos .scroll-div .card-personalizado,    
     .wrapper-geral .servico .cards-servico .card-personalizado {
         padding: 1rem;
         display: flex;
@@ -174,12 +175,13 @@
         border-radius: 50%;
     }
 
-
+    
     .wrapper-geral .servico .cards-servico .card-title {
         text-align: center;
         width: 100%;
     }
 
+    .div-servicos .scroll-div .card-personalizado h5,
     .wrapper-geral .servico .cards-servico h5 {
         font-size: 0.975rem;
         margin: 0;
@@ -272,7 +274,7 @@
         text-align: center;
     }
 
-    .main-profissional .profissional .selecione-o-profissional .card-personalizado {
+    .main-preferencias .profissional .selecione-o-profissional .card-personalizado {
         display: flex;
         width: 6.1rem;
         height: max-content;
@@ -288,7 +290,7 @@
         background-color: transparent;
     }
 
-    .main-profissional .profissional .selecione-o-profissional .card-personalizado p {
+    .main-preferencias .profissional .selecione-o-profissional .card-personalizado p {
         color: gainsboro;
     }
 
@@ -305,6 +307,7 @@
         color: gainsboro;
     }
 
+    .servicos .novo-servico,
     .profissional .novo-profissional {
         /* border: 2px solid #dcdcdc1c; */
         border-radius: 20px;
@@ -358,6 +361,27 @@
 
     }
 
+    .main-preferencias .horarios .container-horarios {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+        padding: 1rem 0.5rem;
+        justify-content: center;
+        border: 2px solid #dcdcdc1c;
+        border-radius: 20px;
+        background-color: #1f1e1e;
+    }
+
+    .main-preferencias .horarios .container-horarios .card-personalizado {
+        width: 4rem;
+        padding: 0.2rem;
+        text-align: center;
+        border-radius: 5px;
+        border: 1px solid #dcdcdc29;
+        color: gainsboro;
+    }
+
+    .horarios .container-horarios .div-horarios .card-personalizado,
     .wrapper-geral .hora .selecione-o-horario .card-personalizado {
         width: 4rem;
         padding: 0.2rem;
@@ -714,7 +738,7 @@
         padding: 1rem;
     }
 
-    .main-profissional .profissional .selecione-o-profissional {
+    .main-preferencias .profissional .selecione-o-profissional {
         display: flex;
         width: 100%;
         gap: 10px;
@@ -725,11 +749,11 @@
         flex-direction: column;
     }
 
-    .main-profissional .profissional .selecione-o-profissional .scroll-div::-webkit-scrollbar {
+    .main-preferencias .scroll-div::-webkit-scrollbar {
         height: 0px;
     }
 
-    .main-profissional .profissional .selecione-o-profissional .scroll-div {
+    .main-preferencias .profissional .selecione-o-profissional .scroll-div {
         display: flex;
         width: 100%;
         gap: 10px;
@@ -737,6 +761,30 @@
         overflow-x: auto;
 
 
+    }
+    
+    .main-preferencias .horarios,
+    .main-preferencias .servicos {
+        padding: 0.5rem;
+    }
+
+    .main-preferencias .servicos .div-servicos {
+        display: flex;
+        width: 100%;
+        gap: 10px;
+        border: 2px solid #dcdcdc1c;
+        border-radius: 20px;
+        padding: 0.5rem;
+        background-color: #1f1e1e;
+        flex-direction: column;
+    }
+
+    .main-preferencias .servicos .div-servicos .scroll-div {
+        display: flex;
+        width: 100%;
+        gap: 10px;
+        scroll-snap-align: start;
+        overflow-x: auto;   
     }
 
     .wrapper-geral .gerenciar {
