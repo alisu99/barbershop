@@ -90,8 +90,8 @@
 /* mobile */
 @media screen and (max-width: 768px) {
     body {
-        /* background-image: url("../img/background2.png"); */
-        background-color: #212325;
+        background-image: url("../img/background3.png");
+        /* background-color: #212325; */
         background-size: 100%;
         font-size: .950rem;
         font-family: font-main;
@@ -247,6 +247,7 @@
 
 
     }
+
 
     .profissional .selecione-o-profissional::-webkit-scrollbar {
         height: 0px;
@@ -452,7 +453,6 @@
         gap: 1rem;
         overflow: hidden;
         line-height: 20px;
-        justify-items: center;
         align-items: center;
         width: 100%;
     }
@@ -498,10 +498,11 @@
     }
 
     .historico .itens .card-personalizado .profissional-servico {
-        display: flex;
+        display: grid;
         gap: 1rem;
         overflow: hidden;
         line-height: 20px;
+        grid-template-columns: 1fr 1fr;
     }
 
     .spaced-span {
@@ -644,6 +645,8 @@
         /* backdrop-filter: blur(35px); */
         background: #1f1e1e;
         border-left: 1px solid #dcdcdc2b;
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
     }
 
     .aside-mobile nav {
@@ -718,12 +721,23 @@
         display: flex;
         width: 100%;
         gap: 10px;
-        scroll-snap-align: start;
-        overflow-x: auto;
         border: 2px solid #dcdcdc1c;
         border-radius: 20px;
-        padding: 1rem 1rem;
+        padding: 0.5rem;
         background-color: #1f1e1e;
+        flex-direction: column;
+    }
+
+    .main-profissional .profissional .selecione-o-profissional .scroll-div::-webkit-scrollbar {
+        height: 0px;
+    }
+
+    .main-profissional .profissional .selecione-o-profissional .scroll-div {
+        display: flex;
+        width: 100%;
+        gap: 10px;
+        scroll-snap-align: start;
+        overflow-x: auto;
 
 
     }

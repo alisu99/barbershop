@@ -6,33 +6,35 @@
 <main class="main-profissional">
     <section class="profissional">
         <div class="selecione-o-profissional">
-            {% for profissional in profissionais %}
-            <div class="card-personalizado" data-profissional-id="{{ profissional.id }}"
-                data-profissional-nome="{{ profissional.nome }}">
-                <img src="{% static 'assets/img/usuario.png' %}" alt="">
-                <p>{{ profissional.nome|title }}</p>
-                {% if not profissional.disponivel %}
-                <div class="estado">
-                    <div style="background-color: red; width: 10px; height: 10px; border-radius: 50%;"></div>
-                    Indisponível
+            <div class="scroll-div">
+                {% for profissional in profissionais %}
+                <div class="card-personalizado" data-profissional-id="{{ profissional.id }}"
+                    data-profissional-nome="{{ profissional.nome }}">
+                    <img src="{% static 'assets/img/usuario.png' %}" alt="">
+                    <p>{{ profissional.nome|title }}</p>
+                    {% if not profissional.disponivel %}
+                    <div class="estado">
+                        <div style="background-color: red; width: 10px; height: 10px; border-radius: 50%;"></div>
+                        Indisponível
+                    </div>
+                    {% else %}
+                    <div class="estado">
+                        <div style="background-color: green; width: 10px; height: 10px; border-radius: 50%;"></div>
+                        Disponível
+                    </div>
+                    {% endif %}
                 </div>
-                {% else %}
-                <div class="estado">
-                    <div style="background-color: green; width: 10px; height: 10px; border-radius: 50%;"></div>
-                    Disponível
-                </div>
-                {% endif %}
+                {% endfor %}
             </div>
-            {% endfor %}
+            <form action="{% url 'adicionar_profissional' %}" method="post" class="novo-profissional">
+                {% csrf_token %}
+                <!-- <p>Novo Profissional</p> -->
+                <!-- <label for="nome">Nome</label> -->
+                <input class="form-control" type="text" name="nome" id="nome" placeholder="Novo profissional" required
+                    autocomplete="off">
+                <button type="submit" class="btn adicionar">Adicionar</button>
+            </form>
         </div>
-        <form action="{% url 'adicionar_profissional' %}" method="post" class="novo-profissional">
-            {% csrf_token %}
-            <!-- <p>Novo Profissional</p> -->
-            <!-- <label for="nome">Nome</label> -->
-            <input class="form-control" type="text" name="nome" id="nome" placeholder="Novo profissional" required
-                autocomplete="off">
-            <button type="submit" class="btn adicionar">Adicionar</button>
-        </form>
     </section>
 </main>
 
@@ -48,7 +50,8 @@
                 <span class="slider round"></span>
             </label>
         </div>
-        <a id="deletarProfissionalBtn" onclick="return confirm('Deseja deletar permanentemente?')" class="btn btn-danger">Deletar</a>
+        <a id="deletarProfissionalBtn" onclick="return confirm('Deseja deletar permanentemente?')"
+            class="btn btn-danger">Deletar</a>
     </div>
 
     <style>
@@ -216,4 +219,4 @@
     </script>
 </div>
 
-    {% endblock %}
+{% endblock %}
