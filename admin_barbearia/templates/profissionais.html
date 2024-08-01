@@ -60,15 +60,35 @@
         </div>
     </section>
 
-    <section class="horarios">
-        <div class="container-horarios">
-            {% for horario in horarios %}
-            <div class="card-personalizado">
-                {{horario.horario}}
-            </div>
-            {% endfor %}
+<section class="horarios">
+    <div class="container-horarios">
+        {% for horario in horarios %}
+        <div class="card-personalizado" data-horario-id="{{ horario.id }}">
+            {{ horario.horario }}
+            <button class="btn remover-horario" data-horario-id="{{ horario.id }}">Excluir</button>
         </div>
-    </section>
+        {% endfor %}
+    </div>
+
+    <!-- Botão para apagar todos os horários -->
+    <form action="{% url 'remover_todos_horarios' %}" method="post" class="remover-todos-horarios">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Excluir Todos os Horários</button>
+    </form>
+
+    <!-- Formulário para adicionar horários -->
+    <form action="{% url 'adicionar_horario' %}" method="post" class="novo-horario">
+        {% csrf_token %}
+        <label for="horario_inicio">Início:</label>
+        <input type="time" id="horario_inicio" name="inicio" required>
+        <label for="horario_fim">Fim:</label>
+        <input type="time" id="horario_fim" name="fim" required>
+        <label for="intervalo">Intervalo:</label>
+        <input type="number" id="intervalo" name="intervalo" min="15" step="15" required>
+        <button type="submit" class="btn adicionar">Adicionar Horário</button>
+    </form>
+</section>
+
 </main>
 
 <!-- Modal -->
