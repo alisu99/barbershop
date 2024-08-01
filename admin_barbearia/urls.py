@@ -11,4 +11,5 @@ urlpatterns = [
     path('adicionar_horario/', adicionar_horario, name='adicionar_horario'),
     path('remover_horario/<int:id>/', remover_horario, name='remover_horario'),
     path('remover_todos_horarios/', remover_todos_horarios, name='remover_todos_horarios'),
+    path('finalizar/<int:id>/', finalizar, name='finalizar'),
 ]
