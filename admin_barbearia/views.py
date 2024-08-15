@@ -45,8 +45,9 @@ def profissionais(request):
         "profissionais": profissionais,
         "servicos": servicos,
         "horarios": horarios,
-        }
+    }
     return render(request, "profissionais.html", context)
+
 
 @csrf_exempt
 @require_POST
@@ -54,7 +55,7 @@ def adicionar_horario(request):
     inicio = request.POST.get("inicio")
     fim = request.POST.get("fim")
     intervalo = int(request.POST.get("intervalo"))
-    
+
     horarios = []
     current = datetime.datetime.strptime(inicio, "%H:%M")
     end = datetime.datetime.strptime(fim, "%H:%M")
@@ -66,7 +67,8 @@ def adicionar_horario(request):
     for horario in horarios:
         Horario.objects.create(horario=horario)
 
-    return redirect('profissionais')
+    return redirect("profissionais")
+
 
 @csrf_exempt
 @require_POST
@@ -75,11 +77,12 @@ def remover_horario(request, id):
     horario.delete()
     return JsonResponse({"status": "success"})
 
+
 @csrf_exempt
 @require_POST
 def remover_todos_horarios(request):
     Horario.objects.all().delete()
-    return redirect('profissionais')
+    return redirect("profissionais")
 
 
 def adicionar_profissional(request):
@@ -89,12 +92,13 @@ def adicionar_profissional(request):
         profissional.save()
     return redirect("profissionais")
 
+
 def adicionar_servico(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         servico = request.POST.get("servico")
         novo_servico = Servico(servico=servico)
         novo_servico.save()
-    return redirect('profissionais')
+    return redirect("profissionais")
 
 
 @csrf_exempt

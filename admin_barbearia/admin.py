@@ -11,6 +11,7 @@ class BarbeariaAdmin(admin.ModelAdmin):
 class UsuarioAdmin(admin.ModelAdmin):
     list_display = ["nome", "username", "email"]
 
+
 @admin.register(Profissional)
 class ProfissionalAdmin(admin.ModelAdmin):
     list_display = ["nome"]
