@@ -6,90 +6,37 @@
 <main class="main-preferencias">
     <section class="profissional">
         <div class="selecione-o-profissional">
-            <div class="scroll-div">
-                {% for profissional in profissionais %}
-                <div class="card-personalizado" data-profissional-id="{{ profissional.id }}"
-                    data-profissional-nome="{{ profissional.nome }}">
-                    <img src="{% static 'assets/img/usuario.png' %}" alt="">
+            {% for profissional in profissionais %}
+            <div class="card-personalizado-preferencias" data-profissional-id="{{ profissional.id }}"
+                data-profissional-nome="{{ profissional.nome }}">
+                <div style="    display: flex; align-items: center; gap: .5rem;">
+                    <img width="80" src="{% static 'assets/img/usuario.png' %}" alt="">
                     <p>{{ profissional.nome|title }}</p>
-                    {% if not profissional.disponivel %}
-                    <div class="estado">
-                        <div style="background-color: red; width: 10px; height: 10px; border-radius: 50%;"></div>
-                        Indisponível
-                    </div>
-                    {% else %}
-                    <div class="estado">
-                        <div style="background-color: green; width: 10px; height: 10px; border-radius: 50%;"></div>
-                        Disponível
-                    </div>
-                    {% endif %}
                 </div>
-                {% endfor %}
+                {% if not profissional.disponivel %}
+                <div class="estado">
+                    <div style="background-color: red; width: 10px; height: 10px; border-radius: 50%;"></div>
+                    Indisponível
+                </div>
+                {% else %}
+                <div class="estado">
+                    <div style="background-color: green; width: 10px; height: 10px; border-radius: 50%;"></div>
+                    Disponível
+                </div>
+                {% endif %}
             </div>
-            <form action="{% url 'adicionar_profissional' %}" method="post" class="novo-profissional">
-                {% csrf_token %}
-                <!-- <p>Novo Profissional</p> -->
-                <!-- <label for="nome">Nome</label> -->
-                <input class="form-control" type="text" name="nome" id="nome" placeholder="Novo profissional" required
-                    autocomplete="off">
-                <button type="submit" class="btn adicionar">Adicionar</button>
-            </form>
+            {% endfor %}
         </div>
     </section>
-
-    <section class="servicos">
-        <div class="div-servicos">
-            <div class="scroll-div">
-                {% for servico in servicos %}
-                <div>
-                    <div class="card-personalizado" data-servico-id="{{ servico.id }}"
-                        data-servico-nome="{{ servico.servico }}">
-                        <h5>{{ servico.servico }}</h5>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            <form action="{% url 'adicionar_servico' %}" method="post" class="novo-servico">
-                {% csrf_token %}
-                <!-- <p>Novo Profissional</p> -->
-                <!-- <label for="nome">Nome</label> -->
-                <input class="form-control" type="text" name="servico" id="servico" placeholder="Novo serviço" required
-                    autocomplete="off">
-                <button type="submit" class="btn adicionar">Adicionar</button>
-            </form>
-        </div>
-    </section>
-
-<section class="horarios">
-    <div class="container-horarios">
-        {% for horario in horarios %}
-        <div class="card-personalizado" data-horario-id="{{ horario.id }}">
-            {{ horario.horario }}
-            <button class="btn remover-horario" data-horario-id="{{ horario.id }}">Excluir</button>
-        </div>
-        {% endfor %}
-    </div>
-
-    <!-- Botão para apagar todos os horários -->
-    <form action="{% url 'remover_todos_horarios' %}" method="post" class="remover-todos-horarios">
-        {% csrf_token %}
-        <button type="submit" class="btn btn-danger">Excluir Todos os Horários</button>
-    </form>
-
-    <!-- Formulário para adicionar horários -->
-    <form action="{% url 'adicionar_horario' %}" method="post" class="novo-horario">
-        {% csrf_token %}
-        <label for="horario_inicio">Início:</label>
-        <input type="time" id="horario_inicio" name="inicio" required>
-        <label for="horario_fim">Fim:</label>
-        <input type="time" id="horario_fim" name="fim" required>
-        <label for="intervalo">Intervalo:</label>
-        <input type="number" id="intervalo" name="intervalo" min="15" step="15" required>
-        <button type="submit" class="btn adicionar">Adicionar Horário</button>
-    </form>
-</section>
-
 </main>
+<form action="{% url 'adicionar_profissional' %}" method="post" class="novo-profissional">
+    {% csrf_token %}
+    <!-- <p>Novo Profissional</p> -->
+    <!-- <label for="nome">Nome</label> -->
+    <input class="form-input" type="text" name="nome" id="nome" placeholder="Novo profissional" required
+        autocomplete="off">
+    <button type="submit" class="btn adicionar">Adicionar</button>
+</form>
 
 <!-- Modal -->
 <div id="profissionalModal" class="modal" style="display: flex; align-items: center;">
@@ -210,7 +157,7 @@
             }
 
             // Adiciona event listeners para cada card
-            document.querySelectorAll('.card-personalizado').forEach(function (card) {
+            document.querySelectorAll('.card-personalizado-preferencias').forEach(function (card) {
                 card.addEventListener('click', function () {
                     var profissionalId = this.getAttribute('data-profissional-id');
                     var profissionalNome = this.getAttribute('data-profissional-nome');
@@ -251,7 +198,7 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.status === 'success') {
-                            var card = document.querySelector(`.card-personalizado[data-profissional-id='${profissionalId}']`);
+                            var card = document.querySelector(`.card-personalizado-preferencias[data-profissional-id='${profissionalId}']`);
                             var estadoDiv = card.querySelector('.estado div');
                             estadoDiv.style.backgroundColor = disponibilidade ? 'green' : 'red';
                             estadoDiv.parentElement.innerHTML = disponibilidade ?
