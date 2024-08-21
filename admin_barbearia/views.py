@@ -38,51 +38,10 @@ def finalizar(request, id):
 
 def profissionais(request):
     profissionais = Profissional.objects.all()
-    servicos = Servico.objects.all()
-    horarios = Horario.objects.all()
-
     context = {
         "profissionais": profissionais,
-        "servicos": servicos,
-        "horarios": horarios,
     }
     return render(request, "profissionais.html", context)
-
-
-@csrf_exempt
-@require_POST
-def adicionar_horario(request):
-    inicio = request.POST.get("inicio")
-    fim = request.POST.get("fim")
-    intervalo = int(request.POST.get("intervalo"))
-
-    horarios = []
-    current = datetime.datetime.strptime(inicio, "%H:%M")
-    end = datetime.datetime.strptime(fim, "%H:%M")
-
-    while current <= end:
-        horarios.append(current.strftime("%H:%M"))
-        current = current + datetime.timedelta(minutes=intervalo)
-
-    for horario in horarios:
-        Horario.objects.create(horario=horario)
-
-    return redirect("profissionais")
-
-
-@csrf_exempt
-@require_POST
-def remover_horario(request, id):
-    horario = get_object_or_404(Horario, id=id)
-    horario.delete()
-    return JsonResponse({"status": "success"})
-
-
-@csrf_exempt
-@require_POST
-def remover_todos_horarios(request):
-    Horario.objects.all().delete()
-    return redirect("profissionais")
 
 
 def adicionar_profissional(request):
@@ -90,14 +49,6 @@ def adicionar_profissional(request):
         nome = request.POST.get("nome")
         profissional = Profissional(nome=nome)
         profissional.save()
-    return redirect("profissionais")
-
-
-def adicionar_servico(request):
-    if request.method == "POST":
-        servico = request.POST.get("servico")
-        novo_servico = Servico(servico=servico)
-        novo_servico.save()
     return redirect("profissionais")
 
 
@@ -121,3 +72,7 @@ def deletar_profissional(request, id):
     profissional = get_object_or_404(Profissional, id=id)
     profissional.delete()
     return redirect("profissionais")
+
+
+def horarios(request):
+    return render(request, 'horarios.html')
