@@ -3,18 +3,13 @@
 
 {% block conteudo %}
 <title>Barbearia - Profissionais</title>
-<style>
-    body {
-        background-color: #1f1e1e;
-    }
-</style>
 <main class="main-preferencias">
     <section class="profissional">
         <div class="selecione-o-profissional">
             {% for profissional in profissionais %}
             <div class="card-personalizado-preferencias" data-profissional-id="{{ profissional.id }}"
                 data-profissional-nome="{{ profissional.nome }}">
-                <div style="    display: flex; align-items: center; gap: .5rem;">
+                <div style="display: flex; align-items: center; gap: .5rem;">
                     <img width="80" src="{% static 'assets/img/usuario.png' %}" alt="">
                     <p>{{ profissional.nome|title }}</p>
                 </div>
@@ -33,15 +28,14 @@
             {% endfor %}
         </div>
     </section>
+    <form action="{% url 'adicionar_profissional' %}" method="post" class="novo-profissional">
+        {% csrf_token %}
+        <input class="form-input" type="text" name="nome" id="nome" placeholder="Novo profissional" required autocomplete="off">
+        <button type="submit" class="btn adicionar">Adicionar</button>
+    </form>
 </main>
-<form action="{% url 'adicionar_profissional' %}" method="post" class="novo-profissional">
-    {% csrf_token %}
-    <!-- <p>Novo Profissional</p> -->
-    <!-- <label for="nome">Nome</label> -->
-    <input class="form-input" type="text" name="nome" id="nome" placeholder="Novo profissional" required
-        autocomplete="off">
-    <button type="submit" class="btn adicionar">Adicionar</button>
-</form>
+
+
 
 <!-- Modal -->
 <div id="profissionalModal" class="modal" style="display: flex; align-items: center;">

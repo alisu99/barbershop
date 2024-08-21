@@ -293,7 +293,7 @@ body {
         display: flex;
         width: 100%;
         border: 1px solid #dcdcdc29;
-        background-color: transparent;
+        background-color: #262626;
         align-items: center;
         border-radius: 5px;
         padding: .2rem;
@@ -319,15 +319,16 @@ body {
         color: gainsboro;
     }
 
-     .novo-profissional {
+    .novo-profissional {
         display: flex;
         background-color: #1f1e1e;
         padding: 1rem;
-        gap: .8rem;
-        flex-direction: column;
+        gap: 1.3rem;
         position: fixed;
         width: 100%;
-        bottom: 0;
+        height: 10rem;
+        border-top: 2px solid #2d2d2d;
+        flex-direction: column;
     }
 
     .wrapper-geral .profissional .selecione-o-profissional .card p {
