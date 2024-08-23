@@ -372,27 +372,6 @@ body {
 
     }
 
-    .main-preferencias .horarios .container-horarios {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.3rem;
-        padding: 1rem 0.5rem;
-        justify-content: center;
-        border: 2px solid #dcdcdc1c;
-        border-radius: 20px;
-        background-color: #1f1e1e;
-    }
-
-    .main-preferencias .horarios .container-horarios .card-personalizado {
-        width: 4rem;
-        padding: 0.2rem;
-        text-align: center;
-        border-radius: 5px;
-        border: 1px solid #dcdcdc29;
-        color: gainsboro;
-    }
-
-    .horarios .container-horarios .div-horarios .card-personalizado,
     .wrapper-geral .hora .selecione-o-horario .card-personalizado {
         width: 4rem;
         padding: 0.2rem;
@@ -765,8 +744,6 @@ body {
         height: 0px;
     }
 
-
-    .main-preferencias .horarios,
     .main-preferencias .servicos {
         padding: 0.5rem;
     }
