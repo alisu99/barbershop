@@ -2,10 +2,15 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('dashboard/', dashboard, name='dashboard'),
-    path('finalizar/<int:id>', finalizar, name='finalizar'),
+    # dashboard urls
+    path('', dashboard, name='dashboard'),
+
+    # profissional urls
     path('profissionais/', profissionais, name='profissionais'),
-    path('atualizar-disponibilidade/', atualizar_disponibilidade, name='atualizar_disponibilidade'),
-    path('adicionar-profissional/', adicionar_profissional, name='adicionar_profissional'),
-    path('deletar_profissional/<int:id>', deletar_profissional, name='deletar_profissional')
+    path('adicionar_profissional/', adicionar_profissional, name='adicionar_profissional'),
+    path('atualizar_disponibilidade/', atualizar_disponibilidade, name='atualizar_disponibilidade'),
+    path('deletar_profissional/<int:id>/', deletar_profissional, name='deletar_profissional'),
+
+    # horarios url
+    path('horarios/', horarios, name='horarios')
 ]

@@ -31,17 +31,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
 
                 document.querySelector(proximoBloco).style.display = 'block';
-                document.querySelector(proximoBloco).scrollIntoView({ behavior: 'smooth', block: 'start' });
-                atualizarResumo();
 
                 if (categoria === 'dia') {
-                    carregarHorariosDisponiveis(estadoSelecionado.profissional.nome, estadoSelecionado.dia);
+                    carregarHorariosDisponiveis(estadoSelecionado.profissional.nome, estadoSelecionado.dia, proximoBloco);
+                } else {
+                    setTimeout(() => {
+                        document.querySelector(proximoBloco).scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 200); // Pequeno atraso para garantir que o bloco esteja visível
                 }
+
+                atualizarResumo();
             });
         });
     }
 
-    function carregarHorariosDisponiveis(profissionalNome, dia) {
+    function carregarHorariosDisponiveis(profissionalNome, dia, proximoBloco) {
         fetch(`/horarios_disponiveis/?profissional_nome=${profissionalNome}&data=${dia}`)
             .then(response => response.json())
             .then(data => {
@@ -57,6 +61,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
                 cardsHora = document.querySelectorAll('.hora .card-personalizado');
                 selecionarItem(cardsHora, '.agendamento', 'hora');
+
+                // Garante que o bloco de horários esteja visível
+                const blocoHora = document.querySelector('.hora');
+                blocoHora.style.display = 'block';
+
+                // Adiciona um pequeno atraso antes de rolar para garantir que os elementos sejam renderizados
+                setTimeout(() => {
+                    blocoHora.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 200);
             });
     }
 

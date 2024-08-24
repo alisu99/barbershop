@@ -38,7 +38,9 @@ def finalizar(request, id):
 
 def profissionais(request):
     profissionais = Profissional.objects.all()
-    context = {"profissionais": profissionais}
+    context = {
+        "profissionais": profissionais,
+    }
     return render(request, "profissionais.html", context)
 
 
@@ -70,3 +72,7 @@ def deletar_profissional(request, id):
     profissional = get_object_or_404(Profissional, id=id)
     profissional.delete()
     return redirect("profissionais")
+
+
+def horarios(request):
+    return render(request, 'horarios.html')

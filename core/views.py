@@ -7,6 +7,7 @@ from django.views.decorators.http import require_GET
 import locale
 import calendar
 
+
 locale.setlocale(locale.LC_ALL, 'pt_BR.utf8')
 
 def index(request):
@@ -15,7 +16,7 @@ def index(request):
     horas = Horario.objects.all()
     data_atual = datetime.date.today()
     hora_atual = datetime.datetime.now().time()
-
+    # historicos = Agendamento.objects.filter(cliente_email=request.user.email if request.user.is_authenticated else None)
     if data_atual == datetime.date.today():
         horas_disponiveis = []
         for hora in horas:
@@ -41,7 +42,8 @@ def index(request):
         "horas": horas,
         "profissionais": profissionais,
         "servicos": servicos,
-        "proximos_dias": proximos_dias
+        "proximos_dias": proximos_dias,
+        # "historicos": historicos
     }
 
     return render(request, "index.html", context)
@@ -96,6 +98,7 @@ def agendar(request):
         data = request.POST.get("data")
         nome_cliente = request.POST.get("nome_cliente")
         telefone_cliente = request.POST.get("telefone_cliente")
+        cliente_email = request.user.email if request.user.is_authenticated else None
 
         # Obtendo os nomes reais do serviço e profissional
         servico = Servico.objects.get(id=servico_id)
@@ -112,6 +115,7 @@ def agendar(request):
                 data=data_formatada,
                 nome_cliente=nome_cliente,
                 telefone_cliente=telefone_cliente,
+                cliente_email=cliente_email
             )
             agendamento.save()
             return redirect('index')

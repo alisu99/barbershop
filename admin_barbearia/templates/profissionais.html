@@ -3,14 +3,16 @@
 
 {% block conteudo %}
 <title>Barbearia - Profissionais</title>
-<main class="main-profissional">
+<main class="main-preferencias">
     <section class="profissional">
         <div class="selecione-o-profissional">
             {% for profissional in profissionais %}
-            <div class="card-personalizado" data-profissional-id="{{ profissional.id }}"
+            <div class="card-personalizado-preferencias" data-profissional-id="{{ profissional.id }}"
                 data-profissional-nome="{{ profissional.nome }}">
-                <img src="{% static 'assets/img/usuario.png' %}" alt="">
-                <p>{{ profissional.nome|title }}</p>
+                <div style="display: flex; align-items: center; gap: .5rem;">
+                    <img width="80" src="{% static 'assets/img/usuario.png' %}" alt="">
+                    <p>{{ profissional.nome|title }}</p>
+                </div>
                 {% if not profissional.disponivel %}
                 <div class="estado">
                     <div style="background-color: red; width: 10px; height: 10px; border-radius: 50%;"></div>
@@ -25,16 +27,15 @@
             </div>
             {% endfor %}
         </div>
-        <form action="{% url 'adicionar_profissional' %}" method="post" class="novo-profissional">
-            {% csrf_token %}
-            <!-- <p>Novo Profissional</p> -->
-            <!-- <label for="nome">Nome</label> -->
-            <input class="form-control" type="text" name="nome" id="nome" placeholder="Novo profissional" required
-                autocomplete="off">
-            <button type="submit" class="btn adicionar">Adicionar</button>
-        </form>
     </section>
+    <form action="{% url 'adicionar_profissional' %}" method="post" class="novo-profissional">
+        {% csrf_token %}
+        <input class="form-input" type="text" name="nome" id="nome" placeholder="Novo profissional" required autocomplete="off">
+        <button type="submit" class="btn adicionar">Adicionar</button>
+    </form>
 </main>
+
+
 
 <!-- Modal -->
 <div id="profissionalModal" class="modal" style="display: flex; align-items: center;">
@@ -48,7 +49,8 @@
                 <span class="slider round"></span>
             </label>
         </div>
-        <a id="deletarProfissionalBtn" onclick="return confirm('Deseja deletar permanentemente?')" class="btn btn-danger">Deletar</a>
+        <a id="deletarProfissionalBtn" onclick="return confirm('Deseja deletar permanentemente?')"
+            class="btn btn-danger">Deletar</a>
     </div>
 
     <style>
@@ -154,7 +156,7 @@
             }
 
             // Adiciona event listeners para cada card
-            document.querySelectorAll('.card-personalizado').forEach(function (card) {
+            document.querySelectorAll('.card-personalizado-preferencias').forEach(function (card) {
                 card.addEventListener('click', function () {
                     var profissionalId = this.getAttribute('data-profissional-id');
                     var profissionalNome = this.getAttribute('data-profissional-nome');
@@ -195,7 +197,7 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.status === 'success') {
-                            var card = document.querySelector(`.card-personalizado[data-profissional-id='${profissionalId}']`);
+                            var card = document.querySelector(`.card-personalizado-preferencias[data-profissional-id='${profissionalId}']`);
                             var estadoDiv = card.querySelector('.estado div');
                             estadoDiv.style.backgroundColor = disponibilidade ? 'green' : 'red';
                             estadoDiv.parentElement.innerHTML = disponibilidade ?
@@ -216,4 +218,4 @@
     </script>
 </div>
 
-    {% endblock %}
+{% endblock %}

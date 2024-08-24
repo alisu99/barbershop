@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Jost:ital,wght@0,100..900;1,100..900&family=Kumbh+Sans:wght@100..900&family=Outfit:wght@100..900&family=REM:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Share+Tech&family=Space+Grotesk:wght@300..700&family=Titillium+Web:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700&display=swap');
+
+body {
+    background-size: 100%;
+    font-size: .950rem;
+    font-family: "Titillium Web", sans-serif;
+    font-style: normal;
+}
+
 ::-webkit-scrollbar {
     width: 2px;
     /* Largura da barra de rolagem */
@@ -15,11 +24,6 @@
     /* Cor da trilha */
 }
 
-@font-face {
-    font-family: font-main;
-
-    src: url(../../assets/fonts/poppins/Poppins-Regular.ttf);
-}
 
 .selecionado {
     background-color: rgba(220, 220, 220, 0.081);
@@ -55,7 +59,7 @@
     color: gainsboro;
 }
 
-
+.scroll-div .card-personalizado,
 .wrapper-geral .card-personalizado:not(.selecionado) {
     border: 1px solid #dcdcdc29;
     color: gainsboro;
@@ -86,17 +90,22 @@
     transform: rotate(180deg);
 }
 
+.form-input {
+    background-color: transparent;
+    outline: none;
+    border: none;
+    border-bottom: 2px solid #7b7b7b;
+    border-radius: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    color: white;
+    font-size: larger;
+}
+
 
 /* mobile */
 @media screen and (max-width: 768px) {
-    body {
-        /* background-image: url("../img/background2.png"); */
-        background-color: #212325;
-        background-size: 100%;
-        font-size: .950rem;
-        font-family: font-main;
-    }
-
     .accordion-item {
         background-color: #1f1e1e;
     }
@@ -164,6 +173,7 @@
         margin-left: 20px;
     }
 
+    .div-servicos .scroll-div .card-personalizado,
     .wrapper-geral .servico .cards-servico .card-personalizado {
         padding: 1rem;
         display: flex;
@@ -180,6 +190,7 @@
         width: 100%;
     }
 
+    .div-servicos .scroll-div .card-personalizado h5,
     .wrapper-geral .servico .cards-servico h5 {
         font-size: 0.975rem;
         margin: 0;
@@ -234,6 +245,10 @@
         padding: 0.5rem;
     }
 
+    .main-preferencias .profissional {
+        padding: 0;
+    }
+
     .wrapper-geral .profissional .selecione-o-profissional {
         display: flex;
         width: 100%;
@@ -247,6 +262,7 @@
 
 
     }
+
 
     .profissional .selecione-o-profissional::-webkit-scrollbar {
         height: 0px;
@@ -271,32 +287,29 @@
         text-align: center;
     }
 
-    .main-profissional .profissional .selecione-o-profissional .card-personalizado {
+    .main-preferencias .profissional .selecione-o-profissional .card-personalizado-preferencias {
         display: flex;
-        width: 6.1rem;
-        height: max-content;
-        border-top-left-radius: 7px;
-        border-top-right-radius: 7px;
-        border-bottom-left-radius: 7px;
-        border-bottom-right-radius: 7px;
-        flex-direction: column;
-        align-items: center;
-        text-wrap: wrap;
-        text-align: center;
+        width: 100%;
         border: 1px solid #dcdcdc29;
-        background-color: transparent;
+        background-color: #212325;
+        align-items: center;
+        border-radius: 5px;
+        padding: .2rem;
+        justify-content: space-between;
     }
 
-    .main-profissional .profissional .selecione-o-profissional .card-personalizado p {
+    .main-preferencias .profissional .selecione-o-profissional .card-personalizado-preferencias p {
         color: gainsboro;
+        font-size: 20px;
+        margin-bottom: 0;
     }
 
-    .profissional .selecione-o-profissional .card-personalizado .estado {
+    .main-preferencias .profissional .selecione-o-profissional .card-personalizado-preferencias .estado {
         color: gainsboro;
         display: flex;
         align-items: center;
-        font-size: x-small;
         gap: 5px;
+        align-self: end;
     }
 
     .profissional .novo-profissional label,
@@ -304,14 +317,16 @@
         color: gainsboro;
     }
 
-    .profissional .novo-profissional {
-        /* border: 2px solid #dcdcdc1c; */
-        border-radius: 20px;
-        padding: 0.5rem;
+    .novo-profissional {
         display: flex;
-        /* background-color: #1f1e1e; */
-        align-items: center;
-        gap: 0.2rem;
+        background-color: #1f1e1e;
+        padding: 1rem;
+        gap: 1.3rem;
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        border-top: 2px solid #2d2d2d;
+        flex-direction: column;
     }
 
     .wrapper-geral .profissional .selecione-o-profissional .card p {
@@ -383,7 +398,7 @@
         color: gainsboro;
     }
 
-    .wrapper-geral .agendamento .resumo-agendamento .form-agendamento .form-nome,
+    /* .wrapper-geral .agendamento .resumo-agendamento .form-agendamento .form-nome,
     .wrapper-geral .agendamento .resumo-agendamento .form-agendamento .form-tel {
         width: 100%;
         height: 2.5rem;
@@ -392,7 +407,7 @@
         border-bottom-left-radius: 6px;
         border-bottom-right-radius: 6px;
         border: 0.5px solid;
-    }
+    } */
 
     .wrapper-geral .agendamento .resumo-agendamento .form-agendamento .btn-container {
         display: flex;
@@ -447,14 +462,11 @@
     }
 
     .agendamentos .dashboard .card-personalizado .profissional-servico {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
+        display: flex;
         gap: 1rem;
-        overflow: hidden;
         line-height: 20px;
-        justify-items: center;
-        align-items: center;
         width: 100%;
+        align-items: flex-start;
     }
 
     .agendamentos .dashboard .card-personalizado .profissional-servico a {
@@ -628,7 +640,7 @@
         position: fixed;
         z-index: 2;
         top: 0;
-        right: 0;
+        right: -1px;
         display: flex;
         flex-direction: column;
         width: 80%;
@@ -644,6 +656,8 @@
         /* backdrop-filter: blur(35px); */
         background: #1f1e1e;
         border-left: 1px solid #dcdcdc2b;
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
     }
 
     .aside-mobile nav {
@@ -714,18 +728,43 @@
         padding: 1rem;
     }
 
-    .main-profissional .profissional .selecione-o-profissional {
+    .main-preferencias .profissional .selecione-o-profissional {
+        display: flex;
+        width: 100%;
+        gap: 3px;
+        border-top: 2px solid #dcdcdc1c;
+        padding: 0.5rem;
+        background-color: #1f1e1e;
+        flex-direction: column;
+        overflow: auto;
+        height: 70vh;
+    }
+
+    .main-preferencias .scroll-div::-webkit-scrollbar {
+        height: 0px;
+    }
+
+    .main-preferencias .servicos {
+        padding: 0.5rem;
+    }
+
+    .main-preferencias .servicos .div-servicos {
+        display: flex;
+        width: 100%;
+        gap: 10px;
+        border: 2px solid #dcdcdc1c;
+        border-radius: 20px;
+        padding: 0.5rem;
+        background-color: #1f1e1e;
+        flex-direction: column;
+    }
+
+    .main-preferencias .servicos .div-servicos .scroll-div {
         display: flex;
         width: 100%;
         gap: 10px;
         scroll-snap-align: start;
         overflow-x: auto;
-        border: 2px solid #dcdcdc1c;
-        border-radius: 20px;
-        padding: 1rem 1rem;
-        background-color: #1f1e1e;
-
-
     }
 
     .wrapper-geral .gerenciar {
