@@ -3,10 +3,12 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from core.urls import *
+from financeiro.urls import *
 
 
 urlpatterns = [
     path('superadmin/', admin.site.urls),
     path('', include('core.urls')),
+    path('', include('financeiro.urls')),
     path('nucleo/', include('admin_barbearia.urls')),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

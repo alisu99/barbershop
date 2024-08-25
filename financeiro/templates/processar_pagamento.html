@@ -1,0 +1,11 @@
+{% extends 'base_dashboard.html' %}
+{% load static %}
+
+{% block conteudo %}
+<form method="post" action="{% url 'processar_pagamento' %}">
+    {% csrf_token %}
+    <label for="valor">Valor:</label>
+    <input type="text" id="valor" name="valor" required>
+    <button type="submit">Pagar</button>
+</form>
+{% endblock %}
